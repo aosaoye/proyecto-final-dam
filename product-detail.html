@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Modsy.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header site-header--solid">
+        <div class="site-header__container container">
+            <div class="header-left">
+                <div class="logo">
+                    <button class="mobile-menu-toggle" aria-label="Open Menu">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="index.html"><ion-icon name="crop-outline"></ion-icon></a>
+                    <a href="index.html">Modsy.</a>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="main-nav__list">
+                    <li><a href="index.html" class="main-nav__link">Home</a></li>
+                    <li><a href="products.html" class="main-nav__link main-nav__link--active">Products</a></li>
+                    <li><a href="contact.html" class="main-nav__link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="search.html" class="header-action-link"><ion-icon name="search-outline"></ion-icon></a>
+                    <a href="#" class="header-action-link"><ion-icon name="cart-outline"></ion-icon></a>
+                    <a href="login.html" class="header-action-link"><ion-icon name="person-outline"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-detail">
+        <div class="container">
+            <div class="hero-detail__grid">
+                <!-- Image (Left) -->
+                <div class="image-col">
+                    <img src="" alt="" class="image-col__img" id="detail-img">
+                </div>
+
+                <!-- Info (Right) -->
+                <div class="info-col">
+                    <div class="info-col__price" id="detail-price">0€</div>
+                    <h1 class="info-col__name" id="detail-title">Product Name</h1>
+                    <span class="info-col__tagline" id="detail-tagline">Premium Collection</span>
+                    
+                    <p class="info-col__desc" id="detail-desc">Loading description...</p>
+
+                    <div class="color-options" id="detail-colors"></div>
+
+                    <div class="product-actions">
+                        <div class="qty-box">
+                            <button class="qty-btn" id="btn-qty-minus"><ion-icon name="remove-outline"></ion-icon></button>
+                            <span id="qty-value" class="qty-value">1</span>
+                            <button class="qty-btn" id="btn-qty-plus"><ion-icon name="add-outline"></ion-icon></button>
+                        </div>
+                        <button class="btn-buy" id="btn-add-to-cart">Add</button>
+                    </div>
+                </div>
+
+                <!-- Label (Far Right) -->
+                <div class="category-label">
+                    <span class="category-label__text" id="detail-category-v">CATEGORY</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="similar-products container">
+        <h2 class="similar-products__title">You may also like</h2>
+        <div class="products-section__grid" id="similar-grid">
+            <!-- Dynamic -->
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__promo">
+                    <h2 class="footer__promo-title">Furniture that fits you.</h2>
+                    <p class="footer__promo-desc">Design custom furniture that fits your room down to the last millimeter.</p>
+                </div>
+            </div>
+            <div class="footer__brand-text">Modsy.</div>
+        </div>
+    </footer>
+
+    <script src="products-data.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = parseInt(urlParams.get('id'));
+
+        if (!id || typeof productsData === 'undefined') return;
+
+        const product = productsData.find(p => p.id === id);
+        if (!product) return;
+
+        // UI Populate
+        document.getElementById('detail-img').src = product.image;
+        document.getElementById('detail-title').textContent = product.name;
+        document.getElementById('detail-price').textContent = product.price;
+        document.getElementById('detail-desc').textContent = product.description;
+        document.getElementById('detail-category-v').textContent = product.category.toUpperCase();
+        document.getElementById('detail-tagline').textContent = `${product.category} Series`;
+
+        // Colors
+        const colorsEl = document.getElementById('detail-colors');
+        if (colorsEl && product.colors) {
+            colorsEl.innerHTML = '';
+            product.colors.forEach((c, idx) => {
+                const dot = document.createElement('div');
+                dot.className = `color-dot ${idx === 0 ? 'color-dot--active' : ''}`;
+                dot.innerHTML = `<div class="color-dot-inner" style="background:${c.code}"></div>`;
+                dot.addEventListener('click', () => {
+                    document.getElementById('detail-img').src = c.img;
+                    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('color-dot--active'));
+                    dot.classList.add('color-dot--active');
+                });
+                colorsEl.appendChild(dot);
+            });
+        }
+
+        // Qty
+        let qty = 1;
+        document.getElementById('btn-qty-minus').addEventListener('click', () => { if(qty > 1) { qty--; document.getElementById('qty-value').textContent = qty; }});
+        document.getElementById('btn-qty-plus').addEventListener('click', () => { qty++; document.getElementById('qty-value').textContent = qty; });
+
+        // Cart
+        document.getElementById('btn-add-to-cart').addEventListener('click', () => {
+            let cart = JSON.parse(localStorage.getItem('modsy_cart') || '[]');
+            const existing = cart.find(item => item.name === product.name);
+            if (existing) existing.qty += qty;
+            else cart.push({ name: product.name, price: parseFloat(product.price.replace(/[^\d.]/g, '')), img: product.image, qty });
+            localStorage.setItem('modsy_cart', JSON.stringify(cart));
+            alert('Added to cart!');
+        });
+
+        // Similar Products
+        const similarGrid = document.getElementById('similar-grid');
+        if (similarGrid) {
+            const similar = productsData.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+            similar.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-card__visual">
+                        <img src="${p.image}" alt="${p.name}" class="product-card__img">
+                        <button class="product-card__favorite-btn">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="product-card__info">
+                        <div class="product-card__header">
+                            <h3 class="product-card__name">${p.name}</h3>
+                            <span class="product-card__price">${p.price}</span>
+                        </div>
+                        <div class="product-card__footer">
+                            <span class="product-card__category">${p.category}</span>
+                            <div class="product-card__colors">
+                                ${p.colors ? p.colors.map(c => `<div class="product-card__color-swatch" style="background: ${c.code}"></div>`).join('') : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => { window.location.href = `product-detail.html?id=${p.id}`; });
+                similarGrid.appendChild(card);
+            });
+        }
+    });
+    </script>
+</body>
+</html>
