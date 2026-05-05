@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search | Modsy.</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .search-hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(to bottom, #f8faff, #ffffff);
+            text-align: center;
+        }
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .search-input-wrapper {
+            position: relative;
+            margin-top: 30px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 20px 30px 20px 60px;
+            border-radius: 50px;
+            border: 1px solid #e2e8f0;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            font-family: var(--font-plus-jakarta);
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        .search-icon {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--color-secondary);
+        }
+        .search-results-info {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Mobile specific adjustments for search */
+        @media (max-width: 640px) {
+            .search-hero {
+                padding: 100px 0 40px;
+            }
+            .search-input {
+                padding: 15px 25px 15px 50px;
+                font-size: 1rem;
+            }
+            .search-icon {
+                left: 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header site-header--solid site-header--scrolled">
+        <div class="site-header__container container">
+            <div class="header-left">
+                <div class="logo">
+                    <button class="mobile-menu-toggle" aria-label="Open Menu">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="index.html"><ion-icon name="crop-outline"></ion-icon></a>
+                    <a href="index.html">Modsy.</a>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="main-nav__list">
+                    <li><a href="index.html" class="main-nav__link">Home</a></li>
+                    <li><a href="products.html" class="main-nav__link">Products</a></li>
+                    <li><a href="contact.html" class="main-nav__link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="search.html" class="header-action-link"><ion-icon name="search-outline"></ion-icon></a>
+                    <a href="#" class="header-action-link"><ion-icon name="cart-outline"></ion-icon></a>
+                    <a href="auth/login.html" class="header-action-link"><ion-icon name="person-outline"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="search-hero">
+        <div class="search-container">
+            <h1 class="categories__title">Search our Collection</h1>
+            <div class="search-input-wrapper">
+                <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                <input type="text" id="search-box" class="search-input" placeholder="Search for products, colors, categories..." autofocus>
+            </div>
+            <div id="results-count" class="search-results-info">Start typing to see results</div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="products-section">
+            <div class="products-section__grid" id="products-grid">
+                <!-- Results will appear here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div style="grid-column: span 5;">
+                    <h2 class="hero__title" style="font-size: 2rem; color: var(--color-primary);">Join our community</h2>
+                    <p class="hero__description" style="color: var(--color-secondary);">Stay updated with the latest furniture trends and exclusive offers.</p>
+                    <form class="form-group" style="max-width: 300px;">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit" class="btn btn--primary" style="margin-top: 1rem; width: 100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer__brand-text">Modsy.</div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/products-data.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchBox = document.getElementById('search-box');
+            const grid = document.getElementById('products-grid');
+            const countEl = document.getElementById('results-count');
+
+            if (!grid || typeof productsData === 'undefined') return;
+
+            function renderProducts(filtered) {
+                grid.innerHTML = '';
+                
+                if (filtered.length === 0) {
+                    countEl.textContent = 'No products found';
+                    return;
+                }
+
+                countEl.textContent = `${filtered.length} Products found`;
+
+                filtered.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.setAttribute('data-id', p.id);
+                    
+                    let colorsHtml = '';
+                    p.colors.forEach((c, idx) => {
+                        colorsHtml += `<span class="product-card__color-swatch" style="background:${c.code};" data-img="${c.img}"></span>`;
+                    });
+
+                    card.innerHTML = `
+                      <div class="product-card__image" style="cursor:pointer;">
+                        <img src="${p.image}" alt="${p.name}" class="product-card__img">
+                        <button class="product-card__favorite-btn" aria-label="Add to favorites"><ion-icon name="heart-outline"></ion-icon></button>
+                      </div>
+                      <div class="product-card__info">
+                        <div class="product-card__header">
+                          <div class="product-card__name" style="cursor:pointer;">${p.name}</div>
+                          <div class="product-card__price">${p.price}</div>
+                        </div>
+                        <div class="product-card__footer">
+                          <div class="product-card__category">${p.category.toUpperCase()}</div>
+                          <div class="product-card__colors">
+                            ${colorsHtml}
+                          </div>
+                        </div>
+                      </div>
+                    `;
+
+                    // Handle Details
+                    const handleDetail = () => {
+                        window.location.href = `product-detail.html?id=${p.id}`;
+                    };
+                    card.querySelector('.product-card__image').addEventListener('click', handleDetail);
+                    card.querySelector('.product-card__name').addEventListener('click', handleDetail);
+
+                    grid.appendChild(card);
+                });
+            }
+
+            searchBox.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                
+                if (query.length < 2) {
+                    grid.innerHTML = '';
+                    countEl.textContent = 'Start typing to see results';
+                    return;
+                }
+
+                const filtered = productsData.filter(p => {
+                    return p.name.toLowerCase().includes(query) || 
+                           p.category.toLowerCase().includes(query) || 
+                           p.description.toLowerCase().includes(query);
+                });
+
+                renderProducts(filtered);
+            });
+            
+            // Optional: check for search query in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialQuery = urlParams.get('q');
+            if (initialQuery) {
+                searchBox.value = initialQuery;
+                const event = new Event('input');
+                searchBox.dispatchEvent(event);
+            }
+        });
+    </script>
+</body>
+</html>

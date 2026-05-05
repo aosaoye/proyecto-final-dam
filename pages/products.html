@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Modsy.</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <header class="site-header site-header--solid">
+        <div class="site-header__container container">
+            <div class="header-left">
+                <div class="logo">
+                    <button class="mobile-menu-toggle" aria-label="Open Menu">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="index.html"><ion-icon name="crop-outline"></ion-icon></a>
+                    <a href="index.html">Modsy.</a>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="main-nav__list">
+                    <li><a href="index.html" class="main-nav__link">Home</a></li>
+                    <li><a href="products.html" class="main-nav__link main-nav__link--active">Products</a></li>
+                    <li><a href="contact.html" class="main-nav__link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="search.html" class="header-action-link"><ion-icon name="search-outline"></ion-icon></a>
+                    <a href="#" class="header-action-link"><ion-icon name="cart-outline"></ion-icon></a>
+                    <a href="auth/login.html" class="header-action-link"><ion-icon name="person-outline"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container section-padding">
+        <header class="categories__header">
+            <h2 class="categories__title">Our Collection</h2>
+            <div class="categories__nav">
+                <span class="categories__view-all" id="results-count">12 Results</span>
+            </div>
+        </header>
+
+        <!-- Filters -->
+        <div class="filters-bar scrollbar-hide" id="categories-filter">
+            <button class="filter-btn filter-btn--active" data-category="All">All Products</button>
+            <button class="filter-btn" data-category="Garden">Garden</button>
+            <button class="filter-btn" data-category="Kitchen">Kitchen</button>
+            <button class="filter-btn" data-category="Dining">Dining</button>
+            <button class="filter-btn" data-category="Living">Living</button>
+            <button class="filter-btn" data-category="Bedroom">Bedroom</button>
+            <button class="filter-btn" data-category="Kids Room">Kids Room</button>
+            <button class="filter-btn" data-category="Bathroom">Bathroom</button>
+            <button class="filter-btn" data-category="Office">Office</button>
+            <button class="filter-btn" data-category="Storage">Storage</button>
+        </div>
+
+        <!-- Estructura de tarjetas de productos estilo galería moderna -->
+        <section class="products-section">
+            <div class="products-section__grid" id="products-grid">
+                <!-- Dynamic cards loaded via JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div style="grid-column: span 5;">
+                    <h2 class="hero__title" style="font-size: 2rem; color: var(--color-primary);">Join our community</h2>
+                    <p class="hero__description" style="color: var(--color-secondary);">Stay updated with the latest furniture trends and exclusive offers.</p>
+                    <form class="form-group" style="max-width: 300px;">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit" class="btn btn--primary" style="margin-top: 1rem; width: 100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer__brand-text">Modsy.</div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/products-data.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="../assets/js/script.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.getElementById('products-grid');
+        const filterContainer = document.getElementById('categories-filter');
+        const countEl = document.getElementById('results-count');
+
+        if (!grid || typeof productsData === 'undefined') return;
+
+        // Extract category parameter from URL (for clicks on index.html category cards)
+        const urlParams = new URLSearchParams(window.location.search);
+        let selectedCategory = urlParams.get('category') || 'All';
+
+        function renderProducts(category) {
+            grid.innerHTML = '';
+            
+            const filtered = category === 'All' 
+                ? productsData 
+                : productsData.filter(p => p.category.toLowerCase() === category.toLowerCase());
+
+            if (countEl) {
+                countEl.textContent = `${filtered.length} Results`;
+            }
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.setAttribute('data-id', p.id);
+                
+                let colorsHtml = '';
+                p.colors.forEach((c, idx) => {
+                    colorsHtml += `<span class="product-card__color-swatch" style="background:${c.code}; cursor:pointer;" data-img="${c.img}"></span>`;
+                });
+
+                card.innerHTML = `
+                  <div class="product-card__image" style="cursor:pointer;">
+                    <img src="${p.image}" alt="${p.name}" class="product-card__img">
+                    <button class="product-card__favorite-btn" aria-label="Agregar a favoritos"><ion-icon name="heart-outline"></ion-icon></button>
+                  </div>
+                  <div class="product-card__info">
+                    <div class="product-card__header">
+                      <div class="product-card__name" style="cursor:pointer;">${p.name}</div>
+                      <div class="product-card__price">${p.price}</div>
+                    </div>
+                    <div class="product-card__footer">
+                      <div class="product-card__category">${p.category.toUpperCase()}</div>
+                      <div class="product-card__colors">
+                        ${colorsHtml}
+                      </div>
+                    </div>
+                  </div>
+                `;
+
+                // Handle Swatches (changes color instantly)
+                card.querySelectorAll('.product-card__color-swatch').forEach(swatch => {
+                    swatch.addEventListener('click', (e) => {
+                        e.stopPropagation(); // don't open details on color click
+                        const newImg = swatch.getAttribute('data-img');
+                        card.querySelector('.product-card__img').src = newImg;
+                    });
+                });
+
+                // Handle Favorites
+                const favBtn = card.querySelector('.product-card__favorite-btn');
+                const favIcon = favBtn.querySelector('ion-icon');
+                const favs = JSON.parse(localStorage.getItem('modsy_favorites') || '[]');
+                if (favs.includes(p.name)) {
+                    favBtn.classList.add('product-card__favorite-btn--active');
+                    if (favIcon) favIcon.setAttribute('name', 'heart');
+                }
+                favBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    favBtn.classList.toggle('product-card__favorite-btn--active');
+                    let currentFavs = JSON.parse(localStorage.getItem('modsy_favorites') || '[]');
+                    if (favBtn.classList.contains('product-card__favorite-btn--active')) {
+                        if (favIcon) favIcon.setAttribute('name', 'heart');
+                        currentFavs.push(p.name);
+                    } else {
+                        if (favIcon) favIcon.setAttribute('name', 'heart-outline');
+                        currentFavs = currentFavs.filter(f => f !== p.name);
+                    }
+                    localStorage.setItem('modsy_favorites', JSON.stringify(currentFavs));
+                });
+
+                // Detail routing
+                const detailTrigger = card.querySelector('.product-card__image');
+                const nameTrigger = card.querySelector('.product-card__name');
+                const handleDetail = () => {
+                    window.location.href = `product-detail.html?id=${p.id}`;
+                };
+                detailTrigger.addEventListener('click', handleDetail);
+                nameTrigger.addEventListener('click', handleDetail);
+
+                grid.appendChild(card);
+            });
+
+            // Update active state on buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-category').toLowerCase() === category.toLowerCase()) {
+                    btn.classList.add('filter-btn--active');
+                } else {
+                    btn.classList.remove('filter-btn--active');
+                }
+            });
+        }
+
+        if (filterContainer) {
+            filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const cat = btn.getAttribute('data-category');
+                    const url = new URL(window.location);
+                    url.searchParams.set('category', cat);
+                    window.history.pushState({}, '', url);
+                    renderProducts(cat);
+                });
+            });
+        }
+
+        renderProducts(selectedCategory);
+    });
+    </script>
+</body>
+</html>
