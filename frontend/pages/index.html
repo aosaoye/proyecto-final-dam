@@ -141,43 +141,10 @@
 
         <script type="module">
             import { productService } from '../assets/js/api-services.js';
-            document.addEventListener('DOMContentLoaded', async () => {
-                const container = document.getElementById('home-products-grid');
-                if (!container) return;
-
-                try {
-                    const allProducts = await productService.getAll();
-                    // Only take the last 4 products uploaded
-                    const latestProducts = allProducts.reverse().slice(0, 4);
-
-                    if (latestProducts.length === 0) {
-                        container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: #888;">Visit the admin panel to add products to the showcase!</p>';
-                        return;
-                    }
-
-                    container.innerHTML = latestProducts.map(p => {
-                        const imgUrl = p.image && p.image.startsWith('/uploads') 
-                            ? `http://${window.location.hostname}:5000${p.image}` 
-                            : (p.image || 'https://via.placeholder.com/300x300?text=No+Image');
-                        
-                        return `
-                            <div class="product-card" onclick="window.location.href='product-detail.html?id=${p.id || p._id}'" style="cursor:pointer;">
-                                <div class="product-card__image">
-                                    <img src="${imgUrl}" class="product-card__img" alt="${p.name}">
-                                </div>
-                                <div class="product-card__info">
-                                    <div class="product-card__header">
-                                        <div class="product-card__name">${p.name}</div>
-                                        <div class="product-card__price">${p.price}€</div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('');
-
-                } catch (err) {
-                    container.innerHTML = '<p style="color:red; text-align:center; grid-column:1/-1;">Could not reach server</p>';
-                }
+            import { loadLatestArrivals } from '../assets/js/home.js';
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                loadLatestArrivals(productService, 'home-products-grid');
             });
         </script>
     </main>

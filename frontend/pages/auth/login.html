@@ -5,208 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In | Modsy.</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/auth.css">
+    
     <style>
-        .auth-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
-            padding: 2rem;
-        }
-        .auth-card {
-            background: var(--color-white);
-            padding: 3rem;
-            border-radius: var(--radius-xl);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 450px;
-        }
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-        .auth-header .logo {
-            color: var(--color-primary);
-            margin-bottom: 1.5rem;
-            justify-content: center;
-        }
-        .auth-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-        }
-        .auth-subtitle {
-            color: var(--color-secondary);
-            font-size: 0.9rem;
-        }
-        .auth-footer {
-            margin-top: 2rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--color-secondary);
-        }
-        .auth-footer a {
-            color: var(--color-primary);
-            font-weight: 700;
-            text-decoration: none;
-        }
-        .auth-footer a:hover {
-            text-decoration: underline;
+        /* Route-specific overrides */
+        .auth-image-col {
+            background: url('https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
         }
     </style>
-    <!-- Automatic Redirection for already logged users -->
-    <script type="module">
-        import { authService } from '../../assets/js/api-services.js';
-        if (authService.isAuthenticated()) {
-            window.location.href = '../index.html';
-        }
-    </script>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <header class="auth-header">
-                <div class="logo">
-                    <a href="../index.html" style="display:flex; align-items:center; gap:0.5rem;">
-                        <ion-icon name="crop-outline"></ion-icon>
-                        <span>Modsy.</span>
-                    </a>
+    <div class="auth-wrapper">
+        <!-- Image Cover Panel -->
+        <div class="auth-image-col">
+            <div class="auth-image-overlay">
+                <a href="../index.html" style="color:white; display:flex; align-items:center; gap:0.5rem; text-decoration:none; font-weight:800; font-size:1.2rem;">
+                    <ion-icon name="crop-outline" style="font-size:1.5rem;"></ion-icon> Modsy.
+                </a>
+                <div>
+                    <h3 style="font-size: 2.5rem; font-weight: 800; margin-bottom:1rem; line-height:1;">Define your<br>own space.</h3>
+                    <p style="opacity:0.8; max-width: 300px;">Access your account to design, shop, and manage your premium furniture collection.</p>
                 </div>
-                <h1 class="auth-title">Welcome Back</h1>
-                <p class="auth-subtitle">Enter your details to access your account</p>
-            </header>
+            </div>
+        </div>
 
-            <form id="login-form">
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" id="email" placeholder="name@example.com" required>
-                </div>
-                <div class="form-group" style="margin-top: 1.5rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <label style="margin-bottom: 0;">Password</label>
-                        <a href="#" id="forgot-password-trigger" style="font-size: 0.8rem; color: var(--color-stone-400); text-decoration: none;">Forgot?</a>
+        <!-- Form Panel -->
+        <div class="auth-content-col">
+            <div class="auth-inner-form">
+                <h1 class="auth-title">Sign in</h1>
+
+                <form id="login-form">
+                    <div class="form-group" style="margin-bottom:1.5rem;">
+                        <label>Email</label>
+                        <input type="email" id="email" class="input-modsy" placeholder="e.g. alex@example.com" required>
                     </div>
-                    <input type="password" id="password" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 2rem; padding: 1.2rem;">Sign In</button>
-            </form>
+                    <div class="form-group" style="margin-bottom:2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label style="margin:0;">Password</label>
+                            <a href="#" id="forgot-password-trigger" style="font-size: 0.8rem; color: #78716c; text-decoration: none; font-weight:600;">Forgot?</a>
+                        </div>
+                        <input type="password" id="password" class="input-modsy" style="margin-top:0.5rem;" placeholder="••••••••" required>
+                    </div>
 
-            <div class="auth-footer">
-                Don't have an account? <a href="register.html">Sign up for free</a>
+                    <button type="submit" class="btn-modsy-primary">Continue</button>
+                </form>
+
+                <div class="auth-footer">
+                    New to Modsy? <a href="register.html">Create account</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- SweetAlert2 -->
+    <!-- External Framework Loader -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <script type="module">
-        import { authService } from '../../assets/js/api-services.js';
-
-        document.getElementById('login-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            try {
-                // Add loading indicator
-                Swal.fire({
-                    title: 'Signing In...',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-                const result = await authService.login(email, password);
-                
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Welcome Back!',
-                    text: 'Login successful',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(() => {
-                    const user = authService.getCurrentUser();
-                    if (user && user.role === 'admin') {
-                        window.location.href = '../dashboard/intranet.html';
-                    } else {
-                        window.location.href = '../index.html';
-                    }
-                });
-
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Incorrect email or password',
-                    footer: `<small style="color:#ef4444">${error.message}</small>`
-                });
-            }
-        });
-        
-        // Secure 2-Step Forgot Password Logic
-        document.getElementById('forgot-password-trigger').addEventListener('click', async (e) => {
-            e.preventDefault();
-            
-            // STEP 1: Request Email
-            const { value: email } = await Swal.fire({
-                title: 'Recover Password',
-                input: 'email',
-                inputLabel: 'Enter your registered email address',
-                inputPlaceholder: 'Your email',
-                showCancelButton: true,
-                confirmButtonText: 'Send Code',
-                confirmButtonColor: '#1c1917',
-                inputValidator: (value) => {
-                    if (!value) return 'Email is required!';
-                }
-            });
-
-            if (email) {
-                Swal.fire({ title: 'Processing...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
-                try {
-                    await authService.requestPasswordReset(email);
-                    
-                    // STEP 2: Successful request, ask for code & new password
-                    const { value: formValues } = await Swal.fire({
-                        icon: 'info',
-                        title: 'Code Sent',
-                        html: `
-                            <p style="font-size:0.85rem; margin-bottom:1rem;">Look for the 6-digit security code sent to your inbox.</p>
-                            <input type="text" id="reset-token" class="swal2-input" placeholder="6-Digit Code" maxlength="6" style="text-align:center; font-weight:bold;">
-                            <input type="password" id="reset-new-pass" class="swal2-input" placeholder="New Password">
-                        `,
-                        focusConfirm: false,
-                        showCancelButton: true,
-                        confirmButtonText: 'Verify and Update',
-                        confirmButtonColor: '#1c1917',
-                        preConfirm: () => {
-                            const token = document.getElementById('reset-token').value;
-                            const pass = document.getElementById('reset-new-pass').value;
-                            if (!token || !pass) {
-                                Swal.showValidationMessage(`Please complete both fields.`);
-                                return false;
-                            }
-                            return { token, pass };
-                        }
-                    });
-
-                    if (formValues) {
-                        Swal.fire({ title: 'Verifying...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
-                        await authService.confirmPasswordReset(formValues.token, formValues.pass);
-                        Swal.fire('Success!', 'Your password has been updated. You can now sign in.', 'success');
-                    }
-
-                } catch (err) {
-                    Swal.fire('Error', err.message || 'Could not complete the recovery process.', 'error');
-                }
-            }
-        });
+        import { initLoginView } from '../../assets/js/auth-ui.js';
+        initLoginView();
     </script>
-
+    
+    <!-- Graphic Modules -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

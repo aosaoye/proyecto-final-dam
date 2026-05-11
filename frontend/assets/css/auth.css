@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+:root {
+    --font-brand: 'Geist', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --modsy-black: #1c1917;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-brand);
+    color: var(--modsy-black);
+    -webkit-font-smoothing: antialiased;
+}
+
+.auth-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    min-height: 100vh;
+}
+
+.auth-image-col {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    position: relative;
+}
+
+.auth-image-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+}
+
+.auth-content-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: #ffffff;
+}
+
+.auth-inner-form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+}
+
+.auth-subtitle {
+    color: #78716c;
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #78716c;
+    margin-bottom: 0.25rem;
+}
+
+.input-modsy {
+    width: 100%;
+    padding: 0.8rem 0 !important; /* Clean spacing without padding sideboxes */
+    border: none !important;
+    border-bottom: 1px solid #d6d3d1 !important;
+    border-radius: 0 !important; /* Discard rounding for pure line design */
+    font-family: var(--font-brand);
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: transparent !important;
+    color: var(--modsy-black);
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-modsy:focus {
+    outline: none;
+    border-color: transparent !important;
+    border-bottom-color: var(--modsy-black) !important;
+}
+
+/* ABSOLUTE ANNIHILATION OF UGLY YELLOW AUTOCOMPLETE */
+.input-modsy:-webkit-autofill,
+.input-modsy:-webkit-autofill:hover, 
+.input-modsy:-webkit-autofill:focus, 
+.input-modsy:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 40px white inset !important;
+    -webkit-text-fill-color: var(--modsy-black) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.btn-modsy-primary {
+    width: 100%;
+    background: var(--modsy-black);
+    color: white;
+    border: none;
+    padding: 1.1rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    font-family: var(--font-brand);
+    margin-top: 0.5rem;
+}
+
+.btn-modsy-primary:hover {
+    background: #292524;
+    transform: translateY(-2px);
+}
+
+.auth-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #78716c;
+}
+
+.auth-footer a {
+    color: var(--modsy-black);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .auth-wrapper { grid-template-columns: 1fr; }
+    .auth-image-col { display: none; }
+}

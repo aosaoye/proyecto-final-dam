@@ -81,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const logoDiv = document.createElement('div');
         logoDiv.className = 'logo';
-        logoDiv.innerHTML = '<a href="index.html"><ion-icon name="crop-outline"></ion-icon></a><a href="index.html">Modsy.</a>';
+        // Clean text-only logo on drawer to conserve space
+        logoDiv.innerHTML = '<a href="index.html" style="font-weight:900; letter-spacing:-1px;">Modsy.</a>';
 
         const closeButton = document.createElement('button');
         closeButton.className = 'mobile-drawer__close';
@@ -103,7 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const a = document.createElement('a');
             a.className = 'mobile-drawer__link';
             a.href = link.getAttribute('href');
-            a.textContent = link.textContent;
+            a.innerHTML = `
+                <span>${link.textContent}</span>
+                <ion-icon name="arrow-forward-outline" style="font-size:1.25rem; opacity:0.6;"></ion-icon>
+            `;
             li.appendChild(a);
             linkList.appendChild(li);
         });

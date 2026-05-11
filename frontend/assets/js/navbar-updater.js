@@ -286,8 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     html: htmlList,
                     confirmButtonText: 'Checkout',
                     showCancelButton: true,
-                    cancelButtonText: 'Continue Shopping',
-                    confirmButtonColor: '#1e293b'
+                    cancelButtonText: 'Continue Shopping'
                 }).then(async (res) => {
                     if (res.isConfirmed) {
                         try {
