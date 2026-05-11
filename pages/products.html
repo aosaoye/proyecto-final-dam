@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
         </div>
     </header>
 
-    <main class="main-container section-padding">
+    <main class="main-container section-padding" style="margin-top: 90px;">
         <header class="categories__header">
             <h2 class="categories__title">Our Collection</h2>
             <div class="categories__nav">
@@ -87,53 +87,80 @@
     <script src="../assets/js/products-data.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="../assets/js/navbar-updater.js"></script>
     <script src="../assets/js/script.js"></script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <script type="module">
+    import { productService } from '../assets/js/api-services.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
         const grid = document.getElementById('products-grid');
         const filterContainer = document.getElementById('categories-filter');
         const countEl = document.getElementById('results-count');
 
-        if (!grid || typeof productsData === 'undefined') return;
+        if (!grid) return;
 
-        // Extract category parameter from URL (for clicks on index.html category cards)
+        // Extract category parameter from URL
         const urlParams = new URLSearchParams(window.location.search);
         let selectedCategory = urlParams.get('category') || 'All';
+
+        let allApiProducts = [];
+
+        try {
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">Loading collection...</p>';
+            allApiProducts = await productService.getAll();
+        } catch (err) {
+            grid.innerHTML = `<p style="grid-column: 1/-1; color: red; text-align:center;">Error loading products from server.</p>`;
+            console.error(err);
+            return;
+        }
 
         function renderProducts(category) {
             grid.innerHTML = '';
             
             const filtered = category === 'All' 
-                ? productsData 
-                : productsData.filter(p => p.category.toLowerCase() === category.toLowerCase());
+                ? allApiProducts 
+                : allApiProducts.filter(p => p.category && p.category.toLowerCase() === category.toLowerCase());
 
             if (countEl) {
                 countEl.textContent = `${filtered.length} Results`;
             }
 
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--color-stone-400);">No products found.</p>';
+                return;
+            }
+
             filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                card.setAttribute('data-id', p.id);
+                card.setAttribute('data-id', p.id || p._id);
                 
+                // Support for uploaded images vs absolute urls
+                const imgUrl = p.image && p.image.startsWith('/uploads') 
+                    ? `http://${window.location.hostname}:5000${p.image}` 
+                    : (p.image || 'https://via.placeholder.com/300x300?text=No+Image');
+
+                // Fallback for colors not stored in backend
                 let colorsHtml = '';
-                p.colors.forEach((c, idx) => {
-                    colorsHtml += `<span class="product-card__color-swatch" style="background:${c.code}; cursor:pointer;" data-img="${c.img}"></span>`;
-                });
+                if (p.colors && Array.isArray(p.colors)) {
+                    p.colors.forEach((c, idx) => {
+                        colorsHtml += `<span class="product-card__color-swatch" style="background:${c.code}; cursor:pointer;" data-img="${c.img}"></span>`;
+                    });
+                }
 
                 card.innerHTML = `
                   <div class="product-card__image" style="cursor:pointer;">
-                    <img src="${p.image}" alt="${p.name}" class="product-card__img">
-                    <button class="product-card__favorite-btn" aria-label="Agregar a favoritos"><ion-icon name="heart-outline"></ion-icon></button>
+                    <img src="${imgUrl}" alt="${p.name}" class="product-card__img">
+                    <button class="product-card__favorite-btn" aria-label="Add to favorites"><ion-icon name="heart-outline"></ion-icon></button>
                   </div>
                   <div class="product-card__info">
                     <div class="product-card__header">
                       <div class="product-card__name" style="cursor:pointer;">${p.name}</div>
-                      <div class="product-card__price">${p.price}</div>
+                      <div class="product-card__price">${p.price}€</div>
                     </div>
                     <div class="product-card__footer">
-                      <div class="product-card__category">${p.category.toUpperCase()}</div>
+                      <div class="product-card__category">${(p.category || 'UNSORTED').toUpperCase()}</div>
                       <div class="product-card__colors">
                         ${colorsHtml}
                       </div>
@@ -141,42 +168,20 @@
                   </div>
                 `;
 
-                // Handle Swatches (changes color instantly)
+                // Handle Swatches
                 card.querySelectorAll('.product-card__color-swatch').forEach(swatch => {
                     swatch.addEventListener('click', (e) => {
-                        e.stopPropagation(); // don't open details on color click
+                        e.stopPropagation();
                         const newImg = swatch.getAttribute('data-img');
                         card.querySelector('.product-card__img').src = newImg;
                     });
-                });
-
-                // Handle Favorites
-                const favBtn = card.querySelector('.product-card__favorite-btn');
-                const favIcon = favBtn.querySelector('ion-icon');
-                const favs = JSON.parse(localStorage.getItem('modsy_favorites') || '[]');
-                if (favs.includes(p.name)) {
-                    favBtn.classList.add('product-card__favorite-btn--active');
-                    if (favIcon) favIcon.setAttribute('name', 'heart');
-                }
-                favBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    favBtn.classList.toggle('product-card__favorite-btn--active');
-                    let currentFavs = JSON.parse(localStorage.getItem('modsy_favorites') || '[]');
-                    if (favBtn.classList.contains('product-card__favorite-btn--active')) {
-                        if (favIcon) favIcon.setAttribute('name', 'heart');
-                        currentFavs.push(p.name);
-                    } else {
-                        if (favIcon) favIcon.setAttribute('name', 'heart-outline');
-                        currentFavs = currentFavs.filter(f => f !== p.name);
-                    }
-                    localStorage.setItem('modsy_favorites', JSON.stringify(currentFavs));
                 });
 
                 // Detail routing
                 const detailTrigger = card.querySelector('.product-card__image');
                 const nameTrigger = card.querySelector('.product-card__name');
                 const handleDetail = () => {
-                    window.location.href = `product-detail.html?id=${p.id}`;
+                    window.location.href = `product-detail.html?id=${p.id || p._id}`;
                 };
                 detailTrigger.addEventListener('click', handleDetail);
                 nameTrigger.addEventListener('click', handleDetail);

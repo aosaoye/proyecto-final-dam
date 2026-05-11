@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeButton = document.createElement('button');
         closeButton.className = 'mobile-drawer__close';
         closeButton.type = 'button';
-        closeButton.setAttribute('aria-label', 'Cerrar menu');
+        closeButton.setAttribute('aria-label', 'Close menu');
         closeButton.innerHTML = '&times;';
 
         drawerHeader.appendChild(logoDiv);
@@ -250,7 +250,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // Render cart on page load
-    renderCart();
 });

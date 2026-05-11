@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,91 +96,124 @@
         </div>
     </footer>
 
-    <script src="../assets/js/products-data.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="../assets/js/script.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <!-- Add visual alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../assets/js/navbar-updater.js"></script>
+
+    <script type="module">
+    import { productService, cartService, authService } from '../assets/js/api-services.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const id = parseInt(urlParams.get('id'));
+        const id = urlParams.get('id');
 
-        if (!id || typeof productsData === 'undefined') return;
-
-        const product = productsData.find(p => p.id === id);
-        if (!product) return;
-
-        // UI Populate
-        document.getElementById('detail-img').src = product.image;
-        document.getElementById('detail-title').textContent = product.name;
-        document.getElementById('detail-price').textContent = product.price;
-        document.getElementById('detail-desc').textContent = product.description;
-        document.getElementById('detail-category-v').textContent = product.category.toUpperCase();
-        document.getElementById('detail-tagline').textContent = `${product.category} Series`;
-
-        // Colors
-        const colorsEl = document.getElementById('detail-colors');
-        if (colorsEl && product.colors) {
-            colorsEl.innerHTML = '';
-            product.colors.forEach((c, idx) => {
-                const dot = document.createElement('div');
-                dot.className = `color-dot ${idx === 0 ? 'color-dot--active' : ''}`;
-                dot.innerHTML = `<div class="color-dot-inner" style="background:${c.code}"></div>`;
-                dot.addEventListener('click', () => {
-                    document.getElementById('detail-img').src = c.img;
-                    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('color-dot--active'));
-                    dot.classList.add('color-dot--active');
-                });
-                colorsEl.appendChild(dot);
-            });
+        if (!id) {
+            window.location.href = 'products.html';
+            return;
         }
 
-        // Qty
-        let qty = 1;
-        document.getElementById('btn-qty-minus').addEventListener('click', () => { if(qty > 1) { qty--; document.getElementById('qty-value').textContent = qty; }});
-        document.getElementById('btn-qty-plus').addEventListener('click', () => { qty++; document.getElementById('qty-value').textContent = qty; });
+        let currentProduct = null;
 
-        // Cart
-        document.getElementById('btn-add-to-cart').addEventListener('click', () => {
-            let cart = JSON.parse(localStorage.getItem('modsy_cart') || '[]');
-            const existing = cart.find(item => item.name === product.name);
-            if (existing) existing.qty += qty;
-            else cart.push({ name: product.name, price: parseFloat(product.price.replace(/[^\d.]/g, '')), img: product.image, qty });
-            localStorage.setItem('modsy_cart', JSON.stringify(cart));
-            alert('Added to cart!');
+        try {
+            // UI Populate using API call
+            currentProduct = await productService.getById(id);
+            if (!currentProduct) throw new Error('Product not found');
+
+            // Standard image loader
+            const imgUrl = currentProduct.image && currentProduct.image.startsWith('/uploads') 
+                ? `http://${window.location.hostname}:5000${currentProduct.image}` 
+                : (currentProduct.image || 'https://via.placeholder.com/500x500');
+
+            document.getElementById('detail-img').src = imgUrl;
+            document.getElementById('detail-title').textContent = currentProduct.name;
+            document.getElementById('detail-price').textContent = `${currentProduct.price}€`;
+            document.getElementById('detail-desc').textContent = currentProduct.description;
+            document.getElementById('detail-category-v').textContent = (currentProduct.category || 'Collection').toUpperCase();
+            document.getElementById('detail-tagline').textContent = `${currentProduct.category} Series`;
+
+        } catch (err) {
+            console.error(err);
+            Swal.fire('Error', 'Could not fetch product information', 'error');
+            return;
+        }
+
+        // Qty Counter
+        let qty = 1;
+        const qtyDisplay = document.getElementById('qty-value');
+        document.getElementById('btn-qty-minus').addEventListener('click', () => { 
+            if(qty > 1) { qty--; qtyDisplay.textContent = qty; }
+        });
+        document.getElementById('btn-qty-plus').addEventListener('click', () => { 
+            qty++; 
+            qtyDisplay.textContent = qty; 
         });
 
-        // Similar Products
-        const similarGrid = document.getElementById('similar-grid');
-        if (similarGrid) {
-            const similar = productsData.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
-            similar.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <div class="product-card__visual">
-                        <img src="${p.image}" alt="${p.name}" class="product-card__img">
-                        <button class="product-card__favorite-btn">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </button>
-                    </div>
-                    <div class="product-card__info">
-                        <div class="product-card__header">
-                            <h3 class="product-card__name">${p.name}</h3>
-                            <span class="product-card__price">${p.price}</span>
-                        </div>
-                        <div class="product-card__footer">
-                            <span class="product-card__category">${p.category}</span>
-                            <div class="product-card__colors">
-                                ${p.colors ? p.colors.map(c => `<div class="product-card__color-swatch" style="background: ${c.code}"></div>`).join('') : ''}
+        // Add to backend Cart logic
+        document.getElementById('btn-add-to-cart').addEventListener('click', async () => {
+            if (!authService.isAuthenticated()) {
+                Swal.fire({
+                    title: 'Sign In Required',
+                    text: 'Please log in to add items to your cart.',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Go to Login'
+                }).then(res => {
+                    if (res.isConfirmed) window.location.href = 'auth/login.html';
+                });
+                return;
+            }
+
+            try {
+                Swal.fire({
+                    title: 'Adding...',
+                    didOpen: () => Swal.showLoading()
+                });
+                
+                // Connect to API service
+                await cartService.addItem(id, qty);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Added to Cart',
+                    text: `${qty}x ${currentProduct.name} added successfully!`,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            } catch (error) {
+                Swal.fire('Error', error.message, 'error');
+            }
+        });
+
+        // Load simple recommendation list 
+        try {
+            const all = await productService.getAll();
+            const similarGrid = document.getElementById('similar-grid');
+            if (similarGrid && all) {
+                const similar = all.filter(p => p.id !== id).slice(0, 4);
+                similarGrid.innerHTML = similar.map(p => {
+                    const sImg = p.image && p.image.startsWith('/uploads') 
+                        ? `http://${window.location.hostname}:5000${p.image}` 
+                        : (p.image || 'https://via.placeholder.com/300x300');
+                    
+                    return `
+                        <div class="product-card" style="cursor:pointer;" onclick="window.location.href='product-detail.html?id=${p.id || p._id}'">
+                            <div class="product-card__image">
+                                <img src="${sImg}" alt="${p.name}" class="product-card__img">
+                            </div>
+                            <div class="product-card__info">
+                                <div class="product-card__header">
+                                    <h3 class="product-card__name">${p.name}</h3>
+                                    <span class="product-card__price">${p.price}€</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                card.addEventListener('click', () => { window.location.href = `product-detail.html?id=${p.id}`; });
-                similarGrid.appendChild(card);
-            });
-        }
+                    `;
+                }).join('');
+            }
+        } catch (e) { /* Silent fail recommendations */ }
     });
     </script>
 </body>

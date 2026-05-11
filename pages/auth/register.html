@@ -56,6 +56,13 @@
             text-decoration: underline;
         }
     </style>
+    <!-- Prevent duplicate registrations -->
+    <script type="module">
+        import { authService } from '../../assets/js/api-services.js';
+        if (authService.isAuthenticated()) {
+            window.location.href = '../index.html';
+        }
+    </script>
 </head>
 <body>
     <div class="auth-container">
@@ -74,15 +81,15 @@
             <form id="register-form">
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" placeholder="John Doe" required>
+                    <input type="text" id="name" placeholder="John Doe" required>
                 </div>
                 <div class="form-group" style="margin-top: 1.25rem;">
                     <label>Email Address</label>
-                    <input type="email" placeholder="name@example.com" required>
+                    <input type="email" id="email" placeholder="name@example.com" required>
                 </div>
                 <div class="form-group" style="margin-top: 1.25rem;">
                     <label>Password</label>
-                    <input type="password" placeholder="••••••••" required>
+                    <input type="password" id="password" placeholder="••••••••" required>
                 </div>
                 <p style="font-size: 0.75rem; color: var(--color-stone-400); margin-top: 1rem;">
                     By signing up, you agree to our <a href="#" style="color: var(--color-stone-500); text-decoration: underline;">Terms</a> and <a href="#" style="color: var(--color-stone-500); text-decoration: underline;">Privacy Policy</a>.
@@ -95,6 +102,47 @@
             </div>
         </div>
     </div>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="module">
+        import { authService } from '../../assets/js/api-services.js';
+
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                Swal.fire({
+                    title: 'Creating Account...',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                await authService.register({ name, email, password });
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Account Created!',
+                    text: 'Welcome to Modsy. You can now log in.',
+                    confirmButtonColor: '#1c1917'
+                }).then(() => {
+                    window.location.href = 'login.html';
+                });
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: error.message
+                });
+            }
+        });
+    </script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
