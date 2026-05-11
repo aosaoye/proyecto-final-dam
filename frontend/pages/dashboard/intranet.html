@@ -23,14 +23,11 @@
         
         body {
             margin: 0;
-            background: #f4f4f5; /* Modsy neutral base */
+            background: #f4f4f5; 
             font-family: var(--font-main);
             color: var(--color-text-primary);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -43,7 +40,7 @@
             overflow: hidden;
         }
 
-        /* Sidebar styling matching reference image perfectly */
+        /* Sidebar styling */
         .sidebar {
             width: var(--sidebar-width);
             background: #fbfbfa;
@@ -52,6 +49,9 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, width 0.3s ease;
+            z-index: 1000;
         }
         
         .sidebar-top {
@@ -272,12 +272,11 @@
             margin: 0;
         }
 
-        /* Reused table block and list cards now cleanly enclosed */
         .panel-card {
             background: white;
             border: 1px solid #f1f5f9;
             border-radius: 16px;
-            overflow: hidden;
+            overflow-x: auto; /* Ensure tables can scroll horizontally on mobile */
         }
         
         .panel-header {
@@ -398,6 +397,97 @@
             align-items: center;
             gap: 0.5rem;
         }
+
+        /* MOBILE MENU BURGER */
+        .hamburger-menu {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #1c1917;
+        }
+
+        .overlay-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE ADAPTATIONS                       */
+        /* ============================================ */
+        @media (max-width: 992px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .content-body {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: 0; top: 0; bottom: 0;
+                transform: translateX(-100%);
+            }
+            .sidebar.sidebar--active {
+                transform: translateX(0);
+            }
+            .overlay-screen.active {
+                display: block;
+            }
+            
+            .toolbar {
+                padding: 1rem 1.5rem;
+            }
+            .content-body {
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+                align-items: center;
+            }
+            
+            .breadcrumbs {
+                display: none; /* Hide text crumbs on very small screens to make space */
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            .metric-tile {
+                border-right: none;
+                border-bottom: 1px solid #f1f5f9;
+            }
+            .hero-label { font-size: 1.5rem; }
+            .hero-value { font-size: 2.5rem; }
+
+            .search-wrapper {
+                width: 140px; /* Compact search */
+            }
+            .search-wrapper input::placeholder {
+                font-size: 0; /* Hide text leaving only icon when very small */
+            }
+            
+            .toolbar-right {
+                gap: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .search-wrapper { display: none; } /* Hide search completely if screen is microscopic */
+        }
+
     </style>
 </head>
 <body>
@@ -409,6 +499,9 @@
             window.location.href = '../index.html';
         }
     </script>
+
+    <!-- Mobile Blur Overlay -->
+    <div class="overlay-screen" id="nav-overlay" onclick="toggleMobileSidebar()"></div>
 
     <div class="app-shell">
         
@@ -455,7 +548,12 @@
         <main class="main-content">
             
             <header class="toolbar">
-                <div class="breadcrumbs">Portal / <span id="breadcrumb-active">Dashboard</span></div>
+                <div style="display:flex; align-items:center; gap:1rem;">
+                    <div class="hamburger-menu" onclick="toggleMobileSidebar()">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </div>
+                    <div class="breadcrumbs">Portal / <span id="breadcrumb-active">Dashboard</span></div>
+                </div>
                 
                 <div class="toolbar-right">
                     <div class="search-wrapper">
@@ -670,8 +768,24 @@
             }
         };
 
+        // Mobile Sidebar Toggling
+        window.toggleMobileSidebar = function() {
+            const side = document.querySelector('.sidebar');
+            const over = document.getElementById('nav-overlay');
+            side.classList.toggle('sidebar--active');
+            over.classList.toggle('active');
+        }
+
         // Tab Toggling logic supporting new Breadcrumb context
         window.switchTab = function(targetId, element, breadcrumbTitle) {
+            // If mobile, close sidebar on click
+            const side = document.querySelector('.sidebar');
+            const over = document.getElementById('nav-overlay');
+            if (side.classList.contains('sidebar--active')) {
+                side.classList.remove('sidebar--active');
+                over.classList.remove('active');
+            }
+
             // Remove active classes
             document.querySelectorAll('.content-view').forEach(view => view.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
