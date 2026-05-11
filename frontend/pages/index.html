@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modsy. | Furniture that fits you.</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="site-header__container container">
+            <div class="header-left">
+                <div class="logo">
+                    <button class="mobile-menu-toggle" aria-label="Open Menu">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="index.html"><ion-icon name="crop-outline"></ion-icon></a>
+                    <a href="index.html">Modsy.</a>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="main-nav__list">
+                    <li><a href="index.html" class="main-nav__link main-nav__link--active">Home</a></li>
+                    <li><a href="products.html" class="main-nav__link">Products</a></li>
+                    <li><a href="contact.html" class="main-nav__link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="search.html" class="header-action-link"><ion-icon name="search-outline"></ion-icon></a>
+                    <a href="#" class="header-action-link"><ion-icon name="cart-outline"></ion-icon></a>
+                    <a href="auth/login.html" class="header-action-link"><ion-icon name="person-outline"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero__bg">
+                <img src="https://images.pexels.com/photos/7546714/pexels-photo-7546714.jpeg" alt="Modern Designer Chair">
+            </div>
+
+            <div class="hero__container container">
+                <div class="hero__content">
+                    <h1 class="hero__title">Made to measure, made for you</h1>
+                    <p class="hero__description">
+                        Say goodbye to dead spaces and awkward corners. Design custom furniture that fits your room down to the last millimeter, ensuring a seamless and functional living space.
+                    </p>
+                    <a href="#" class="hero__link">See Collection</a>
+                </div>
+            </div>
+
+          
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories container" id="categories">
+            <div class="categories__header">
+                <h2 class="categories__title">Explore Categories</h2>
+            </div>
+
+            <div class="categories__list scrollbar-hide" id="categories-carousel">
+                <!-- Category 1 -->
+                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Garden'">
+                    <div class="category-card__visual">
+                        <img src="../assets/img/garden.png" alt="Garden" class="category-card__img">
+                    </div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__name">Garden</h3>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Kitchen'">
+                    <div class="category-card__visual">
+                        <img src="../assets/img/kitchen.png" alt="Kitchen" class="category-card__img">
+                    </div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__name">Kitchen</h3>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Dining'">
+                    <div class="category-card__visual">
+                        <img src="../assets/img/dining.png" alt="Dining" class="category-card__img">
+                    </div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__name">Dining</h3>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Living'">
+                    <div class="category-card__visual">
+                        <img src="../assets/img/living.png" alt="Living" class="category-card__img">
+                    </div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__name">Living</h3>
+                    </div>
+                </div>
+
+                <!-- Category 5 -->
+                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Bedroom'">
+                    <div class="category-card__visual">
+                        <img src="../assets/img/bedroom.png" alt="Bedroom" class="category-card__img">
+                    </div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__name">Bedroom</h3>
+                    </div>
+                </div>
+
+                <!-- Category 6 -->
+                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Office'">
+                    <div class="category-card__visual">
+                        <img src="../assets/img/office.png" alt="Office" class="category-card__img">
+                    </div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__name">Office</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured/New Arrivals Section -->
+        <section class="container section-padding" style="margin-top: 4rem;">
+            <div class="categories__header" style="margin-bottom: 2rem;">
+                <h2 class="categories__title">New Arrivals</h2>
+                <a href="products.html" class="hero__link" style="font-size: 1rem; padding: 0.5rem 1rem;">View All</a>
+            </div>
+            
+            <!-- Reusing the product grid style from products.html -->
+            <div id="home-products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem;">
+                <p style="text-align:center; grid-column: 1/-1;">Checking latest inventory...</p>
+            </div>
+        </section>
+
+        <script type="module">
+            import { productService } from '../assets/js/api-services.js';
+            document.addEventListener('DOMContentLoaded', async () => {
+                const container = document.getElementById('home-products-grid');
+                if (!container) return;
+
+                try {
+                    const allProducts = await productService.getAll();
+                    // Only take the last 4 products uploaded
+                    const latestProducts = allProducts.reverse().slice(0, 4);
+
+                    if (latestProducts.length === 0) {
+                        container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: #888;">Visit the admin panel to add products to the showcase!</p>';
+                        return;
+                    }
+
+                    container.innerHTML = latestProducts.map(p => {
+                        const imgUrl = p.image && p.image.startsWith('/uploads') 
+                            ? `http://${window.location.hostname}:5000${p.image}` 
+                            : (p.image || 'https://via.placeholder.com/300x300?text=No+Image');
+                        
+                        return `
+                            <div class="product-card" onclick="window.location.href='product-detail.html?id=${p.id || p._id}'" style="cursor:pointer;">
+                                <div class="product-card__image">
+                                    <img src="${imgUrl}" class="product-card__img" alt="${p.name}">
+                                </div>
+                                <div class="product-card__info">
+                                    <div class="product-card__header">
+                                        <div class="product-card__name">${p.name}</div>
+                                        <div class="product-card__price">${p.price}€</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+
+                } catch (err) {
+                    container.innerHTML = '<p style="color:red; text-align:center; grid-column:1/-1;">Could not reach server</p>';
+                }
+            });
+        </script>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div style="grid-column: span 5;">
+                    <h2 class="hero__title" style="font-size: 2rem; color: var(--color-primary);">Furniture that fits you.</h2>
+                    <p class="hero__description" style="color: var(--color-secondary);">Design custom furniture that fits your room down to the last millimeter.</p>
+                </div>
+            </div>
+            <div class="footer__brand-text">Modsy.</div>
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="../assets/js/navbar-updater.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
