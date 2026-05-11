@@ -1,9 +1,9 @@
 // CHANGE THIS TO YOUR RENDER PRODUCTION BACKEND URL (e.g., https://tu-servidor.onrender.com)
-const PRODUCTION_API_URL = 'TU_URL_DE_RENDER_AQUI'; 
+const PRODUCTION_API_URL = 'https://proyecto-final-dam-backend.onrender.com';
 
 const IS_PRODUCTION = !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1');
 
-export const BASE_IMAGE_URL = IS_PRODUCTION && PRODUCTION_API_URL !== 'TU_URL_DE_RENDER_AQUI'
+export const BASE_IMAGE_URL = IS_PRODUCTION 
     ? PRODUCTION_API_URL 
     : `http://${window.location.hostname}:5000`;
 
