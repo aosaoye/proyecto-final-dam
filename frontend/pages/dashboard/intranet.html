@@ -31,10 +31,10 @@
         <aside class="sidebar">
             <div class="sidebar-top">
                 <div style="display:flex; align-items:center; gap:0.6rem;">
-                    <svg class="logo-spiral" viewBox="0 0 100 100" width="32" height="32" fill="none" stroke="#6E4424" stroke-width="4.5" stroke-linecap="round">
+                    <svg class="logo-spiral" viewBox="0 0 100 100" width="32" height="32" fill="none" stroke="var(--color-secondary)" stroke-width="4.5" stroke-linecap="round">
                         <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
                     </svg>
-                    <span style="font-weight:800; font-size:1.4rem; letter-spacing:-0.025em; color:#6E4424;">Modsy</span>
+                    <span style="font-weight:800; font-size:1.4rem; letter-spacing:-0.025em; color:var(--color-primary);">Modsy</span>
                 </div>
             </div>
 
@@ -414,7 +414,7 @@
                         <h4 style="font-family: var(--font-general-sans), sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Tus Representantes Electos en Modsy</h4>
                         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem;">
                             <div style="background:var(--color-stone-50); border:1px solid var(--color-stone-200); padding:1.5rem; border-radius:var(--radius-md); text-align:center;">
-                                <div style="width:64px; height:64px; border-radius:50%; background:#6E4424; color:white; display:flex; align-items:center; justify-content:center; font-family:var(--font-general-sans); font-weight:800; font-size:1.5rem; margin:0 auto 1rem auto;">SA</div>
+                                <div style="width:64px; height:64px; border-radius:50%; background:var(--color-primary); color:white; display:flex; align-items:center; justify-content:center; font-family:var(--font-general-sans); font-weight:800; font-size:1.5rem; margin:0 auto 1rem auto;">SA</div>
                                 <h5 style="font-family:var(--font-general-sans); font-size:1rem; font-weight:700; margin-bottom:0.25rem;">Sofía Alarcón</h5>
                                 <p style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--color-secondary); margin-bottom:0.75rem;">Delegada Principal (Logística)</p>
                                 <a href="mailto:sofia.alarcon@modsy.com" style="font-size:0.8rem; color:var(--color-primary); font-weight:700; text-decoration:none;">sofia.alarcon@modsy.com</a>
@@ -712,7 +712,7 @@
                     title: `¡Fichaje Registrado!`,
                     text: `Se ha registrado tu ${type.toLowerCase()} correctamente a las ${newLog.time}.`,
                     icon: 'success',
-                    confirmButtonColor: '#1c1917'
+                    confirmButtonColor: '#0F172A'
                 });
             };
 
@@ -810,7 +810,7 @@
                             title: '¡Sugerencia Recibida!',
                             text: `Tu consulta sobre "${type}" ha sido depositada de manera segura e ${identity} en el archivo del Comité. Gracias por colaborar en mejorar nuestro entorno laboral.`,
                             icon: 'success',
-                            confirmButtonColor: '#1c1917'
+                            confirmButtonColor: '#0F172A'
                         });
                         
                         document.getElementById('suggest-msg').value = '';
