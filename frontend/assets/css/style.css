@@ -1,38 +1,57 @@
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700,800&f[]=satoshi@300,400,500,700,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
 
 
 :root {
-  /* Colors - Modsy Furniture Warm Natural Travertine & Clay Palette */
-  --color-primary: #6E4424;      /* Rich Clay Brown */
-  --color-secondary: #8E8276;    /* Warm Clay Taupe */
-  --color-accent: #E2D5C2;       /* Alabaster Warm Sand Beige */
-  --color-bg: #F7F5F0;           /* Soft Sand/Travertine Background */
-  --color-text: #000000;         /* Clear High-Contrast Black */
-  --color-white: #ffffff;        /* Pure white cards/containers */
-  --color-glass: rgba(247, 245, 240, 0.85);
-  --color-glass-dark: rgba(110, 68, 36, 0.95);
+  /* Material Design 3 - Custom Furniture Store Theme */
+  --color-primary: #8D6E63;      /* MD3 Brown 400 */
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #EFEBE9;
+  --color-on-primary-container: #3E2723;
   
-  /* Automatically re-mapping stone colors for a warm, physical sand feeling */
-  --color-stone-50: #fcfbfa;
-  --color-stone-100: #faf9f6;
-  --color-stone-200: #f4f1ea;
-  --color-stone-300: #e2d5c2;
-  --color-stone-400: #bfaea2;
-  --color-stone-500: #8e8276;
-  --color-stone-600: #786b5f;
-  --color-stone-700: #5c4e43;
-  --color-stone-800: #42352b;
-  --color-stone-900: #6e4424;
+  --color-secondary: #795548;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #D7CCC8;
+  --color-on-secondary-container: #3E2723;
+  
+  --color-tertiary: #5D4037;
+  --color-on-tertiary: #FFFFFF;
+  
+  /* Backgrounds & Surfaces */
+  --color-bg: #FFF8F6;           /* Warm tonal background */
+  --color-surface: #FFF8F6;
+  --color-surface-variant: #F5EBE7;
+  --color-on-surface: #201A18;
+  --color-on-surface-variant: #53433F;
+  --color-outline: #85736E;
+  
+  --color-text: var(--color-on-surface);
+  --color-accent: var(--color-primary);
+  --color-white: #ffffff;
+  --color-glass: rgba(255, 248, 246, 0.85);
+  --color-glass-dark: rgba(141, 110, 99, 0.95);
 
-  /* Typography */
-  --font-plus-jakarta: 'Open Sans', system-ui, sans-serif;
-  --font-instrument-sans: 'Open Sans', sans-serif;
+  /* Fallback aliases for existing code */
+  --color-stone-50: #FFF8F6;
+  --color-stone-100: #F5EBE7;
+  --color-stone-200: #E6D8D3;
+  --color-stone-300: #D5C2BC;
+  --color-stone-400: #BCA49C;
+  --color-stone-500: #9E8278;
+  --color-stone-600: #7E6359;
+  --color-stone-700: #5D4037;
+  --color-stone-800: #3E2723;
+  --color-stone-900: #201A18;
+
+  /* MD3 Typography */
+  --font-plus-jakarta: 'Roboto', sans-serif;
+  --font-instrument-sans: 'Roboto', sans-serif;
   --font-bricolage-grotesque: 'Outfit', sans-serif;
-  --font-poppins: 'Open Sans', sans-serif;
+  --font-poppins: 'Outfit', sans-serif;
   --font-outfit: 'Outfit', sans-serif;
   --font-satoshi: 'Outfit', sans-serif;
   --font-general-sans: 'Outfit', sans-serif;
+  
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -53,18 +72,20 @@
   --spacing-xl: 4rem;
   --spacing-xxl: 8rem;
 
-  /* Effects */
-  --shadow-sm: 0 1px 2px 0 rgba(110, 68, 36, 0.05);
-  --shadow-md: 0 4px 12px -1px rgba(110, 68, 36, 0.08);
-  --shadow-lg: 0 20px 40px -5px rgba(110, 68, 36, 0.1);
-  --blur: blur(12px);
-  --radius-sm: 8px; /* Soft rounder edges for natural wood vibes */
-  --radius-md: 12px;
-  --radius-lg: 24px;
+  /* MD3 Shapes & Radii */
+  --radius-sm: 8px; 
+  --radius-md: 16px; /* MD3 standard */
+  --radius-lg: 28px; /* MD3 large */
   --radius-full: 9999px;
 
+  /* MD3 Elevations */
+  --shadow-sm: 0 1px 3px 1px rgba(32, 26, 24, 0.1), 0 1px 2px 0 rgba(32, 26, 24, 0.06); 
+  --shadow-md: 0 4px 8px 3px rgba(32, 26, 24, 0.08), 0 1px 3px 0 rgba(32, 26, 24, 0.04); 
+  --shadow-lg: 0 8px 16px 6px rgba(32, 26, 24, 0.1), 0 2px 6px 0 rgba(32, 26, 24, 0.06); 
+  --blur: blur(12px);
+
   /* Transitions */
-  --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: all 0.3s cubic-bezier(0.2, 0, 0, 1); /* MD3 standard easing */
 }
 
 /* Reset & Base */
@@ -156,15 +177,16 @@ button {
 }
 
 .site-header--scrolled {
-  background: rgb(255, 255, 255);
-  padding: var(--spacing-md) 0;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  background: var(--color-surface);
+  padding: var(--spacing-sm) 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .site-header--scrolled .logo,
 .site-header--scrolled .main-nav__link,
-.site-header--scrolled .header-action-link {
-  color: var(--color-primary);
+.site-header--scrolled .header-action-link,
+.site-header--scrolled .mobile-menu-toggle {
+  color: var(--color-on-surface);
 }
 
 .site-header--scrolled .main-nav__link::after,
@@ -172,17 +194,15 @@ button {
   background: var(--color-primary);
 }
 
-.site-header--scrolled .main-nav__link:hover {
-  color: var(--color-secondary)
-}
-.site-header--scrolled .header-right .header-action-link:hover{
-  color: var(--color-secondary)
+.site-header--scrolled .main-nav__link:hover,
+.site-header--scrolled .header-right .header-action-link:hover {
+  color: var(--color-primary);
 }
 
 /* Solid Header for white pages */
 .site-header--solid {
-    background: #ffffff;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .site-header--solid .logo,
@@ -190,20 +210,12 @@ button {
 .site-header--solid .main-nav__link,
 .site-header--solid .header-action-link,
 .site-header--solid .mobile-menu-toggle {
-    color: var(--color-stone-900) !important;
+  color: var(--color-on-surface) !important;
 }
 
-.site-header--scrolled {
-    background: #ffffff;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-}
-
-.site-header--scrolled .logo,
-.site-header--scrolled .logo a,
-.site-header--scrolled .main-nav__link,
-.site-header--scrolled .header-action-link,
-.site-header--scrolled .mobile-menu-toggle {
-    color: var(--color-stone-900) !important;
+.site-header--solid .main-nav__link:hover,
+.site-header--solid .header-right .header-action-link:hover {
+  color: var(--color-primary) !important;
 }
 
 .site-header__container {
@@ -454,8 +466,8 @@ button {
 
 .category-card__visual {
     position: relative;
-    background: var(--color-stone-100);
-    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     margin-bottom: 12px;
     aspect-ratio: 1 / 1;
@@ -502,12 +514,10 @@ button {
 }
 
 .category-card__name {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    font-family: var(--font-bricolage-grotesque), sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-on-surface);
+    font-family: var(--font-bricolage-grotesque);
     transition: var(--transition-base);
 }
 
@@ -558,21 +568,27 @@ button {
 }
 
 .product-card {
-  background: transparent;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
+  overflow: hidden;
+}
+
+.product-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .product-card__image {
   position: relative;
   width: 100%;
   aspect-ratio: 1/1;
-  background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
+  background: var(--color-surface-variant);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -594,30 +610,35 @@ button {
   position: absolute;
   top: 16px;
   right: 16px;
-  background: transparent;
+  background: var(--color-surface);
   border: none;
-  color: #ffffff;
-  font-size: 1.4rem;
+  border-radius: 50%;
+  color: var(--color-on-surface-variant);
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s, color 0.2s;
+  transition: var(--transition-base);
   z-index: 5;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  box-shadow: var(--shadow-sm);
 }
 
 .product-card__favorite-btn:hover {
-  transform: scale(1.1);
-  color: #e63946;
+  background: var(--color-surface-variant);
+  transform: scale(1.05);
+  color: var(--color-primary);
 }
 
 .product-card__favorite-btn--active {
-  color: #e63946;
+  color: var(--color-primary);
+  background: var(--color-primary-container);
 }
 
 .product-card__info {
-  padding: 1rem 0;
+  padding: 1rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -632,15 +653,15 @@ button {
 }
 
 .product-card__name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-stone-900);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-on-surface);
 }
 
 .product-card__price {
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--color-stone-900);
+  color: var(--color-primary);
 }
 
 .product-card__footer {
@@ -718,20 +739,24 @@ button {
 }
 
 .filter-btn {
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border: 1px solid var(--color-stone-200);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    padding: 8px 16px;
+    border: 1px solid var(--color-outline);
+    border-radius: var(--radius-sm); /* MD3 uses 8px for chips */
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-on-surface-variant);
+    background: transparent;
     transition: var(--transition-base);
 }
 
+.filter-btn:hover {
+    background: rgba(32, 26, 24, 0.04); /* MD3 hover state overlay */
+}
+
 .filter-btn--active {
-    background: var(--color-stone-900);
-    color: var(--color-white);
-    border-color: var(--color-stone-900);
+    background: var(--color-secondary-container);
+    color: var(--color-on-secondary-container);
+    border-color: transparent;
 }
 
 /* Forms */
@@ -802,11 +827,13 @@ button {
 
 .btn--primary {
     background: var(--color-primary);
-    color: var(--color-white);
+    color: var(--color-on-primary);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn--primary:hover {
-    background: var(--color-stone-800);
+    background: var(--color-tertiary);
+    box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
 
@@ -1719,34 +1746,32 @@ body:not(:has(.hero)) .mobile-menu-toggle span {
 }
 
 /* ======================================================== */
-/* MODSY FURNITURE - NATURAL TRAVERTINE & CLAY MINIMALISM */
+/* MATERIAL DESIGN 3 - CUSTOM FURNITURE STORE THEME */
 /* ======================================================== */
 
-/* Physical Repeating Topographical Contours / Wood Grain Background */
+/* Clean MD3 Surface Background */
 body {
-    background-color: #F7F5F0 !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='900' viewBox='0 0 1440 900'%3E%3Cpath d='M0,150 C300,200 400,50 800,120 C1200,190 1300,70 1440,110' fill='none' stroke='%236e4424' stroke-width='1.2' opacity='0.04'/%3E%3Cpath d='M0,300 C250,350 500,180 850,260 C1100,340 1250,220 1440,240' fill='none' stroke='%236e4424' stroke-width='1' opacity='0.04'/%3E%3Cpath d='M0,450 C350,510 600,330 900,430 C1200,530 1350,380 1440,410' fill='none' stroke='%236e4424' stroke-width='1.5' opacity='0.03'/%3E%3Cpath d='M0,600 C200,650 450,480 750,560 C1050,640 1200,510 1440,540' fill='none' stroke='%236e4424' stroke-width='0.8' opacity='0.04'/%3E%3Cpath d='M0,750 C300,810 550,630 850,710 C1150,790 1300,660 1440,680' fill='none' stroke='%236e4424' stroke-width='1.1' opacity='0.03'/%3E%3C/svg%3E") !important;
-    background-repeat: repeat-y !important;
-    background-size: 100% auto !important;
-    font-family: 'Open Sans', sans-serif !important;
-    color: #000000 !important;
+    background-color: var(--color-bg) !important;
+    background-image: none !important;
+    font-family: var(--font-plus-jakarta) !important;
+    color: var(--color-on-surface) !important;
 }
 
-/* Elegant High-Fashion Geometric Outfit Headings */
+/* Elegant Headings MD3 Style */
 h1, h2, h3, h4, 
 .hero__title, .view-title, .section-card h3, .view-subtitle,
 .logo a, .nav-section-label, .breadcrumbs span, .similar-products__title {
-    font-family: 'Outfit', sans-serif !important;
-    font-weight: 600 !important;
-    letter-spacing: -0.02em !important;
-    color: #6E4424 !important;
+    font-family: var(--font-bricolage-grotesque) !important;
+    font-weight: 500 !important; /* MD3 usually uses 400 or 500 for display */
+    letter-spacing: -0.01em !important;
+    color: var(--color-on-surface) !important;
 }
 
 .hero__title, .view-title {
-    font-size: 5rem !important;
-    font-weight: 700 !important;
-    line-height: 1.05 !important;
-    letter-spacing: -0.03em !important;
+    font-size: 4rem !important;
+    font-weight: 600 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
 }
 
 /* Asymmetric Fine-Line Organic Gallery Cards */
