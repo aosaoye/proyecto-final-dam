@@ -1,56 +1,54 @@
-@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700,800&f[]=satoshi@300,400,500,700,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Material Design 3 - Custom Furniture Store Theme */
-  --color-primary: #8D6E63;      /* MD3 Brown 400 */
+  /* Big Tech Startup Theme - Crisp & Clean */
+  --color-primary: #0F172A;      /* Jet Black Primary */
   --color-on-primary: #FFFFFF;
-  --color-primary-container: #EFEBE9;
-  --color-on-primary-container: #3E2723;
+  --color-primary-container: #F1F5F9;
+  --color-on-primary-container: #0F172A;
   
-  --color-secondary: #795548;
+  --color-secondary: #2563EB;    /* Electric Blue Accent */
   --color-on-secondary: #FFFFFF;
-  --color-secondary-container: #D7CCC8;
-  --color-on-secondary-container: #3E2723;
+  --color-secondary-container: #DBEAFE;
+  --color-on-secondary-container: #1E3A8A;
   
-  --color-tertiary: #5D4037;
+  --color-tertiary: #64748B;
   --color-on-tertiary: #FFFFFF;
   
   /* Backgrounds & Surfaces */
-  --color-bg: #FFF8F6;           /* Warm tonal background */
-  --color-surface: #FFF8F6;
-  --color-surface-variant: #F5EBE7;
-  --color-on-surface: #201A18;
-  --color-on-surface-variant: #53433F;
-  --color-outline: #85736E;
+  --color-bg: #F8FAFC;           /* Very light crisp gray */
+  --color-surface: #FFFFFF;      /* Pure white cards */
+  --color-surface-variant: #F1F5F9;
+  --color-on-surface: #0F172A;
+  --color-on-surface-variant: #475569;
+  --color-outline: #E2E8F0;
   
   --color-text: var(--color-on-surface);
-  --color-accent: var(--color-primary);
+  --color-accent: var(--color-secondary);
   --color-white: #ffffff;
-  --color-glass: rgba(255, 248, 246, 0.85);
-  --color-glass-dark: rgba(141, 110, 99, 0.95);
+  --color-glass: rgba(255, 255, 255, 0.85);
+  --color-glass-dark: rgba(15, 23, 42, 0.95);
 
-  /* Fallback aliases for existing code */
-  --color-stone-50: #FFF8F6;
-  --color-stone-100: #F5EBE7;
-  --color-stone-200: #E6D8D3;
-  --color-stone-300: #D5C2BC;
-  --color-stone-400: #BCA49C;
-  --color-stone-500: #9E8278;
-  --color-stone-600: #7E6359;
-  --color-stone-700: #5D4037;
-  --color-stone-800: #3E2723;
-  --color-stone-900: #201A18;
+  /* Slate Scale for depth */
+  --color-stone-50: #F8FAFC;
+  --color-stone-100: #F1F5F9;
+  --color-stone-200: #E2E8F0;
+  --color-stone-300: #CBD5E1;
+  --color-stone-400: #94A3B8;
+  --color-stone-500: #64748B;
+  --color-stone-600: #475569;
+  --color-stone-700: #334155;
+  --color-stone-800: #1E293B;
+  --color-stone-900: #0F172A;
 
-  /* MD3 Typography */
-  --font-plus-jakarta: 'Roboto', sans-serif;
-  --font-instrument-sans: 'Roboto', sans-serif;
-  --font-bricolage-grotesque: 'Outfit', sans-serif;
-  --font-poppins: 'Outfit', sans-serif;
-  --font-outfit: 'Outfit', sans-serif;
-  --font-satoshi: 'Outfit', sans-serif;
-  --font-general-sans: 'Outfit', sans-serif;
+  /* Modern Tech Typography */
+  --font-plus-jakarta: 'Inter', system-ui, sans-serif;
+  --font-instrument-sans: 'Inter', system-ui, sans-serif;
+  --font-bricolage-grotesque: 'Inter', system-ui, sans-serif;
+  --font-poppins: 'Inter', system-ui, sans-serif;
+  --font-outfit: 'Inter', system-ui, sans-serif;
+  --font-satoshi: 'Inter', system-ui, sans-serif;
+  --font-general-sans: 'Inter', system-ui, sans-serif;
   
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -72,20 +70,20 @@
   --spacing-xl: 4rem;
   --spacing-xxl: 8rem;
 
-  /* MD3 Shapes & Radii */
-  --radius-sm: 8px; 
-  --radius-md: 16px; /* MD3 standard */
-  --radius-lg: 28px; /* MD3 large */
+  /* Crisp SaaS Shapes */
+  --radius-sm: 6px; 
+  --radius-md: 12px; 
+  --radius-lg: 16px; 
   --radius-full: 9999px;
 
-  /* MD3 Elevations */
-  --shadow-sm: 0 1px 3px 1px rgba(32, 26, 24, 0.1), 0 1px 2px 0 rgba(32, 26, 24, 0.06); 
-  --shadow-md: 0 4px 8px 3px rgba(32, 26, 24, 0.08), 0 1px 3px 0 rgba(32, 26, 24, 0.04); 
-  --shadow-lg: 0 8px 16px 6px rgba(32, 26, 24, 0.1), 0 2px 6px 0 rgba(32, 26, 24, 0.06); 
+  /* High-end Tech Elevations */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05); 
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05); 
   --blur: blur(12px);
 
-  /* Transitions */
-  --transition-base: all 0.3s cubic-bezier(0.2, 0, 0, 1); /* MD3 standard easing */
+  /* Snappy Transitions */
+  --transition-base: all 0.2s ease; 
 }
 
 /* Reset & Base */
@@ -786,12 +784,10 @@ button {
 
 .form-group label {
     display: block;
-    font-size: var(--font-size-xs);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-stone-500);
-    margin-bottom: var(--spacing-xs);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-stone-700);
+    margin-bottom: 0.35rem;
 }
 
 .form-group input, 

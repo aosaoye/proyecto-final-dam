@@ -12,8 +12,8 @@
 
 /* Sidebar Tab Navigator */
 .intranet-sidebar {
-    background: #fafaf9;
-    border: 1px solid #e7e5e4;
+    background: var(--color-surface-variant);
+    border: 1px solid var(--color-stone-200);
     border-radius: var(--radius-lg);
     padding: 1.5rem;
     position: sticky;
@@ -25,7 +25,7 @@
     align-items: center;
     gap: 1rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e7e5e4;
+    border-bottom: 1px solid var(--color-stone-200);
     margin-bottom: 1.5rem;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .intranet-nav-btn:hover {
-    background: #f5f5f4;
+    background: var(--color-stone-100);
     color: var(--color-primary);
 }
 
@@ -139,8 +139,8 @@
 }
 
 .section-card {
-    background: #ffffff;
-    border: 1px solid #e7e5e4;
+    background: var(--color-surface);
+    border: 1px solid var(--color-stone-200);
     border-radius: var(--radius-md);
     padding: 2rem;
     margin-bottom: 2rem;
@@ -189,8 +189,8 @@
 
 .legal-badge {
     display: inline-block;
-    background: #fafaf9;
-    border: 1px solid #e7e5e4;
+    background: var(--color-surface-variant);
+    border: 1px solid var(--color-stone-200);
     color: var(--color-primary);
     font-size: 0.7rem;
     font-weight: 700;
@@ -234,14 +234,14 @@
 }
 
 .clock-btn {
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
-    font-weight: 700;
+    padding: 0.85rem 2rem;
+    border-radius: 8px; /* SaaS standard */
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
     transition: var(--transition-base);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: var(--shadow-sm);
 }
 
 .clock-btn--in {
@@ -311,8 +311,8 @@
 }
 
 .calc-results {
-    background: #fafaf9;
-    border: 1px solid #e7e5e4;
+    background: var(--color-surface-variant);
+    border: 1px solid var(--color-stone-200);
     border-radius: var(--radius-md);
     padding: 2rem;
     display: flex;
@@ -325,7 +325,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.85rem 0;
-    border-bottom: 1px solid #e7e5e4;
+    border-bottom: 1px solid var(--color-stone-200);
 }
 
 .calc-result-row:last-child {
@@ -362,8 +362,8 @@
 
 .intranet-table th {
     text-align: left;
-    background: #fafaf9;
-    border-bottom: 2px solid #e7e5e4;
+    background: var(--color-surface-variant);
+    border-bottom: 2px solid var(--color-stone-200);
     padding: 1rem;
     font-family: var(--font-general-sans), sans-serif;
     font-size: 0.8rem;
@@ -375,13 +375,13 @@
 
 .intranet-table td {
     padding: 1rem;
-    border-bottom: 1px solid #e7e5e4;
+    border-bottom: 1px solid var(--color-stone-200);
     font-size: 0.9rem;
     line-height: 1.5;
 }
 
 .intranet-table tr:hover td {
-    background: #fafaf9;
+    background: var(--color-surface-variant);
 }
 
 /* Suggestions Form */
