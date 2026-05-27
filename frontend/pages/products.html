@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | Modsy.</title>
+    <title>Our Collection | Arkwood</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -15,8 +15,15 @@
                     <button class="mobile-menu-toggle" aria-label="Open Menu">
                         <ion-icon name="menu-outline"></ion-icon>
                     </button>
-                    <a href="index.html"><ion-icon name="crop-outline"></ion-icon></a>
-                    <a href="index.html">Modsy.</a>
+                    <a href="index.html" class="logo-link">
+                        <svg class="logo-spiral" viewBox="0 0 100 100" width="36" height="36" fill="none" stroke="#6E4424" stroke-width="4.5" stroke-linecap="round">
+                            <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
+                        </svg>
+                        <div class="logo-text">
+                            <span class="logo-title">Arkwood</span>
+                            <span class="logo-subtitle">FURNITURE</span>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -24,6 +31,7 @@
                 <ul class="main-nav__list">
                     <li><a href="index.html" class="main-nav__link">Home</a></li>
                     <li><a href="products.html" class="main-nav__link main-nav__link--active">Products</a></li>
+                    <li><a href="intranet.html" class="main-nav__link">Intranet</a></li>
                     <li><a href="contact.html" class="main-nav__link">Contact</a></li>
                 </ul>
             </nav>
@@ -80,7 +88,7 @@
                     </form>
                 </div>
             </div>
-            <div class="footer__brand-text">Modsy.</div>
+            <div class="footer__brand-text">Arkwood.</div>
         </div>
     </footer>
 
@@ -107,7 +115,23 @@
         let allApiProducts = [];
 
         try {
-            grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">Loading collection...</p>';
+            // Render beautiful skeleton cards while loading the database data
+            let skeletonHtml = '';
+            for(let i = 0; i < 8; i++) {
+                skeletonHtml += `
+                    <div class="product-card skeleton-card">
+                        <div class="product-card__image skeleton" style="aspect-ratio: 1/1; width: 100%;"></div>
+                        <div class="product-card__info" style="padding: 1rem 0; display:flex; flex-direction:column; gap:0.5rem;">
+                            <div style="display:flex; justify-content:space-between; gap:1rem;">
+                                <div class="skeleton" style="height: 1rem; width: 60%; border-radius:4px;"></div>
+                                <div class="skeleton" style="height: 1rem; width: 20%; border-radius:4px;"></div>
+                            </div>
+                            <div class="skeleton" style="height: 0.75rem; width: 45%; border-radius:4px; margin-top:0.25rem;"></div>
+                        </div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = skeletonHtml;
             allApiProducts = await productService.getAll();
         } catch (err) {
             grid.innerHTML = `<p style="grid-column: 1/-1; color: red; text-align:center;">Error loading products from server.</p>`;
@@ -157,7 +181,7 @@
                   <div class="product-card__info">
                     <div class="product-card__header">
                       <div class="product-card__name" style="cursor:pointer;">${p.name}</div>
-                      <div class="product-card__price">${p.price}€</div>
+                      <div class="product-card__price">${String(p.price).includes('€') ? p.price : p.price + '€'}</div>
                     </div>
                     <div class="product-card__footer">
                       <div class="product-card__category">${(p.category || 'UNSORTED').toUpperCase()}</div>

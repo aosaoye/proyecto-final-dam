@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modsy. | Furniture that fits you.</title>
+    <title>Arkwood | Nature in your home.</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -15,8 +15,15 @@
                     <button class="mobile-menu-toggle" aria-label="Open Menu">
                         <ion-icon name="menu-outline"></ion-icon>
                     </button>
-                    <a href="index.html"><ion-icon name="crop-outline"></ion-icon></a>
-                    <a href="index.html">Modsy.</a>
+                    <a href="index.html" class="logo-link">
+                        <svg class="logo-spiral" viewBox="0 0 100 100" width="36" height="36" fill="none" stroke="#6E4424" stroke-width="4.5" stroke-linecap="round">
+                            <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
+                        </svg>
+                        <div class="logo-text">
+                            <span class="logo-title">Arkwood</span>
+                            <span class="logo-subtitle">FURNITURE</span>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -24,6 +31,7 @@
                 <ul class="main-nav__list">
                     <li><a href="index.html" class="main-nav__link main-nav__link--active">Home</a></li>
                     <li><a href="products.html" class="main-nav__link">Products</a></li>
+                    <li><a href="intranet.html" class="main-nav__link">Intranet</a></li>
                     <li><a href="contact.html" class="main-nav__link">Contact</a></li>
                 </ul>
             </nav>
@@ -40,21 +48,93 @@
 
     <main>
         <section class="hero">
-            <div class="hero__bg">
-                <img src="https://images.pexels.com/photos/7546714/pexels-photo-7546714.jpeg" alt="Modern Designer Chair">
+            <!-- Center titles sitting on clean white background -->
+            <div class="hero__header-content">
+                <h1 class="hero__title">Nature in your home</h1>
+                <p class="hero__description">Explore a premium collection perfect for adding a natural touch to your home.</p>
             </div>
 
-            <div class="hero__container container">
-                <div class="hero__content">
-                    <h1 class="hero__title">Made to measure, made for you</h1>
-                    <p class="hero__description">
-                        Say goodbye to dead spaces and awkward corners. Design custom furniture that fits your room down to the last millimeter, ensuring a seamless and functional living space.
-                    </p>
-                    <a href="#" class="hero__link">See Collection</a>
+            <!-- Image visual frame with relative positioned card overlays and hotspots -->
+            <div class="hero__visual-wrapper">
+                <img src="https://images.pexels.com/photos/2995012/pexels-photo-2995012.jpeg" alt="Arkwood Luxury Furniture Set" class="hero__image">
+
+                <!-- Interactivity hotspots directly matching the premium UI mockup -->
+                <div class="hotspots-container">
+                    <!-- Hotspot 1: Solid Wood Table -->
+                    <div class="hotspot" style="top: 61%; left: 49%;" id="hotspot-table">
+                        <div class="hotspot-ring"></div>
+                        <div class="hotspot-dot"></div>
+                        <div class="hotspot-card hotspot-card--horizontal">
+                            <div class="hotspot-card__img-container">
+                                <img src="https://images.pexels.com/photos/2995012/pexels-photo-2995012.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Solid wood table">
+                            </div>
+                            <div class="hotspot-card__text">
+                                <h4>Solid wood table</h4>
+                                <p>A sturdy design that brings warmth and unique style to your home.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hotspot 2: Oak Chair -->
+                    <div class="hotspot" style="top: 76%; left: 34%;" id="hotspot-chair">
+                        <div class="hotspot-ring"></div>
+                        <div class="hotspot-dot"></div>
+                        <div class="hotspot-card">
+                            <h4>Handcrafted Oak Chair</h4>
+                            <p>Meticulously curved structure to provide both aesthetic poise and lasting lumbar comfort.</p>
+                            <a href="products.html" class="hotspot-btn">Discover Chair <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                        </div>
+                    </div>
+
+                    <!-- Hotspot 3: Floating Shelf -->
+                    <div class="hotspot" style="top: 38%; left: 9.5%;" id="hotspot-shelf">
+                        <div class="hotspot-ring"></div>
+                        <div class="hotspot-dot"></div>
+                        <div class="hotspot-card">
+                            <h4>Nordic Shelf Jars</h4>
+                            <p>Elegant ceramic jars on natural wood floating shelves, bringing refined textures to empty walls.</p>
+                            <a href="products.html" class="hotspot-btn">See shelves <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                        </div>
+                    </div>
+
+                    <!-- Hotspot 4: Side Console -->
+                    <div class="hotspot" style="top: 61%; left: 69%;" id="hotspot-console">
+                        <div class="hotspot-ring"></div>
+                        <div class="hotspot-dot"></div>
+                        <div class="hotspot-card">
+                            <h4>Oak Side Console</h4>
+                            <p>A slender, low-profile storage console made of premium natural oak grain wood.</p>
+                            <a href="products.html" class="hotspot-btn">View consoles <ion-icon name="arrow-forward-outline"></ion-icon></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Highlight Card (Bottom-Left) -->
+                <div class="hero-video-card">
+                    <img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Video preview">
+                    <div class="video-card__overlay">
+                        <button class="video-card__play" aria-label="Play video" onclick="alert('Reproduciendo video de la colección...')">
+                            <ion-icon name="play"></ion-icon>
+                        </button>
+                        <span class="video-card__title">Your home, your style</span>
+                    </div>
+                </div>
+
+                <!-- Floating Highlight Card (Bottom-Right) -->
+                <div class="hero-highlight-card">
+                    <div class="highlight-card__content">
+                        <h4>Warm and cozy tone</h4>
+                        <p>Furniture made to last. Discover unique pieces for every corner of your home.</p>
+                    </div>
+                    <div class="highlight-card__image-box">
+                        <img src="https://images.pexels.com/photos/116910/pexels-photo-116910.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Oak Chair">
+                        <button class="highlight-card__wishlist" aria-label="Add to wishlist">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </button>
+                    </div>
+                    <button class="btn btn--primary highlight-card__btn" onclick="window.location.href='products.html'">SHOP NOW</button>
                 </div>
             </div>
-
-          
         </section>
 
         <!-- Categories Section -->
@@ -153,14 +233,15 @@
         <div class="container">
             <div class="footer__grid">
                 <div style="grid-column: span 5;">
-                    <h2 class="hero__title" style="font-size: 2rem; color: var(--color-primary);">Furniture that fits you.</h2>
+                    <h2 class="hero__title" style="font-size: 2rem; color: var(--color-primary);">Nature in your home.</h2>
                     <p class="hero__description" style="color: var(--color-secondary);">Design custom furniture that fits your room down to the last millimeter.</p>
                 </div>
             </div>
-            <div class="footer__brand-text">Modsy.</div>
+            <div class="footer__brand-text">Arkwood.</div>
         </div>
     </footer>
 
+    <script src="../assets/js/products-data.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="module" src="../assets/js/navbar-updater.js"></script>

@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details | Modsy.</title>
+    <title>Product Details | Arkwood</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
+
+    <!-- Unified Premium Loader Overlay -->
+    <div id="page-loader" class="modsy-loader-overlay">
+        <div class="modsy-spinner"></div>
+        <div class="modsy-loader-text">Loading Arkwood Experience</div>
+    </div>
 
     <header class="site-header site-header--solid">
         <div class="site-header__container container">
@@ -18,8 +24,15 @@
                     <button class="mobile-menu-toggle" aria-label="Open Menu">
                         <ion-icon name="menu-outline"></ion-icon>
                     </button>
-                    <a href="index.html"><ion-icon name="crop-outline"></ion-icon></a>
-                    <a href="index.html">Modsy.</a>
+                    <a href="index.html" class="logo-link">
+                        <svg class="logo-spiral" viewBox="0 0 100 100" width="36" height="36" fill="none" stroke="#6E4424" stroke-width="4.5" stroke-linecap="round">
+                            <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
+                        </svg>
+                        <div class="logo-text">
+                            <span class="logo-title">Arkwood</span>
+                            <span class="logo-subtitle">FURNITURE</span>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -27,6 +40,7 @@
                 <ul class="main-nav__list">
                     <li><a href="index.html" class="main-nav__link">Home</a></li>
                     <li><a href="products.html" class="main-nav__link main-nav__link--active">Products</a></li>
+                    <li><a href="intranet.html" class="main-nav__link">Intranet</a></li>
                     <li><a href="contact.html" class="main-nav__link">Contact</a></li>
                 </ul>
             </nav>
@@ -41,7 +55,11 @@
         </div>
     </header>
 
-    <section class="hero-detail">
+    <main class="container" style="margin-top: 130px; margin-bottom: 0;">
+        <a href="products.html" class="back-link"><ion-icon name="arrow-back-outline"></ion-icon> Back to collection</a>
+    </main>
+
+    <section class="hero-detail" style="padding-top: 20px;">
         <div class="container">
             <div class="hero-detail__grid">
                 <!-- Image (Left) -->
@@ -92,10 +110,11 @@
                     <p class="footer__promo-desc">Design custom furniture that fits your room down to the last millimeter.</p>
                 </div>
             </div>
-            <div class="footer__brand-text">Modsy.</div>
+            <div class="footer__brand-text">Arkwood.</div>
         </div>
     </footer>
 
+    <script src="../assets/js/products-data.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="../assets/js/script.js"></script>
@@ -129,15 +148,46 @@
 
             document.getElementById('detail-img').src = imgUrl;
             document.getElementById('detail-title').textContent = currentProduct.name;
-            document.getElementById('detail-price').textContent = `${currentProduct.price}€`;
+            document.getElementById('detail-price').textContent = String(currentProduct.price).includes('€') ? currentProduct.price : `${currentProduct.price}€`;
             document.getElementById('detail-desc').textContent = currentProduct.description;
             document.getElementById('detail-category-v').textContent = (currentProduct.category || 'Collection').toUpperCase();
             document.getElementById('detail-tagline').textContent = `${currentProduct.category} Series`;
+
+            // Populate color options dynamically and bind click triggers to swap visual
+            const colorsContainer = document.getElementById('detail-colors');
+            if (colorsContainer && currentProduct.colors && Array.isArray(currentProduct.colors) && currentProduct.colors.length > 0) {
+                colorsContainer.innerHTML = currentProduct.colors.map((c, idx) => `
+                    <div class="color-dot ${idx === 0 ? 'color-dot--active' : ''}" data-img="${c.img}" style="background:${c.code}" title="${c.name || ''}">
+                        <div class="color-dot-inner" style="background:${c.code};"></div>
+                    </div>
+                `).join('');
+
+                colorsContainer.querySelectorAll('.color-dot').forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        colorsContainer.querySelectorAll('.color-dot').forEach(d => d.classList.remove('color-dot--active'));
+                        dot.classList.add('color-dot--active');
+                        const newImg = dot.getAttribute('data-img');
+                        if (newImg) {
+                            const parsedImg = newImg.startsWith('/uploads') 
+                                ? `http://${window.location.hostname}:5000${newImg}` 
+                                : newImg;
+                            document.getElementById('detail-img').src = parsedImg;
+                        }
+                    });
+                });
+            }
 
         } catch (err) {
             console.error(err);
             Swal.fire('Error', 'Could not fetch product information', 'error');
             return;
+        } finally {
+            // Dismiss page loader gracefully
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                loader.classList.add('modsy-loader-overlay--hidden');
+                setTimeout(() => loader.remove(), 400);
+            }
         }
 
         // Qty Counter
@@ -206,7 +256,7 @@
                             <div class="product-card__info">
                                 <div class="product-card__header">
                                     <h3 class="product-card__name">${p.name}</h3>
-                                    <span class="product-card__price">${p.price}€</span>
+                                    <span class="product-card__price">${String(p.price).includes('€') ? p.price : p.price + '€'}</span>
                                 </div>
                             </div>
                         </div>
