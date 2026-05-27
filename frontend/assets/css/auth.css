@@ -1,14 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700,800&f[]=satoshi@300,400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Geist:wght@100..900&display=swap');
 
 :root {
-    --font-brand: 'Geist', 'Plus Jakarta Sans', system-ui, sans-serif;
-    --modsy-black: #1c1917;
+    --font-brand: 'Satoshi', 'Geist', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --modsy-black: #1c1917; /* High-contrast charcoal text */
+    --color-bg-sand: #f7f4ee; /* Warm sand background */
 }
 
 body {
     margin: 0;
     font-family: var(--font-brand);
     color: var(--modsy-black);
+    background-color: var(--color-bg-sand);
     -webkit-font-smoothing: antialiased;
 }
 
@@ -27,7 +31,7 @@ body {
 
 .auth-image-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+    background: linear-gradient(to bottom, rgba(28, 25, 23, 0.25), rgba(28, 25, 23, 0.7));
     padding: 3rem;
     display: flex;
     flex-direction: column;
@@ -40,24 +44,39 @@ body {
     align-items: center;
     justify-content: center;
     padding: 4rem 2rem;
-    background: #ffffff;
+    background: var(--color-bg-sand);
+    position: relative;
+}
+
+.auth-content-col::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(circle at 70% 30%, rgba(162, 123, 92, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .auth-inner-form {
     width: 100%;
     max-width: 400px;
+    position: relative;
+    z-index: 5;
 }
 
 .auth-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    line-height: 1.1;
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
     margin-bottom: 0.75rem;
+    color: var(--modsy-black);
 }
 
 .auth-subtitle {
-    color: #78716c;
+    color: #706860;
     font-size: 1rem;
     margin-bottom: 2.5rem;
 }
@@ -67,30 +86,29 @@ body {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #78716c;
+    letter-spacing: 0.15em;
+    color: #706860;
     margin-bottom: 0.25rem;
 }
 
 .input-modsy {
     width: 100%;
-    padding: 0.8rem 0 !important; /* Clean spacing without padding sideboxes */
-    border: none !important;
-    border-bottom: 1px solid #d6d3d1 !important;
-    border-radius: 0 !important; /* Discard rounding for pure line design */
+    padding: 0.8rem 1rem !important;
+    border: 1px solid #dcd6c8 !important;
+    border-radius: 0px !important; /* Sharp architectural text fields */
     font-family: var(--font-brand);
     font-size: 1rem;
     font-weight: 500;
-    background-color: transparent !important;
+    background-color: #ffffff !important;
     color: var(--modsy-black);
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
     box-sizing: border-box;
 }
 
 .input-modsy:focus {
     outline: none;
-    border-color: transparent !important;
-    border-bottom-color: var(--modsy-black) !important;
+    border-color: #a27b5c !important;
+    box-shadow: 3px 3px 0px #e8e3d9 !important;
 }
 
 /* ABSOLUTE ANNIHILATION OF UGLY YELLOW AUTOCOMPLETE */
@@ -98,42 +116,54 @@ body {
 .input-modsy:-webkit-autofill:hover, 
 .input-modsy:-webkit-autofill:focus, 
 .input-modsy:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 40px white inset !important;
+    -webkit-box-shadow: 0 0 0 40px #ffffff inset !important;
     -webkit-text-fill-color: var(--modsy-black) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
 
 .btn-modsy-primary {
     width: 100%;
-    background: var(--modsy-black);
-    color: white;
-    border: none;
+    background: var(--modsy-black) !important;
+    color: #f7f4ee !important;
+    border: 1px solid var(--modsy-black) !important;
     padding: 1.1rem;
-    border-radius: 50px;
+    border-radius: 0px !important; /* Sharp blocky shape */
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease;
-    font-family: var(--font-brand);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     margin-top: 0.5rem;
+    box-shadow: 4px 4px 0px #e8e3d9 !important;
 }
 
 .btn-modsy-primary:hover {
-    background: #292524;
-    transform: translateY(-2px);
+    background: #a27b5c !important;
+    border-color: #a27b5c !important;
+    color: #ffffff !important;
+    transform: translate(-2px, -2px) !important;
+    box-shadow: 6px 6px 0px #dcd6c8 !important;
 }
 
 .auth-footer {
     margin-top: 2rem;
     text-align: center;
     font-size: 0.9rem;
-    color: #78716c;
+    color: #706860;
 }
 
 .auth-footer a {
     color: var(--modsy-black);
     font-weight: 700;
     text-decoration: none;
+    border-bottom: 1px solid rgba(28, 25, 23, 0.15);
+    transition: all 0.2s;
+}
+
+.auth-footer a:hover {
+    border-bottom-color: #a27b5c;
+    color: #a27b5c;
 }
 
 @media (max-width: 900px) {

@@ -2,6 +2,23 @@ export async function loadLatestArrivals(productService, gridElementId) {
     const container = document.getElementById(gridElementId);
     if (!container) return;
 
+    // Render 4 beautiful skeleton shimmer cards while database loads
+    let skeletonHtml = '';
+    for (let i = 0; i < 4; i++) {
+        skeletonHtml += `
+            <div class="product-card skeleton-card">
+                <div class="product-card__image skeleton" style="aspect-ratio: 1/1; width: 100%;"></div>
+                <div class="product-card__info" style="padding: 1rem 0; display:flex; flex-direction:column; gap:0.5rem;">
+                    <div style="display:flex; justify-content:space-between; gap:1rem;">
+                        <div class="skeleton" style="height: 1rem; width: 60%; border-radius:4px;"></div>
+                        <div class="skeleton" style="height: 1rem; width: 20%; border-radius:4px;"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    container.innerHTML = skeletonHtml;
+
     try {
         const allProducts = await productService.getAll();
         // Reverse to prioritize most recently added items
@@ -21,6 +38,11 @@ export async function loadLatestArrivals(productService, gridElementId) {
             // Fallback to secure production rewrite if explicitly running live, matching standard logic patterns elsewhere
             const secureImg = imgUrl.replace('http:', 'https:');
 
+            const parsedPrice = typeof p.price === 'string'
+                ? parseFloat(p.price.replace(/[^0-9.]/g, ''))
+                : Number(p.price);
+            const displayPrice = isNaN(parsedPrice) ? '0.00' : parsedPrice.toFixed(2);
+
             return `
                 <div class="product-card" onclick="window.location.href='product-detail.html?id=${p.id || p._id}'" style="cursor:pointer;">
                     <div class="product-card__image">
@@ -29,7 +51,7 @@ export async function loadLatestArrivals(productService, gridElementId) {
                     <div class="product-card__info">
                         <div class="product-card__header">
                             <div class="product-card__name">${p.name}</div>
-                            <div class="product-card__price">${Number(p.price).toFixed(2)}€</div>
+                            <div class="product-card__price">${displayPrice}€</div>
                         </div>
                     </div>
                 </div>

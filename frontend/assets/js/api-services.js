@@ -103,11 +103,25 @@ export const authService = {
 };
 
 export const productService = {
-    getAll() {
-        return api.get('/products');
+    async getAll() {
+        try {
+            return await api.get('/products');
+        } catch (error) {
+            console.warn("API products call failed, falling back to static productsData:", error);
+            // If window.productsData is not defined yet, try to load it from localStorage or return an empty array
+            return window.productsData || [];
+        }
     },
-    getById(id) {
-        return api.get(`/products/${id}`);
+    async getById(id) {
+        try {
+            return await api.get(`/products/${id}`);
+        } catch (error) {
+            console.warn(`API product detail call for ID ${id} failed, falling back to static productsData:`, error);
+            const localList = window.productsData || [];
+            const found = localList.find(p => String(p.id) === String(id));
+            if (found) return found;
+            throw error;
+        }
     },
     create(formData) {
         return api.post('/products', formData, true);
@@ -120,33 +134,130 @@ export const productService = {
     }
 };
 
+// Local helpers to manage offline cart and orders inside localStorage
+function getLocalCart() {
+    let local = localStorage.getItem('arkwood_cart');
+    if (!local) {
+        local = JSON.stringify({ items: [], totalPrice: 0 });
+        localStorage.setItem('arkwood_cart', local);
+    }
+    return JSON.parse(local);
+}
+
+function saveLocalCart(cart) {
+    let total = 0;
+    cart.items.forEach(item => {
+        const p = item.product || {};
+        const parsedPrice = typeof p.price === 'string'
+            ? parseFloat(p.price.replace(/[^0-9.]/g, ''))
+            : Number(p.price || 0);
+        total += parsedPrice * (item.quantity || 0);
+    });
+    cart.totalPrice = total;
+    localStorage.setItem('arkwood_cart', JSON.stringify(cart));
+}
+
 export const cartService = {
-    getCart() {
-        return api.get('/cart');
+    async getCart() {
+        try {
+            return await api.get('/cart');
+        } catch (error) {
+            console.warn("API getCart failed, falling back to localStorage:", error);
+            return getLocalCart();
+        }
     },
     async addToCart(productId, quantity) {
-        const res = await api.post('/cart/items', { productId, quantity });
-        window.dispatchEvent(new CustomEvent('cartUpdated'));
-        return res;
+        try {
+            const res = await api.post('/cart/items', { productId, quantity });
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+            return res;
+        } catch (error) {
+            console.warn("API addToCart failed, falling back to localStorage:", error);
+            const cart = getLocalCart();
+            const allProds = window.productsData || [];
+            const prod = allProds.find(p => String(p.id) === String(productId));
+            if (!prod) throw new Error("Product not found in static database");
+            
+            const existing = cart.items.find(item => String(item.product ? item.product.id : item.productId) === String(productId));
+            if (existing) {
+                existing.quantity += Number(quantity);
+            } else {
+                cart.items.push({
+                    productId,
+                    quantity: Number(quantity),
+                    product: prod
+                });
+            }
+            saveLocalCart(cart);
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+            return { success: true };
+        }
     },
     addItem(productId, quantity) {
         return this.addToCart(productId, quantity);
     },
     async removeFromCart(productId) {
-        const res = await api.delete(`/cart/items/${productId}`);
-        window.dispatchEvent(new CustomEvent('cartUpdated'));
-        return res;
+        try {
+            const res = await api.delete(`/cart/items/${productId}`);
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+            return res;
+        } catch (error) {
+            console.warn("API removeFromCart failed, falling back to localStorage:", error);
+            const cart = getLocalCart();
+            cart.items = cart.items.filter(item => String(item.product ? item.product.id : item.productId) !== String(productId));
+            saveLocalCart(cart);
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+            return { success: true };
+        }
     }
 };
 
 export const orderService = {
-    create() {
-        return api.post('/orders', {});
+    async create() {
+        try {
+            return await api.post('/orders', {});
+        } catch (error) {
+            console.warn("API create order failed, falling back to localStorage:", error);
+            const cart = getLocalCart();
+            if (!cart.items || cart.items.length === 0) throw new Error("Cart is empty");
+            
+            const orders = JSON.parse(localStorage.getItem('arkwood_orders') || '[]');
+            const newOrder = {
+                id: 'ARK-' + Math.floor(Math.random() * 900000 + 100000),
+                createdAt: new Date().toISOString(),
+                totalAmount: cart.totalPrice,
+                status: 'pending',
+                items: cart.items.map(item => ({
+                    product: item.product,
+                    quantity: item.quantity,
+                    price: typeof item.product.price === 'string'
+                        ? parseFloat(item.product.price.replace(/[^0-9.]/g, ''))
+                        : Number(item.product.price)
+                }))
+            };
+            orders.unshift(newOrder);
+            localStorage.setItem('arkwood_orders', JSON.stringify(orders));
+            
+            // Clear cart
+            localStorage.setItem('arkwood_cart', JSON.stringify({ items: [], totalPrice: 0 }));
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+            return { success: true, order: newOrder };
+        }
     },
-    getAll() {
-        return api.get('/orders');
+    async getAll() {
+        try {
+            return await api.get('/orders');
+        } catch (error) {
+            console.warn("API getAll orders failed, falling back to localStorage:", error);
+            return JSON.parse(localStorage.getItem('arkwood_orders') || '[]');
+        }
     },
-    getMyOrders() {
-        return api.get('/orders/my');
+    async getMyOrders() {
+        try {
+            return await api.get('/orders/my');
+        } catch (error) {
+            console.warn("API getMyOrders failed, falling back to localStorage:", error);
+            return JSON.parse(localStorage.getItem('arkwood_orders') || '[]');
+        }
     }
 };

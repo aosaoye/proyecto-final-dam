@@ -1,17 +1,20 @@
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700,800&f[]=satoshi@300,400,500,700,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 :root {
     --sidebar-width: 260px;
-    --color-bg-main: #fafafa; 
-    --color-text-primary: #1c1917; /* Official Modsy Black */
-    --color-text-muted: #78716c; /* Official Stone-500 */
-    --color-border: #f1f5f9;
-    --color-purple-accent: #111; /* Back to Modsy Black/Primary */
-    --font-main: 'Geist', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --color-bg-main: #f7f4ee; 
+    --color-text-primary: #1c1917; 
+    --color-text-muted: #706860; 
+    --color-border: #e8e3d9;
+    --color-purple-accent: #a27b5c; 
+    --font-main: 'Satoshi', 'Geist', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-satoshi: 'Satoshi', sans-serif;
+    --font-general-sans: 'General Sans', sans-serif;
 }
 
 body {
     margin: 0;
-    background: #f4f4f5; 
+    background: #f7f4ee; 
     font-family: var(--font-main);
     color: var(--color-text-primary);
     min-height: 100vh;
@@ -23,7 +26,7 @@ body {
 .app-shell {
     width: 100vw;
     height: 100vh;
-    background: #ffffff;
+    background: #f7f4ee;
     display: flex;
     overflow: hidden;
 }
@@ -31,8 +34,8 @@ body {
 /* Sidebar styling */
 .sidebar {
     width: var(--sidebar-width);
-    background: #fbfbfa;
-    border-right: 1px solid #f0f0f0;
+    background: #ffffff;
+    border-right: 1px solid #e8e3d9;
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
@@ -49,18 +52,18 @@ body {
     margin-bottom: 1.5rem;
 }
 .sidebar-logo-icon {
-    background: #111;
+    background: #1c1917;
     width: 36px;
     height: 36px;
-    border-radius: 8px;
+    border-radius: 0px; /* Editorial square shape */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #facc15; /* yellow glyph */
+    color: #ffffff; 
     font-size: 1.2rem;
 }
 .sidebar-toggle {
-    color: #94a3b8;
+    color: #706860;
     font-size: 1.2rem;
     cursor: pointer;
 }
@@ -68,7 +71,7 @@ body {
 .nav-section-label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #94a3b8;
+    color: #b8af9c;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 0.5rem;
@@ -87,8 +90,8 @@ body {
     align-items: center;
     gap: 0.75rem;
     padding: 0.65rem 0.75rem;
-    border-radius: 10px;
-    color: #334155;
+    border-radius: 0px; /* Editorial boxy lines */
+    color: #706860;
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
@@ -97,21 +100,23 @@ body {
 }
 .nav-item ion-icon {
     font-size: 1.2rem;
-    color: #64748b;
+    color: #b8af9c;
 }
 .nav-item:hover {
-    background: #f1f5f9;
+    background: #faf8f5;
+    color: #1c1917;
 }
 .nav-item.active {
-    background: #f1f1ef; /* subtle light gray background from screenshot */
-    color: #000000;
+    background: rgba(162, 123, 92, 0.08); 
+    color: #1c1917;
     font-weight: 600;
+    border-left: 3px solid #a27b5c;
 }
 
 /* Content Area styling matching clear background without noise */
 .main-content {
     flex-grow: 1;
-    background: #ffffff;
+    background: #f7f4ee;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -130,8 +135,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 3.5rem;
-    border-bottom: 1px solid #fafafa; /* extreme minimal separation */
-}
+    border-bottom: 1px solid #e8e3d9;
 .breadcrumbs {
     font-size: 0.85rem;
     color: #94a3b8;

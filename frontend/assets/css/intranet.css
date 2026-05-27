@@ -1,0 +1,494 @@
+/* ======================================================== */
+/* MODSY EMPLOYEE INTRANET - PREMIUM STYLING SYSTEM         */
+/* ======================================================== */
+
+.intranet-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 2rem;
+}
+
+/* Sidebar Tab Navigator */
+.intranet-sidebar {
+    background: #fafaf9;
+    border: 1px solid #e7e5e4;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    position: sticky;
+    top: 120px;
+}
+
+.intranet-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e7e5e4;
+    margin-bottom: 1.5rem;
+}
+
+.intranet-avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-general-sans), sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+}
+
+.intranet-user-info h3 {
+    font-family: var(--font-general-sans), sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.intranet-user-info span {
+    font-size: 0.75rem;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.intranet-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.intranet-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-satoshi), sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition-base);
+}
+
+.intranet-nav-btn ion-icon {
+    font-size: 1.15rem;
+    transition: var(--transition-base);
+}
+
+.intranet-nav-btn:hover {
+    background: #f5f5f4;
+    color: var(--color-primary);
+}
+
+.intranet-nav-btn--active {
+    background: var(--color-primary);
+    color: var(--color-white) !important;
+}
+
+/* Content Sections */
+.intranet-content {
+    background: var(--color-white);
+    min-height: 60vh;
+}
+
+.intranet-view {
+    display: none;
+    animation: intranet-fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.intranet-view--active {
+    display: block;
+}
+
+@keyframes intranet-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography Extensions */
+.view-title {
+    font-family: var(--font-general-sans), sans-serif;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.view-subtitle {
+    font-family: var(--font-satoshi), sans-serif;
+    font-size: 1rem;
+    color: var(--color-secondary);
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+}
+
+.section-card {
+    background: #ffffff;
+    border: 1px solid #e7e5e4;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.01);
+}
+
+.section-card h3 {
+    font-family: var(--font-general-sans), sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-card h3 ion-icon {
+    color: var(--color-secondary);
+}
+
+.legal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.legal-item {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1.25rem;
+}
+
+.legal-item h4 {
+    font-family: var(--font-general-sans), sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.legal-item p {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    line-height: 1.6;
+}
+
+.legal-badge {
+    display: inline-block;
+    background: #fafaf9;
+    border: 1px solid #e7e5e4;
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+/* Clock In Widget (Extra) */
+.clock-widget {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.clock-time {
+    font-family: var(--font-general-sans), sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+}
+
+.clock-date {
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+
+.clock-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.clock-btn {
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    transition: var(--transition-base);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.clock-btn--in {
+    background: #22c55e;
+    color: white;
+}
+
+.clock-btn--in:hover {
+    background: #16a34a;
+    transform: translateY(-2px);
+}
+
+.clock-btn--out {
+    background: #ef4444;
+    color: white;
+}
+
+.clock-btn--out:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+.clock-log {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 1.5rem;
+    text-align: left;
+}
+
+.clock-log h4 {
+    font-family: var(--font-general-sans), sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-accent);
+}
+
+.clock-log-list {
+    max-height: 150px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.clock-log-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Net Salary Calculator (Extra) */
+.calc-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+}
+
+.calc-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.calc-results {
+    background: #fafaf9;
+    border: 1px solid #e7e5e4;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.calc-result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid #e7e5e4;
+}
+
+.calc-result-row:last-child {
+    border-bottom: none;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--color-primary);
+}
+
+.calc-result-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+.calc-result-value {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.calc-result-value--total {
+    font-family: var(--font-general-sans), sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+/* Tables styling */
+.intranet-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.intranet-table th {
+    text-align: left;
+    background: #fafaf9;
+    border-bottom: 2px solid #e7e5e4;
+    padding: 1rem;
+    font-family: var(--font-general-sans), sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-secondary);
+}
+
+.intranet-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e7e5e4;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.intranet-table tr:hover td {
+    background: #fafaf9;
+}
+
+/* Suggestions Form */
+.suggest-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.suggest-btn {
+    align-self: flex-start;
+    padding: 1rem 3rem;
+}
+
+/* PRL Evacuation Box */
+.evac-plan {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.evac-step {
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.evac-step ion-icon {
+    font-size: 2rem;
+    color: #ef4444;
+    margin-bottom: 0.75rem;
+}
+
+.evac-step h5 {
+    font-family: var(--font-general-sans), sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #991b1b;
+}
+
+.evac-step p {
+    font-size: 0.85rem;
+    color: #b91c1c;
+    line-height: 1.5;
+}
+
+/* ======================================================== */
+/* RESPONSIVE DESIGN - TABLET AND MOBILE ADAPTATIONS        */
+/* ======================================================== */
+
+@media (max-width: 992px) {
+    .intranet-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .intranet-sidebar {
+        position: relative;
+        top: 0;
+    }
+    
+    .intranet-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
+    }
+    
+    .intranet-nav::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .intranet-nav-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+    
+    .calc-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .clock-time {
+        font-size: 2.5rem;
+    }
+    
+    .clock-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .clock-btn {
+        width: 100%;
+    }
+    
+    .evac-plan {
+        grid-template-columns: 1fr;
+    }
+    
+    .intranet-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

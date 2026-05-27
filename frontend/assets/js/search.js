@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <div class="product-card__info">
                 <div class="product-card__header">
                   <div class="product-card__name">${p.name}</div>
-                  <div class="product-card__price">${p.price}€</div>
+                  <div class="product-card__price">${String(p.price).includes('€') ? p.price : p.price + '€'}</div>
                 </div>
                 <div class="product-card__footer">
                   <div class="product-card__category">${(p.category||'').toUpperCase()}</div>

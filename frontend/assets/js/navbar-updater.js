@@ -265,21 +265,33 @@ document.addEventListener('DOMContentLoaded', () => {
                         ? `http://${window.location.hostname}:5000${prod.image}` 
                         : (prod.image || 'https://via.placeholder.com/50');
 
+                    const parsedPrice = typeof prod.price === 'string'
+                        ? parseFloat(prod.price.replace(/[^0-9.]/g, ''))
+                        : Number(prod.price || 0);
+                    const itemTotal = (parsedPrice * item.quantity).toFixed(2);
+                    const priceDisplay = String(prod.price).includes('€') ? prod.price : prod.price + '€';
+
                     htmlList += `
                         <div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid #eee; padding: 10px 0;">
                             <img src="${img}" style="width:50px; height:50px; object-fit:cover; border-radius:6px;">
                             <div style="flex-grow:1;">
                                 <div style="font-weight:bold; font-size:0.9rem;">${prod.name}</div>
-                                <div style="font-size:0.8rem; color:#666;">Qty: ${item.quantity} x ${prod.price}€</div>
+                                <div style="font-size:0.8rem; color:#666;">Qty: ${item.quantity} x ${priceDisplay}</div>
                             </div>
-                            <div style="font-weight:bold; margin-right:10px;">${(prod.price * item.quantity).toFixed(2)}€</div>
+                            <div style="font-weight:bold; margin-right:10px;">${itemTotal}€</div>
                             <button class="js-cart-remove-item" data-prod-id="${prod.id || prod._id || item.productId}" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; justify-content:center;">
                                 <ion-icon name="close-circle"></ion-icon>
                             </button>
                         </div>
                     `;
                 });
-                htmlList += `</div><div style="margin-top:15px; text-align:right; font-size:1.2rem; font-weight:bold;">Total: ${cart.totalPrice.toFixed(2)}€</div>`;
+                
+                const parsedTotal = typeof cart.totalPrice === 'string'
+                    ? parseFloat(cart.totalPrice.replace(/[^0-9.]/g, ''))
+                    : Number(cart.totalPrice || 0);
+                const totalDisplay = isNaN(parsedTotal) ? '0.00' : parsedTotal.toFixed(2);
+
+                htmlList += `</div><div style="margin-top:15px; text-align:right; font-size:1.2rem; font-weight:bold;">Total: ${totalDisplay}€</div>`;
 
                 Swal.fire({
                     title: 'Your Cart',
