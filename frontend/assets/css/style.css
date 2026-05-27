@@ -167,7 +167,8 @@ button {
   color: var(--color-primary);
 }
 
-.site-header--scrolled .main-nav__link--active::after {
+.site-header--scrolled .main-nav__link::after,
+.site-header--solid .main-nav__link::after {
   background: var(--color-primary);
 }
 
@@ -272,31 +273,47 @@ button {
 
 .main-nav__list {
   display: flex;
-  gap: var(--spacing-xl);
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-nav__link {
-  font-size: var(--font-size-xs);
-  font-weight: 600;
+  position: relative;
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: var(--font-bricolage-grotesque), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.7);
-  transition: var(--transition-base);
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.3s ease;
+  padding-bottom: 4px;
 }
 
-.main-nav__link:hover,
-.main-nav__link--active {
+.main-nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-white);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.main-nav__link:hover {
   color: var(--color-white);
 }
 
+.main-nav__link:hover::after,
 .main-nav__link--active::after {
-  content: '';
-  display: block;
-  width: 4px;
-  height: 4px;
-  background: var(--color-white);
-  border-radius: 50%;
-  margin: 4px auto 0;
+  width: 100%;
+  left: 0;
+}
+
+.main-nav__link--active {
+  color: var(--color-white);
+  font-weight: 700;
 }
 
 /* Hero Section */

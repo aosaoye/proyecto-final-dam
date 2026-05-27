@@ -554,3 +554,33 @@ select.swal2-select, select.modsy-select {
     }
     .search-wrapper { display: none; } /* Hide search completely if screen is microscopic */
 }
+
+.input-modsy {
+    width: 100%;
+    padding: 0.8rem 1rem !important;
+    border: 1px solid #dcd6c8 !important;
+    border-radius: 0px !important;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #ffffff !important;
+    color: #1c1917;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-modsy:focus {
+    outline: none;
+    border-color: #a27b5c !important;
+    box-shadow: 3px 3px 0px #e8e3d9 !important;
+}
+
+.input-modsy:-webkit-autofill,
+.input-modsy:-webkit-autofill:hover, 
+.input-modsy:-webkit-autofill:focus, 
+.input-modsy:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 40px #ffffff inset !important;
+    -webkit-text-fill-color: #1c1917 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
