@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- 1. Initialize DOM Elements dynamically (Modsy Premium UX Toolkit) ----
     // ---- 2. Favoritos en tarjetas de productos ----
-    const FAVORITE_KEY = 'arkwood_favorites';
+    const FAVORITE_KEY = 'modsy_favorites';
     function getFavorites() {
         return JSON.parse(localStorage.getItem(FAVORITE_KEY) || '[]');
     }
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const logoDiv = document.createElement('div');
         logoDiv.className = 'logo';
         // Clean text-only logo on drawer to conserve space
-        logoDiv.innerHTML = '<a href="index.html" style="font-weight:900; letter-spacing:-1px; color:#000000; text-decoration:none;">Arkwood.</a>';
+        logoDiv.innerHTML = '<a href="index.html" style="font-weight:900; letter-spacing:-1px; color:#000000; text-decoration:none;">Modsy.</a>';
 
         const closeButton = document.createElement('button');
         closeButton.className = 'mobile-drawer__close';
