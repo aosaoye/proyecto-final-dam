@@ -1,9 +1,0 @@
-node_modules/
-.vite/
-dist/
-.DS_Store
-.data/
-backend/node_modules/
-backend/dist/
-backend/.env
-.env

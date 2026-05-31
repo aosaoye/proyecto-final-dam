@@ -47,166 +47,296 @@
     </header>
 
     <main>
-        <section class="hero">
-            <!-- Center titles sitting on clean white background -->
-            <div class="hero__header-content">
-                <h1 class="hero__title">Nature in your home</h1>
-                <p class="hero__description">Explore a premium collection perfect for adding a natural touch to your home.</p>
+        <!-- Ultra-Premium Light Asymmetric Grid Carousel (User Selected Layout) -->
+        <section class="museum-hero" id="museum-hero">
+            <div class="museum-hero__grid">
+                
+                <!-- Col 1: Vertical Pager Control (10% width) -->
+                <div class="museum-col museum-brand-col">
+                    <!-- Vertical Page Navigation -->
+                    <div class="museum-vertical-nav" style="border-left: none; padding-left: 0; width: 100%;">
+                        <button class="museum-nav-arrow up-arrow" aria-label="Slide anterior">
+                            <ion-icon name="arrow-up-outline"></ion-icon>
+                        </button>
+                        <div class="museum-nav-pages">
+                            <span class="museum-page-indicator active" data-slide="0">01</span>
+                            <span class="museum-page-indicator" data-slide="1">02</span>
+                            <span class="museum-page-indicator" data-slide="2">03</span>
+                        </div>
+                        <button class="museum-nav-arrow down-arrow" aria-label="Siguiente slide">
+                            <ion-icon name="arrow-down-outline"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Col 2: Active Slide Column (45% width) -->
+                <div class="museum-col museum-active-col">
+                    <!-- Slide Image Container -->
+                    <div class="museum-image-box">
+                        <!-- Slide 1 Image -->
+                        <img src="https://images.pexels.com/photos/2995012/pexels-photo-2995012.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nature Collection" class="museum-slide-img active" data-index="0">
+                        <!-- Slide 2 Image -->
+                        <img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Luxury Craftsmanship" class="museum-slide-img" data-index="1" style="display: none;">
+                        <!-- Slide 3 Image -->
+                        <img src="https://images.pexels.com/photos/1866143/pexels-photo-1866143.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Minimalist Living" class="museum-slide-img" data-index="2" style="display: none;">
+                    </div>
+                    <!-- Slide Details Container -->
+                    <div class="museum-details-box">
+                        <div class="museum-slide-details active" data-index="0">
+                            <span class="museum-designer">Colección Nature</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Jardines y Exteriores</h2>
+                        </div>
+                        <div class="museum-slide-details" data-index="1" style="display: none;">
+                            <span class="museum-designer">Artesanía de Roble Macizo</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Cocina y Comedor</h2>
+                        </div>
+                        <div class="museum-slide-details" data-index="2" style="display: none;">
+                            <span class="museum-designer">Estilo Nórdico Minimalista</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Salón y Zonas de Estar</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Col 3: Secondary Previews Column (45% width) -->
+                <div class="museum-col museum-preview-col">
+                    <!-- Top Crop Image -->
+                    <div class="museum-crop-box top-crop">
+                        <img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Preview Top" class="museum-preview-img-1">
+                    </div>
+                    
+                    <!-- Middle Preview Details -->
+                    <div class="museum-preview-details-box">
+                        <div class="museum-preview-details active" data-index="0">
+                            <span class="museum-designer">Próximo Diseño</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Roble Rústico Moderno</h2>
+                        </div>
+                        <div class="museum-preview-details" data-index="1" style="display: none;">
+                            <span class="museum-designer">Próximo Diseño</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Estructura Minimalista</h2>
+                        </div>
+                        <div class="museum-preview-details" data-index="2" style="display: none;">
+                            <span class="museum-designer">Próximo Diseño</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Exteriores Exclusivos</h2>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Crop Image -->
+                    <div class="museum-crop-box bottom-crop">
+                        <img src="https://images.pexels.com/photos/1866143/pexels-photo-1866143.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Preview Bottom" class="museum-preview-img-2">
+                    </div>
+                </div>
+
             </div>
+        </section>
 
-            <!-- Image visual frame with relative positioned card overlays and hotspots -->
-            <div class="hero__visual-wrapper">
-                <img src="https://images.pexels.com/photos/2995012/pexels-photo-2995012.jpeg" alt="Modsy Luxury Furniture Set" class="hero__image">
+        <!-- Museum Slider Controller JS -->
+        <script>
+            let currentMuseumIndex = 0;
+            const totalMuseumSlides = 3;
 
-                <!-- Interactivity hotspots directly matching the premium UI mockup -->
-                <div class="hotspots-container">
-                    <!-- Hotspot 1: Solid Wood Table -->
-                    <div class="hotspot" style="top: 61%; left: 49%;" id="hotspot-table">
-                        <div class="hotspot-ring"></div>
-                        <div class="hotspot-dot"></div>
-                        <div class="hotspot-card hotspot-card--horizontal">
-                            <div class="hotspot-card__img-container">
-                                <img src="https://images.pexels.com/photos/2995012/pexels-photo-2995012.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Solid wood table">
-                            </div>
-                            <div class="hotspot-card__text">
-                                <h4>Solid wood table</h4>
-                                <p>A sturdy design that brings warmth and unique style to your home.</p>
-                            </div>
-                        </div>
-                    </div>
+            const museumData = [
+                {
+                    title: "Nature",
+                    subtitle: "Explore a premium collection perfect for adding a natural touch to your home.",
+                    ctaText: "Explore Now",
+                    designer: "Colección Nature",
+                    location: "Jardines y Exteriores",
+                    nextTopImg: "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800",
+                    nextBottomImg: "https://images.pexels.com/photos/1866143/pexels-photo-1866143.jpeg?auto=compress&cs=tinysrgb&w=800"
+                },
+                {
+                    title: "Luxury",
+                    subtitle: "Discover timeless handcrafted solid oak designs tailored for contemporary living.",
+                    ctaText: "Shop Collection",
+                    designer: "Artesanía de Roble Macizo",
+                    location: "Cocina y Comedor",
+                    nextTopImg: "https://images.pexels.com/photos/1866143/pexels-photo-1866143.jpeg?auto=compress&cs=tinysrgb&w=800",
+                    nextBottomImg: "https://images.pexels.com/photos/2995012/pexels-photo-2995012.jpeg?auto=compress&cs=tinysrgb&w=800"
+                },
+                {
+                    title: "Minimalist",
+                    subtitle: "Create clean, modern interiors with our elegant Nordic elements and functional furniture sets.",
+                    ctaText: "View Catalog",
+                    designer: "Estilo Nórdico Minimalista",
+                    location: "Salón y Comedor",
+                    nextTopImg: "https://images.pexels.com/photos/2995012/pexels-photo-2995012.jpeg?auto=compress&cs=tinysrgb&w=800",
+                    nextBottomImg: "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800"
+                }
+            ];
 
-                    <!-- Hotspot 2: Oak Chair -->
-                    <div class="hotspot" style="top: 76%; left: 34%;" id="hotspot-chair">
-                        <div class="hotspot-ring"></div>
-                        <div class="hotspot-dot"></div>
-                        <div class="hotspot-card">
-                            <h4>Handcrafted Oak Chair</h4>
-                            <p>Meticulously curved structure to provide both aesthetic poise and lasting lumbar comfort.</p>
-                            <a href="products.html" class="hotspot-btn">Discover Chair <ion-icon name="arrow-forward-outline"></ion-icon></a>
-                        </div>
-                    </div>
+            function goToMuseumSlide(idx) {
+                currentMuseumIndex = idx;
+                
+                const data = museumData[idx];
+                
+                // Update main active column details
+                const activeDetails = document.querySelectorAll('.museum-slide-details');
+                activeDetails.forEach((el, i) => {
+                    el.style.display = (i === idx) ? 'flex' : 'none';
+                });
+                
+                const activeImages = document.querySelectorAll('.museum-slide-img');
+                activeImages.forEach((img, i) => {
+                    if (i === idx) {
+                        img.style.display = 'block';
+                        setTimeout(() => img.classList.add('active'), 20);
+                    } else {
+                        img.classList.remove('active');
+                        img.style.display = 'none';
+                    }
+                });
 
-                    <!-- Hotspot 3: Floating Shelf -->
-                    <div class="hotspot" style="top: 38%; left: 9.5%;" id="hotspot-shelf">
-                        <div class="hotspot-ring"></div>
-                        <div class="hotspot-dot"></div>
-                        <div class="hotspot-card">
-                            <h4>Nordic Shelf Jars</h4>
-                            <p>Elegant ceramic jars on natural wood floating shelves, bringing refined textures to empty walls.</p>
-                            <a href="products.html" class="hotspot-btn">See shelves <ion-icon name="arrow-forward-outline"></ion-icon></a>
-                        </div>
-                    </div>
+                // Update indicators
+                const indicators = document.querySelectorAll('.museum-page-indicator');
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === idx);
+                });
 
-                    <!-- Hotspot 4: Side Console -->
-                    <div class="hotspot" style="top: 61%; left: 69%;" id="hotspot-console">
-                        <div class="hotspot-ring"></div>
-                        <div class="hotspot-dot"></div>
-                        <div class="hotspot-card">
-                            <h4>Oak Side Console</h4>
-                            <p>A slender, low-profile storage console made of premium natural oak grain wood.</p>
-                            <a href="products.html" class="hotspot-btn">View consoles <ion-icon name="arrow-forward-outline"></ion-icon></a>
-                        </div>
-                    </div>
+                // Update preview column details and crop images dynamically!
+                const previewDetails = document.querySelectorAll('.museum-preview-details');
+                previewDetails.forEach((el, i) => {
+                    el.style.display = (i === idx) ? 'flex' : 'none';
+                });
+                
+                const topCrop = document.querySelector('.museum-preview-img-1');
+                const bottomCrop = document.querySelector('.museum-preview-img-2');
+                
+                if (topCrop) topCrop.src = data.nextTopImg;
+                if (bottomCrop) bottomCrop.src = data.nextBottomImg;
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const downBtn = document.querySelector('.museum-nav-arrow.down-arrow');
+                const upBtn = document.querySelector('.museum-nav-arrow.up-arrow');
+                
+                if (downBtn) {
+                    downBtn.addEventListener('click', () => {
+                        let nextIndex = (currentMuseumIndex + 1) % totalMuseumSlides;
+                        goToMuseumSlide(nextIndex);
+                    });
+                }
+                
+                if (upBtn) {
+                    upBtn.addEventListener('click', () => {
+                        let prevIndex = (currentMuseumIndex - 1 + totalMuseumSlides) % totalMuseumSlides;
+                        goToMuseumSlide(prevIndex);
+                    });
+                }
+                
+                // Bind click events on indicators
+                const indicators = document.querySelectorAll('.museum-page-indicator');
+                indicators.forEach((indicator, i) => {
+                    indicator.addEventListener('click', () => goToMuseumSlide(i));
+                });
+            });
+        </script>
+
+        <!-- Asymmetric Typography Promo Banner (User Selected Layout) -->
+        <section class="promo-banner container">
+            <div class="promo-banner__grid">
+                <!-- Left: Big Bold Statement -->
+                <div class="promo-banner__left">
+                    <span class="promo-banner__eyebrow">LEGACY OF EXCELLENCE</span>
+                    <h2 class="promo-banner__title">
+                        Spaces that<br>
+                        <span class="promo-banner__title-alt">define home</span>
+                    </h2>
                 </div>
-
-                <!-- Video Highlight Card (Bottom-Left) -->
-                <div class="hero-video-card">
-                    <img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Video preview">
-                    <div class="video-card__overlay">
-                        <button class="video-card__play" aria-label="Play video" onclick="alert('Reproduciendo video de la colección...')">
-                            <ion-icon name="play"></ion-icon>
-                        </button>
-                        <span class="video-card__title">Your home, your style</span>
+                <!-- Right: Small Sub-statement & Est tag -->
+                <div class="promo-banner__right">
+                    <p class="promo-banner__statement"># Crafting premium modular elements, solid oak tables, and custom outdoor environments for your modern living.</p>
+                    <div class="promo-banner__est">
+                        <span class="promo-banner__line"></span>
+                        <span class="promo-banner__year">EST. 2011</span>
                     </div>
-                </div>
-
-                <!-- Floating Highlight Card (Bottom-Right) -->
-                <div class="hero-highlight-card">
-                    <div class="highlight-card__content">
-                        <h4>Warm and cozy tone</h4>
-                        <p>Furniture made to last. Discover unique pieces for every corner of your home.</p>
-                    </div>
-                    <div class="highlight-card__image-box">
-                        <img src="https://images.pexels.com/photos/116910/pexels-photo-116910.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Oak Chair">
-                        <button class="highlight-card__wishlist" aria-label="Add to wishlist">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </button>
-                    </div>
-                    <button class="btn btn--primary highlight-card__btn" onclick="window.location.href='products.html'">SHOP NOW</button>
                 </div>
             </div>
         </section>
 
-        <!-- Categories Section -->
-        <section class="categories container" id="categories">
-            <div class="categories__header">
-                <h2 class="categories__title">Explore Categories</h2>
-            </div>
-
-            <div class="categories__list scrollbar-hide" id="categories-carousel">
-                <!-- Category 1 -->
-                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Garden'">
-                    <div class="category-card__visual">
-                        <img src="../assets/img/garden.png" alt="Garden" class="category-card__img">
+        <!-- Alternating Seamless Showcase Grid Categories Section -->
+        <section class="categories" id="categories" style="padding: 0 !important; margin: 4rem 0 0 0 !important; max-width: 100% !important; width: 100% !important;">
+            <div class="categories__grid-showcase">
+                <!-- Category 1: Garden -->
+                <div class="showcase-row" onclick="window.location.href='products.html?category=Garden'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="../assets/img/garden.png" alt="Mobiliario de Jardín" class="showcase-img">
                     </div>
-                    <div class="category-card__content">
-                        <h3 class="category-card__name">Garden</h3>
-                        <span class="category-card__arrow"><ion-icon name="arrow-forward-outline"></ion-icon></span>
-                    </div>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Kitchen'">
-                    <div class="category-card__visual">
-                        <img src="../assets/img/kitchen.png" alt="Kitchen" class="category-card__img">
-                    </div>
-                    <div class="category-card__content">
-                        <h3 class="category-card__name">Kitchen</h3>
-                        <span class="category-card__arrow"><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Mobiliario de Jardín</h3>
+                            <p class="showcase-subtitle">Explore la colección exclusiva para exteriores</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Category 3 -->
-                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Dining'">
-                    <div class="category-card__visual">
-                        <img src="../assets/img/dining.png" alt="Dining" class="category-card__img">
+                <!-- Category 2: Kitchen -->
+                <div class="showcase-row showcase-row--reverse" onclick="window.location.href='products.html?category=Kitchen'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="../assets/img/kitchen.png" alt="Cocinas Modernas" class="showcase-img">
                     </div>
-                    <div class="category-card__content">
-                        <h3 class="category-card__name">Dining</h3>
-                        <span class="category-card__arrow"><ion-icon name="arrow-forward-outline"></ion-icon></span>
-                    </div>
-                </div>
-
-                <!-- Category 4 -->
-                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Living'">
-                    <div class="category-card__visual">
-                        <img src="../assets/img/living.png" alt="Living" class="category-card__img">
-                    </div>
-                    <div class="category-card__content">
-                        <h3 class="category-card__name">Living</h3>
-                        <span class="category-card__arrow"><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Mobiliario de Cocina</h3>
+                            <p class="showcase-subtitle">Espacios funcionales y diseños contemporáneos</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Category 5 -->
-                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Bedroom'">
-                    <div class="category-card__visual">
-                        <img src="../assets/img/bedroom.png" alt="Bedroom" class="category-card__img">
+                <!-- Category 3: Dining -->
+                <div class="showcase-row" onclick="window.location.href='products.html?category=Dining'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="../assets/img/dining.png" alt="Salón y Comedor" class="showcase-img">
                     </div>
-                    <div class="category-card__content">
-                        <h3 class="category-card__name">Bedroom</h3>
-                        <span class="category-card__arrow"><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Salón y Comedor</h3>
+                            <p class="showcase-subtitle">Calidez y confort para los momentos en familia</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Category 6 -->
-                <div class="category-card" style="cursor:pointer;" onclick="window.location.href='products.html?category=Office'">
-                    <div class="category-card__visual">
-                        <img src="../assets/img/office.png" alt="Office" class="category-card__img">
+                <!-- Category 4: Living -->
+                <div class="showcase-row showcase-row--reverse" onclick="window.location.href='products.html?category=Living'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="../assets/img/living.png" alt="Zonas de Estar" class="showcase-img">
                     </div>
-                    <div class="category-card__content">
-                        <h3 class="category-card__name">Office</h3>
-                        <span class="category-card__arrow"><ion-icon name="arrow-forward-outline"></ion-icon></span>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Zonas de Estar</h3>
+                            <p class="showcase-subtitle">Sofás y complementos de diseño minimalista</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 5: Bedroom -->
+                <div class="showcase-row" onclick="window.location.href='products.html?category=Bedroom'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="../assets/img/bedroom.png" alt="Dormitorios Confortables" class="showcase-img">
+                    </div>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Dormitorios</h3>
+                            <p class="showcase-subtitle">Sistemas de descanso y confort premium</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 6: Office -->
+                <div class="showcase-row showcase-row--reverse" onclick="window.location.href='products.html?category=Office'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="../assets/img/office.png" alt="Equipamiento de Oficina" class="showcase-img">
+                    </div>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Equipamiento de Oficina</h3>
+                            <p class="showcase-subtitle">Ergonomía excepcional para productividad profesional</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
                     </div>
                 </div>
             </div>

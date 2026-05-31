@@ -35,15 +35,15 @@ style.textContent = `
     .user-avatar-circle {
         width: 32px;
         height: 32px;
-        background: #3b82f6;
-        color: white;
+        background: #ffffff;
+        color: #006580;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: bold;
         font-size: 0.85rem;
-        box-shadow: 0 2px 5px rgba(59, 130, 246, 0.3);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     
     /* The hidden panel */
@@ -188,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="user-menu-dropdown">
                 <div class="user-avatar-trigger">
                     <div class="user-avatar-circle">${initial}</div>
-                    <span class="user-greet-text" style="color: var(--color-stone-500); font-size:0.85rem; font-weight:600;">${firstName}</span>
-                    <ion-icon name="chevron-down-outline" style="font-size:0.7rem; color:var(--color-stone-400);"></ion-icon>
+                    <span class="user-greet-text" style="color: #ffffff; font-size:0.85rem; font-weight:600;">${firstName}</span>
+                    <ion-icon name="chevron-down-outline" style="font-size:0.7rem; color: #ffffff;"></ion-icon>
                 </div>
                 <div class="dropdown-panel">
                     <div class="dropdown-header">

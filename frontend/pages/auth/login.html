@@ -16,28 +16,20 @@
 </head>
 <body>
     <div class="auth-wrapper">
-        <!-- Image Cover Panel -->
-        <div class="auth-image-col">
-            <div class="auth-image-overlay">
-                <a href="../index.html" class="logo-link" style="color:white !important; text-decoration:none;">
-                    <svg class="logo-spiral" viewBox="0 0 100 100" width="32" height="32" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round">
-                        <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
-                    </svg>
-                    <div class="logo-text" style="display:flex; flex-direction:column; line-height:1;">
-                        <span class="logo-title" style="font-size:1.25rem !important; color:#FFFFFF !important; font-weight:700;">Modsy</span>
-                        <span class="logo-subtitle" style="font-size:0.5rem !important; color:rgba(255,255,255,0.7) !important; letter-spacing:0.2em;">FURNITURE</span>
-                    </div>
-                </a>
-                <div>
-                    <h3 style="font-size: 2.5rem; font-weight: 800; margin-bottom:1rem; line-height:1;">Define your<br>own space.</h3>
-                    <p style="opacity:0.8; max-width: 300px;">Access your account to design, shop, and manage your premium furniture collection.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Form Panel -->
+        <!-- Centered Form Panel -->
         <div class="auth-content-col">
             <div class="auth-inner-form">
+                <!-- Modsy Spiral Logo at top of form -->
+                <a href="../index.html" class="logo-link" style="color:#002833 !important; text-decoration:none; display:flex; align-items:center; gap:10px; margin-bottom:2rem; justify-content:center;">
+                    <svg class="logo-spiral" viewBox="0 0 100 100" width="32" height="32" fill="none" stroke="#002833" stroke-width="4.5" stroke-linecap="round">
+                        <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
+                    </svg>
+                    <div class="logo-text" style="display:flex; flex-direction:column; line-height:1; text-align:left;">
+                        <span class="logo-title" style="font-size:1.25rem !important; color:#002833 !important; font-weight:700;">Modsy</span>
+                        <span class="logo-subtitle" style="font-size:0.5rem !important; color:#64748b !important; letter-spacing:0.2em;">FURNITURE</span>
+                    </div>
+                </a>
+
                 <h1 class="auth-title">Sign in</h1>
 
                 <form id="login-form">
@@ -48,7 +40,7 @@
                     <div class="form-group" style="margin-bottom:2rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <label style="margin:0;">Password</label>
-                            <a href="#" id="forgot-password-trigger" style="font-size: 0.8rem; color: #78716c; text-decoration: none; font-weight:600;">Forgot?</a>
+                            <a href="#" id="forgot-password-trigger" style="font-size: 0.8rem; color: #64748b; text-decoration: none; font-weight:600;">Forgot?</a>
                         </div>
                         <input type="password" id="password" class="input-modsy" style="margin-top:0.5rem;" placeholder="••••••••" required>
                     </div>

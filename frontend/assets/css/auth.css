@@ -4,81 +4,66 @@
 :root {
     --font-brand: 'Satoshi', 'Geist', 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-serif: 'Cormorant Garamond', serif;
-    --modsy-black: #1c1917; /* High-contrast charcoal text */
-    --color-bg-sand: #f7f4ee; /* Warm sand background */
+    --modsy-black: #002833; /* Corporate dark slate */
+    --color-bg-sand: #f7f4ee; /* Warm elegant sand background */
 }
 
 body {
     margin: 0;
     font-family: var(--font-brand);
     color: var(--modsy-black);
-    background-color: var(--color-bg-sand);
+    background-color: #ffffff;
     -webkit-font-smoothing: antialiased;
 }
 
 .auth-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    min-height: 100vh;
-}
-
-.auth-image-col {
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    position: relative;
-}
-
-.auth-image-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(28, 25, 23, 0.25), rgba(28, 25, 23, 0.7));
-    padding: 3rem;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: white;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+    position: relative;
+    background-color: #ffffff;
+}
+
+/* Cover Panel is hidden */
+.auth-image-col {
+    display: none !important;
 }
 
 .auth-content-col {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 2rem;
-    background: var(--color-bg-sand);
-    position: relative;
-}
-
-.auth-content-col::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: radial-gradient(circle at 70% 30%, rgba(162, 123, 92, 0.08) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 1;
+    width: 100%;
 }
 
 .auth-inner-form {
     width: 100%;
-    max-width: 400px;
-    position: relative;
-    z-index: 5;
+    max-width: 440px;
+    background: #ffffff;
+    padding: 3.5rem 3rem;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 40, 51, 0.04);
+    box-sizing: border-box;
 }
 
 .auth-title {
-    font-family: var(--font-serif);
-    font-size: 3rem;
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin-bottom: 0.75rem;
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 900 !important;
+    text-align: center;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 2rem;
     color: var(--modsy-black);
 }
 
-.auth-subtitle {
-    color: #706860;
-    font-size: 1rem;
-    margin-bottom: 2.5rem;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .form-group label {
@@ -86,20 +71,20 @@ body {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #706860;
-    margin-bottom: 0.25rem;
+    letter-spacing: 0.1em;
+    color: #64748b;
 }
 
 .input-modsy {
     width: 100%;
-    padding: 0.8rem 1rem !important;
-    border: 1px solid #dcd6c8 !important;
-    border-radius: 0px !important; /* Sharp architectural text fields */
+    padding: 0.6rem 0 !important;
+    border: none !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    border-radius: 0px !important;
     font-family: var(--font-brand);
     font-size: 1rem;
     font-weight: 500;
-    background-color: #ffffff !important;
+    background-color: transparent !important;
     color: var(--modsy-black);
     transition: all 0.3s ease;
     box-sizing: border-box;
@@ -107,8 +92,8 @@ body {
 
 .input-modsy:focus {
     outline: none;
-    border-color: #a27b5c !important;
-    box-shadow: 3px 3px 0px #e8e3d9 !important;
+    border-bottom-color: #006580 !important; /* Premium brand teal */
+    box-shadow: none !important;
 }
 
 /* ABSOLUTE ANNIHILATION OF UGLY YELLOW AUTOCOMPLETE */
@@ -123,50 +108,154 @@ body {
 
 .btn-modsy-primary {
     width: 100%;
-    background: var(--modsy-black) !important;
-    color: #f7f4ee !important;
-    border: 1px solid var(--modsy-black) !important;
-    padding: 1.1rem;
-    border-radius: 0px !important; /* Sharp blocky shape */
+    background: #002833 !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 1.1rem 2rem;
+    border-radius: 9999px !important; /* Fully rounded buttons */
+    font-family: var(--font-brand);
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    margin-top: 0.5rem;
-    box-shadow: 4px 4px 0px #e8e3d9 !important;
+    margin-top: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 40, 51, 0.1) !important;
 }
 
 .btn-modsy-primary:hover {
-    background: #a27b5c !important;
-    border-color: #a27b5c !important;
+    background: #006580 !important; /* Brand Teal */
     color: #ffffff !important;
-    transform: translate(-2px, -2px) !important;
-    box-shadow: 6px 6px 0px #dcd6c8 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 101, 128, 0.15) !important;
 }
 
 .auth-footer {
     margin-top: 2rem;
     text-align: center;
     font-size: 0.9rem;
-    color: #706860;
+    color: #64748b;
 }
 
 .auth-footer a {
-    color: var(--modsy-black);
+    color: #006580;
     font-weight: 700;
     text-decoration: none;
-    border-bottom: 1px solid rgba(28, 25, 23, 0.15);
     transition: all 0.2s;
 }
 
 .auth-footer a:hover {
-    border-bottom-color: #a27b5c;
-    color: #a27b5c;
+    color: #ffa700;
 }
 
-@media (max-width: 900px) {
-    .auth-wrapper { grid-template-columns: 1fr; }
-    .auth-image-col { display: none; }
+/* ======================================================== */
+/* SWEETALERT2 MODAL CUSTOM LUXURY OVERRIDES */
+/* ======================================================== */
+.swal2-popup {
+    border-radius: 24px !important;
+    font-family: var(--font-brand) !important;
+    padding: 3rem 2rem !important;
+    box-shadow: 0 20px 50px rgba(0, 40, 51, 0.1) !important;
 }
+
+.swal2-title {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 1.8rem !important;
+    font-weight: 900 !important;
+    color: var(--modsy-black) !important;
+    letter-spacing: -0.5px !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.swal2-html-container {
+    color: #64748b !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.swal2-input-label {
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: #64748b !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.swal2-input, .swal2-file, .swal2-textarea, .swal2-select, .swal2-radio, .swal2-checkbox {
+    border: none !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    font-family: var(--font-brand) !important;
+    font-size: 1rem !important;
+    color: var(--modsy-black) !important;
+    padding: 0.8rem 0 !important;
+    margin: 1rem auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal2-input:focus, .swal2-file:focus, .swal2-textarea:focus, .swal2-select:focus {
+    outline: none !important;
+    border-bottom-color: #006580 !important;
+}
+
+.swal2-actions {
+    margin-top: 2rem !important;
+    gap: 12px !important;
+}
+
+.swal2-confirm {
+    background-color: #002833 !important;
+    color: #ffffff !important;
+    border-radius: 9999px !important; /* Fully rounded buttons */
+    padding: 0.9rem 2.2rem !important;
+    font-family: var(--font-brand) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.1em !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(0, 40, 51, 0.1) !important;
+}
+
+.swal2-confirm:hover {
+    background-color: #006580 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 101, 128, 0.15) !important;
+}
+
+.swal2-cancel {
+    background-color: #f1f5f9 !important;
+    color: #64748b !important;
+    border-radius: 9999px !important; /* Fully rounded buttons */
+    padding: 0.9rem 2.2rem !important;
+    font-family: var(--font-brand) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.1em !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal2-cancel:hover {
+    background-color: #e2e8f0 !important;
+    color: var(--modsy-black) !important;
+}
+
+/* Fix for input validation error alerts in SweetAlert2 */
+.swal2-validation-message {
+    background: #fff1f2 !important;
+    color: #f43f5e !important;
+    border-radius: 8px !important;
+    padding: 0.6rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+}
+

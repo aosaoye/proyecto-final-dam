@@ -142,7 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     backdrop?.addEventListener('click', closeMobileDrawer);
 
-    // ---- 3. Header Scroll Effect ----
+    // ---- 3. Header Scroll Effect (Disabled as per user request) ----
+    /*
     const header = document.querySelector('.site-header');
     if (header) {
         window.addEventListener('scroll', () => {
@@ -153,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    */
 
     // ---- 5. Smart Dynamic Filtering Logic ----
     const filterBtns = document.querySelectorAll('.filters-bar .filter-btn');
@@ -254,4 +256,81 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ---- 8. Full-Width Hero Carousel Logic ----
+    const carouselSlides = document.querySelectorAll('.carousel-slide');
+    const carouselDots = document.querySelectorAll('.indicator-dot');
+    const prevArrow = document.querySelector('.prev-arrow');
+    const nextArrow = document.querySelector('.next-arrow');
+    
+    if (carouselSlides.length > 0) {
+        let currentSlideIndex = 0;
+        let autoplayTimer = null;
+        
+        function showSlide(index) {
+            // Remove active classes
+            carouselSlides.forEach(slide => slide.classList.remove('active'));
+            carouselDots.forEach(dot => dot.classList.remove('active'));
+            
+            // Normalize index
+            if (index >= carouselSlides.length) {
+                currentSlideIndex = 0;
+            } else if (index < 0) {
+                currentSlideIndex = carouselSlides.length - 1;
+            } else {
+                currentSlideIndex = index;
+            }
+            
+            // Add active classes
+            carouselSlides[currentSlideIndex].classList.add('active');
+            if (carouselDots[currentSlideIndex]) {
+                carouselDots[currentSlideIndex].classList.add('active');
+            }
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlideIndex + 1);
+        }
+        
+        function prevSlide() {
+            showSlide(currentSlideIndex - 1);
+        }
+        
+        function startAutoplay() {
+            stopAutoplay();
+            autoplayTimer = setInterval(nextSlide, 6000); // Shift every 6 seconds
+        }
+        
+        function stopAutoplay() {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+            }
+        }
+        
+        // Arrow Event Listeners
+        if (nextArrow) {
+            nextArrow.addEventListener('click', () => {
+                nextSlide();
+                startAutoplay(); // Reset autoplay timer
+            });
+        }
+        
+        if (prevArrow) {
+            prevArrow.addEventListener('click', () => {
+                prevSlide();
+                startAutoplay(); // Reset autoplay timer
+            });
+        }
+        
+        // Dots Event Listeners
+        carouselDots.forEach((dot, dotIdx) => {
+            dot.addEventListener('click', () => {
+                showSlide(dotIdx);
+                startAutoplay(); // Reset autoplay timer
+            });
+        });
+        
+        // Initial setup
+        startAutoplay();
+    }
 });

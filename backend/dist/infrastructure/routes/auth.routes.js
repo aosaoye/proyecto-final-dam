@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const PostgresUserRepository_1 = require("../repositories/PostgresUserRepository");
+const LoginUser_1 = require("../../application/use-cases/auth/LoginUser");
+const RegisterUser_1 = require("../../application/use-cases/auth/RegisterUser");
+const ResetPassword_1 = require("../../application/use-cases/auth/ResetPassword");
+const RequestPasswordReset_1 = require("../../application/use-cases/auth/RequestPasswordReset");
+const GetAllUsers_1 = require("../../application/use-cases/auth/GetAllUsers");
+const EmailService_1 = require("../services/EmailService");
+const AuthController_1 = require("../controllers/AuthController");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const router = (0, express_1.Router)();
+const userRepository = new PostgresUserRepository_1.PostgresUserRepository();
+const emailService = new EmailService_1.EmailService();
+const loginUser = new LoginUser_1.LoginUser(userRepository);
+const registerUser = new RegisterUser_1.RegisterUser(userRepository);
+const resetPassword = new ResetPassword_1.ResetPassword(userRepository);
+const requestReset = new RequestPasswordReset_1.RequestPasswordReset(userRepository, emailService);
+const getAllUsers = new GetAllUsers_1.GetAllUsers(userRepository);
+const authController = new AuthController_1.AuthController(loginUser, registerUser, resetPassword, requestReset, getAllUsers);
+router.post('/register', (req, res, next) => authController.register(req, res, next));
+router.post('/login', (req, res, next) => authController.login(req, res, next));
+router.post('/request-reset', (req, res, next) => authController.requestReset(req, res, next));
+router.post('/reset-password', (req, res, next) => authController.resetPassword(req, res, next));
+// Secure endpoint accessible only to admins
+router.get('/users', auth_middleware_1.authenticateJWT, (0, auth_middleware_1.authorizeRole)('admin'), (req, res, next) => authController.getAllUsers(req, res, next));
+exports.default = router;

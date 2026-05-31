@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700;900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
 
 :root {
   /* Jungheinrich Profishop Industrial Corporate Theme */
@@ -42,13 +42,13 @@
   --color-stone-900: #006580;
 
   /* Jungheinrich Round Corporate Sans Typography */
-  --font-plus-jakarta: 'Signika', 'Outfit', sans-serif;
-  --font-instrument-sans: 'Signika', 'Outfit', sans-serif;
-  --font-bricolage-grotesque: 'Signika', 'Outfit', sans-serif;
-  --font-poppins: 'Signika', 'Outfit', sans-serif;
-  --font-outfit: 'Signika', 'Outfit', sans-serif;
-  --font-satoshi: 'Signika', 'Outfit', sans-serif;
-  --font-general-sans: 'Signika', 'Outfit', sans-serif;
+  --font-plus-jakarta: 'Satoshi', sans-serif;
+  --font-instrument-sans: 'Satoshi', sans-serif;
+  --font-bricolage-grotesque: 'Satoshi', sans-serif;
+  --font-poppins: 'Satoshi', sans-serif;
+  --font-outfit: 'Satoshi', sans-serif;
+  --font-satoshi: 'Satoshi', sans-serif;
+  --font-general-sans: 'Satoshi', sans-serif;
   
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -180,40 +180,35 @@ button {
   box-shadow: var(--shadow-sm);
 }
 
+.site-header--scrolled,
+.site-header--solid {
+  background: #006580 !important;
+  box-shadow: 0 4px 15px rgba(0, 101, 128, 0.15) !important;
+}
+
 .site-header--scrolled .logo,
+.site-header--scrolled .logo a,
 .site-header--scrolled .main-nav__link,
 .site-header--scrolled .header-action-link,
-.site-header--scrolled .mobile-menu-toggle {
-  color: var(--color-on-surface);
-}
-
-.site-header--scrolled .main-nav__link::after,
-.site-header--solid .main-nav__link::after {
-  background: var(--color-primary);
-}
-
-.site-header--scrolled .main-nav__link:hover,
-.site-header--scrolled .header-right .header-action-link:hover {
-  color: var(--color-primary);
-}
-
-/* Solid Header for white pages */
-.site-header--solid {
-  background: var(--color-surface);
-  box-shadow: var(--shadow-sm);
-}
-
+.site-header--scrolled .mobile-menu-toggle,
 .site-header--solid .logo,
 .site-header--solid .logo a,
 .site-header--solid .main-nav__link,
 .site-header--solid .header-action-link,
 .site-header--solid .mobile-menu-toggle {
-  color: var(--color-on-surface) !important;
+  color: #ffffff !important;
 }
 
+.site-header--scrolled .main-nav__link::after,
+.site-header--solid .main-nav__link::after {
+  background: #ffffff !important;
+}
+
+.site-header--scrolled .main-nav__link:hover,
+.site-header--scrolled .header-right .header-action-link:hover,
 .site-header--solid .main-nav__link:hover,
 .site-header--solid .header-right .header-action-link:hover {
-  color: var(--color-primary) !important;
+  color: #ffffff !important;
 }
 
 .site-header__container {
@@ -455,88 +450,122 @@ button {
 
 }
 
-/* Category Card */
+/* ======================================================== */
+/* LUXURY PREMIUM CATEGORY CARD REDESIGN */
+/* ======================================================== */
 .category-card {
     cursor: pointer;
-    transition: var(--transition-base);
     position: relative;
+    border-radius: 20px !important;
+    overflow: hidden;
+    background: #000000;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 .category-card__visual {
     position: relative;
-    background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    margin-bottom: 12px;
+    width: 100%;
     aspect-ratio: 1 / 1;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-base);
-}
-
-.category-card:hover .category-card__visual {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-4px);
-}
-
-.category-card__visual::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 60%, rgba(110, 68, 36, 0.15));
-    opacity: 0;
-    transition: var(--transition-base);
-    pointer-events: none;
-}
-
-.category-card:hover .category-card__visual::after {
-    opacity: 1;
+    overflow: hidden;
+    margin-bottom: 0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 .category-card__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-.category-card:hover .category-card__img {
-    transform: scale(1.06);
+/* Elegant atmospheric overlay */
+.category-card__visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0, 40, 51, 0.6) 80%, rgba(0, 40, 51, 0.95) 100%) !important;
+    opacity: 0.85 !important;
+    transition: all 0.6s ease !important;
+    pointer-events: none;
+    z-index: 2;
 }
 
+/* Glassmorphic floating card content */
 .category-card__content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 5;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 6px;
-    padding: 0 4px;
+    background: rgba(0, 101, 128, 0.45) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 14px !important;
+    padding: 1.1rem 1.4rem !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 40, 51, 0.25) !important;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 .category-card__name {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--color-on-surface);
-    font-family: var(--font-bricolage-grotesque);
-    transition: var(--transition-base);
-}
-
-.category-card:hover .category-card__name {
-    color: var(--color-stone-800);
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    letter-spacing: -0.5px !important;
+    transition: all 0.4s ease !important;
 }
 
 .category-card__arrow {
-    font-size: 1.1rem;
-    color: var(--color-secondary);
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: var(--transition-base);
-    display: flex;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 50% !important;
+    width: 38px !important;
+    height: 38px !important;
+    display: flex !important;
     align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-size: 1.2rem !important;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Hover effects */
+.category-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(0, 101, 128, 0.3) !important;
+}
+
+.category-card:hover .category-card__img {
+    transform: scale(1.08) !important;
+}
+
+.category-card:hover .category-card__visual::after {
+    opacity: 0.95 !important;
+    background: linear-gradient(to bottom, rgba(0, 40, 51, 0.1) 0%, rgba(0, 40, 51, 0.5) 60%, rgba(0, 40, 51, 0.9) 100%) !important;
+}
+
+.category-card:hover .category-card__content {
+    background: rgba(0, 101, 128, 0.75) !important;
+    border-color: rgba(255, 167, 0, 0.4) !important;
+    box-shadow: 0 12px 40px 0 rgba(0, 101, 128, 0.4) !important;
+    transform: scale(1.02) !important;
+}
+
+.category-card:hover .category-card__name {
+    color: #ffa700 !important;
 }
 
 .category-card:hover .category-card__arrow {
-    opacity: 1;
-    transform: translateX(0);
-    color: var(--color-primary);
+    background: #ffa700 !important;
+    border-color: #ffa700 !important;
+    color: #002833 !important;
+    transform: rotate(-45deg) !important;
 }
 
 /* Products Grid */
@@ -855,7 +884,7 @@ button {
 }
 
 .footer-col h4 {
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
     font-size: 1.05rem !important;
     font-weight: 700 !important;
     color: var(--color-primary) !important;
@@ -877,7 +906,7 @@ button {
     color: #555555 !important;
     font-size: 0.88rem !important;
     text-decoration: none !important;
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
     transition: color 0.2s ease !important;
 }
 
@@ -957,7 +986,7 @@ button {
 }
 
 .site-header--scrolled .mobile-menu-toggle span {
-    background: var(--color-primary);
+    background: #ffffff;
 }
 
 .mobile-menu-toggle--active {
@@ -1274,24 +1303,24 @@ button {
 body:not(:has(.hero)) .logo,
 body:not(:has(.hero)) .main-nav__link,
 body:not(:has(.hero)) .header-right .header-action-link {
-    color: #1c1917;
+    color: #ffffff !important;
 }
 
 body:not(:has(.hero)) .main-nav__link:hover,
 body:not(:has(.hero)) .header-right .header-action-link:hover {
-    color: #78716c;
+    color: #ffffff !important;
 }
 
 body:not(:has(.hero)) .main-nav__link--active {
-    color: #1c1917;
+    color: #ffffff !important;
 }
 
 body:not(:has(.hero)) .main-nav__link--active::after {
-    background: #1c1917;
+    background: #ffffff !important;
 }
 
 body:not(:has(.hero)) .mobile-menu-toggle span {
-    background: var(--color-primary);
+    background: #ffffff !important;
 }
 /* Responsive Grid System */
 .grid-2-cols {
@@ -1884,35 +1913,44 @@ h1, h2, h3, h4,
     letter-spacing: 0.08em !important;
     font-size: 0.85rem !important;
     color: #ffffff !important;
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
 }
 
 .main-nav__link:hover, .main-nav__link--active {
-    color: #ffa700 !important;
+    color: #ffffff !important;
 }
 
 .main-nav__link--active::after {
-    background: #ffa700 !important;
+    background: #ffffff !important;
 }
 
-/* Brand Logo Layout (Jungheinrich Block Style) */
+/* Force action links, icons, dropdown greet text, and mobile drawer toggles to stay white */
+.header-action-link,
+.header-action-link ion-icon,
+.user-greet-text,
+.mobile-menu-toggle,
+.mobile-menu-toggle ion-icon {
+    color: #ffffff !important;
+}
+
+/* Brand Logo Layout - Transparent backdrop, yellowish typography and spiral */
 .logo-link {
-    background: #ffa700 !important; /* Industrial yellow brand block */
-    padding: 6px 14px !important;
-    border-radius: 4px !important;
+    background: transparent !important; /* No yellow background */
+    padding: 0 !important;
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
     text-decoration: none !important;
-    transition: background 0.2s ease !important;
+    transition: opacity 0.2s ease !important;
 }
 
 .logo-link:hover {
-    background: #ffc000 !important;
+    background: transparent !important;
+    opacity: 0.85 !important;
 }
 
 .logo-spiral {
-    stroke: #000000 !important;
+    stroke: #ffa700 !important;
     flex-shrink: 0;
 }
 
@@ -1923,19 +1961,19 @@ h1, h2, h3, h4,
 }
 
 .logo-title {
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
     font-size: 1.3rem !important;
     font-weight: 900 !important;
-    color: #000000 !important;
+    color: #ffa700 !important;
     letter-spacing: -0.5px !important;
     text-transform: uppercase !important;
 }
 
 .logo-subtitle {
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
     font-size: 0.55rem !important;
     font-weight: 700 !important;
-    color: #000000 !important;
+    color: #ffa700 !important;
     letter-spacing: 0.15em !important;
     text-transform: uppercase !important;
     margin-top: 1px;
@@ -1964,7 +2002,7 @@ h1, h2, h3, h4,
 }
 
 .hero__title {
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
     font-size: 4.8rem !important;
     font-weight: 800 !important;
     color: var(--color-primary) !important; /* Brand Teal */
@@ -1974,7 +2012,7 @@ h1, h2, h3, h4,
 }
 
 .hero__description {
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
     font-size: 1.15rem !important;
     font-weight: 400 !important;
     color: #555555 !important;
@@ -2093,7 +2131,7 @@ h1, h2, h3, h4,
     color: var(--color-primary) !important;
     margin-bottom: 0.3rem;
     text-transform: none !important;
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
 }
 
 .hotspot-card p {
@@ -2235,7 +2273,7 @@ h1, h2, h3, h4,
 }
 
 .hero-highlight-card h4 {
-    font-family: 'Signika', sans-serif !important;
+    font-family: 'Satoshi', sans-serif !important;
     font-size: 1rem !important;
     font-weight: 700 !important;
     color: var(--color-primary) !important;
@@ -2304,4 +2342,797 @@ h1, h2, h3, h4,
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-primary);
 }
+
+/* ======================================================== */
+/* PREMIUM FULL-WIDTH HERO CAROUSEL */
+/* ======================================================== */
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+    background: #000000;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 10%;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+/* Background image handling */
+.slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -2;
+    transform: scale(1.05);
+    transition: transform 8s ease;
+}
+
+.carousel-slide.active .slide-bg {
+    transform: scale(1);
+}
+
+/* Deep atmospheric overlay for high-end feel and text legibility */
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 40, 51, 0.85) 0%, rgba(0, 101, 128, 0.4) 50%, rgba(0, 0, 0, 0.15) 100%);
+    z-index: -1;
+}
+
+/* Premium text and button overlay */
+.slide-content {
+    max-width: 650px;
+    z-index: 5;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    transition-delay: 0.3s;
+}
+
+.carousel-slide.active .slide-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-title {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 3.8rem !important;
+    font-weight: 900 !important;
+    line-height: 1.15 !important;
+    color: #ffffff !important;
+    margin-bottom: 1.2rem !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: -1px !important;
+}
+
+.slide-description {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 400 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    line-height: 1.6 !important;
+    margin-bottom: 2rem !important;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.slide-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem !important;
+    font-family: 'Satoshi', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 4px !important;
+    background: #ffa700 !important;
+    color: #313131 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 167, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.slide-btn:hover {
+    background: #ffc000 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 167, 0, 0.45) !important;
+}
+
+/* Elegant navigation arrows */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.hero-carousel:hover .carousel-arrow {
+    opacity: 1;
+}
+
+.carousel-arrow:hover {
+    background: #ffffff;
+    color: #006580;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.prev-arrow {
+    left: 30px;
+}
+
+.next-arrow {
+    right: 30px;
+}
+
+/* Indicators dots at the bottom */
+.carousel-indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.indicator-dot {
+    width: 30px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+    background: #ffa700;
+    width: 45px;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+    .hero-carousel {
+        height: 500px;
+    }
+    .slide-title {
+        font-size: 2.5rem !important;
+    }
+    .slide-description {
+        font-size: 1rem !important;
+    }
+    .carousel-arrow {
+        display: none;
+    }
+    .carousel-slide {
+        padding: 0 5%;
+    }
+}
+
+/* ======================================================== */
+/* SEAMLESS ALTERNATING SHOWCASE GRID (USER SPECIFIED) */
+/* ======================================================== */
+.categories.container {
+    padding: 0 !important;
+    max-width: 1200px !important;
+}
+
+.categories__grid-showcase {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.showcase-row {
+    display: flex;
+    width: 100%;
+    height: 480px; /* Perfect elegant height matching original layout */
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+/* Alternate flex direction for rows */
+.showcase-row--reverse {
+    flex-direction: row-reverse;
+}
+
+.showcase-col {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image Column styles */
+.showcase-image-col {
+    background: #002833;
+}
+
+.showcase-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Text Column styles */
+.showcase-text-col {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    transition: background-color 0.4s ease;
+}
+
+.showcase-content {
+    max-width: 480px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.showcase-title {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 900 !important;
+    color: #002833 !important; /* Premium dark navy/teal color matching original */
+    margin: 0 !important;
+    letter-spacing: -1px !important;
+    line-height: 1.2 !important;
+    text-transform: none !important;
+    transition: color 0.3s ease;
+}
+
+.showcase-subtitle {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 400 !important;
+    color: #6e6e6e !important;
+    margin: 0 !important;
+    line-height: 1.5;
+}
+
+.showcase-link {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    color: #ffa700 !important; /* Accent gold color */
+    text-transform: uppercase !important;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 1rem;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.showcase-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #ffa700;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.showcase-link ion-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effects */
+.showcase-row:hover .showcase-img {
+    transform: scale(1.05);
+}
+
+.showcase-row:hover .showcase-text-col {
+    background: #f7f9fa; /* Sutil gray background shift */
+}
+
+.showcase-row:hover .showcase-title {
+    color: #006580 !important; /* Changes to Modsy corporate Teal */
+}
+
+.showcase-row:hover .showcase-link::after {
+    width: 100%;
+}
+
+.showcase-row:hover .showcase-link ion-icon {
+    transform: translateX(4px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .showcase-row,
+    .showcase-row--reverse {
+        flex-direction: column !important;
+        height: auto;
+    }
+    .showcase-col {
+        width: 100%;
+        height: 300px;
+    }
+    .showcase-text-col {
+        padding: 2.5rem 1.5rem;
+        height: auto;
+    }
+    .showcase-title {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* ======================================================== */
+/* MUSEUM QUALITY LIGHT ASYMMETRIC GRID HERO (USER SPECIFIED) */
+/* ======================================================== */
+.museum-hero {
+    background: #ffffff;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.museum-hero__grid {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.museum-col {
+    height: 100%;
+    position: relative;
+}
+
+/* Col 1: Brand details (40%) */
+.museum-brand-col {
+    flex: 0 0 10%;
+    max-width: 10%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.museum-brand-col__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.museum-hero__title {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 5.5rem !important;
+    font-weight: 900 !important;
+    color: #002833 !important; /* Elegant corporate deep slate */
+    line-height: 1.0 !important;
+    letter-spacing: -2.5px !important;
+    margin: 0 !important;
+}
+
+.museum-hero__subtitle {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 400 !important;
+    color: #64748b !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    max-width: 90%;
+}
+
+.museum-hero__cta {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #006580 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+}
+
+.museum-hero__cta:hover {
+    color: #ffa700 !important;
+    border-bottom-color: #ffa700;
+    transform: translateX(4px);
+}
+
+.museum-brand-col__social {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.3rem;
+    color: #94a3b8;
+    margin-top: 1rem;
+}
+
+.museum-brand-col__social ion-icon {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.museum-brand-col__social ion-icon:hover {
+    color: #002833;
+}
+
+/* Vertical Page Control */
+.museum-vertical-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    border-left: 1px solid #f1f5f9;
+    padding-left: 2rem;
+    height: 60%;
+    justify-content: center;
+}
+
+.museum-nav-arrow {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #002833;
+    transition: all 0.3s ease;
+}
+
+.museum-nav-arrow:hover {
+    color: #ffa700;
+    transform: scale(1.2);
+}
+
+.museum-nav-pages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.museum-page-indicator {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: #94a3b8 !important;
+    cursor: pointer;
+    padding: 6px 8px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.museum-page-indicator.active {
+    color: #002833 !important;
+    background: #f1f5f9;
+    border-color: #e2e8f0;
+    border-radius: 4px;
+}
+
+/* Col 2: Active Slide (30%) */
+.museum-active-col {
+    flex: 0 0 45%;
+    max-width: 45%;
+    border-left: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.museum-image-box {
+    flex: 1.8;
+    position: relative;
+    overflow: hidden;
+    background: #f8fafc;
+}
+
+.museum-slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out, transform 1.2s ease-in-out;
+    transform: scale(1.05);
+}
+
+.museum-slide-img.active {
+    opacity: 1;
+    transform: scale(1.0);
+}
+
+.museum-details-box {
+    flex: 1;
+    background: #ffffff;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid #f1f5f9;
+}
+
+.museum-slide-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: textFadeIn 0.6s ease forwards;
+}
+
+@keyframes textFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.museum-designer {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: #64748b !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.museum-location {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    color: #002833 !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.museum-location ion-icon {
+    font-size: 1.2rem;
+    color: #ffa700;
+}
+
+/* Col 3: Preview Previews (30%) */
+.museum-preview-col {
+    flex: 0 0 45%;
+    max-width: 45%;
+    border-left: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.museum-crop-box {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background: #f8fafc;
+}
+
+.museum-preview-img-1,
+.museum-preview-img-2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: all 0.8s ease-in-out;
+}
+
+.museum-preview-details-box {
+    height: 150px;
+    background: #ffffff;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.museum-preview-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: textFadeIn 0.6s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .museum-hero {
+        height: auto;
+    }
+    .museum-hero__grid {
+        flex-direction: column;
+    }
+    .museum-brand-col,
+    .museum-active-col,
+    .museum-preview-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+    .museum-brand-col {
+        padding: 3rem 2rem;
+        flex-direction: row;
+    }
+    .museum-vertical-nav {
+        flex-direction: row;
+        border-left: none;
+        padding-left: 0;
+        height: auto;
+    }
+    .museum-nav-pages {
+        flex-direction: row;
+    }
+    .museum-active-col {
+        height: 500px;
+    }
+    .museum-preview-col {
+        display: none; /* Hide secondary crops on mobile for clean hierarchy */
+    }
+}
+
+/* ======================================================== */
+/* ASYMMETRIC TYPOGRAPHY PROMO BANNER (USER SPECIFIED) */
+/* ======================================================== */
+.promo-banner {
+    padding: 6rem var(--spacing-lg);
+    background: #ffffff;
+    width: 100%;
+}
+
+.promo-banner__grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 4rem;
+}
+
+.promo-banner__left {
+    flex: 0 0 55%;
+    max-width: 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.promo-banner__eyebrow {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: #ffa700 !important; /* Gold corporate brand color */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.promo-banner__title {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 4.8rem !important;
+    font-weight: 900 !important;
+    color: #002833 !important; /* Dark Slate */
+    line-height: 1.05 !important;
+    letter-spacing: -2px !important;
+    margin: 0 !important;
+}
+
+.promo-banner__title-alt {
+    color: #94a3b8 !important; /* Elegant medium grey */
+}
+
+.promo-banner__right {
+    flex: 0 0 40%;
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.promo-banner__statement {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: #002833 !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+}
+
+.promo-banner__est {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.promo-banner__line {
+    width: 30px;
+    height: 1.5px;
+    background: #94a3b8;
+    display: inline-block;
+}
+
+.promo-banner__year {
+    font-family: 'Satoshi', sans-serif !important;
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    color: #64748b !important;
+    letter-spacing: 1.5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .promo-banner {
+        padding: 4rem var(--spacing-lg);
+    }
+    .promo-banner__grid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2.5rem;
+    }
+    .promo-banner__left,
+    .promo-banner__right {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .promo-banner__title {
+        font-size: 3rem !important;
+    }
+}
+
+
 

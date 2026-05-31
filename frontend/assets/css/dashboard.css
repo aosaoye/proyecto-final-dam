@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
 
 :root {
     --sidebar-width: 260px;
@@ -7,9 +7,9 @@
     --color-text-muted: var(--color-stone-500); 
     --color-border: var(--color-stone-200);
     --color-purple-accent: var(--color-secondary); 
-    --font-main: 'Inter', system-ui, sans-serif;
-    --font-satoshi: 'Inter', system-ui, sans-serif;
-    --font-general-sans: 'Inter', system-ui, sans-serif;
+    --font-main: 'Satoshi', sans-serif;
+    --font-satoshi: 'Satoshi', sans-serif;
+    --font-general-sans: 'Satoshi', sans-serif;
 }
 
 body {
@@ -135,15 +135,17 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 3.5rem;
-    border-bottom: 1px solid var(--color-stone-200);
+    background: #006580 !important;
+    border-bottom: 3px solid #ffa700 !important; /* Prominent yellow divider bottom bar */
+    box-shadow: 0 4px 15px rgba(0, 101, 128, 0.15) !important;
 }
 .breadcrumbs {
     font-size: 0.85rem;
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.75) !important;
     font-weight: 500;
 }
 .breadcrumbs span {
-    color: var(--color-on-surface);
+    color: #ffffff !important;
 }
 
 .toolbar-right {
@@ -471,7 +473,7 @@ select.swal2-select, select.modsy-select {
     display: none;
     font-size: 1.8rem;
     cursor: pointer;
-    color: var(--color-on-surface);
+    color: #ffffff;
 }
 
 .overlay-screen {
@@ -583,5 +585,25 @@ select.swal2-select, select.modsy-select {
     -webkit-box-shadow: 0 0 0 40px var(--color-surface) inset !important;
     -webkit-text-fill-color: var(--color-on-surface) !important;
     transition: background-color 5000s ease-in-out 0s;
+}
+
+/* User Profile Badge for Teal Toolbar */
+.user-profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    color: #ffffff !important;
+}
+
+#user-initial {
+    background: #ffffff !important;
+    color: #006580 !important;
+}
+
+#user-name-display {
+    color: #ffffff !important;
 }
 
