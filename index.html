@@ -356,8 +356,8 @@
         </section>
 
         <script type="module">
-            import { productService } from 'assets/js/api-services.js';
-            import { loadLatestArrivals } from 'assets/js/home.js';
+            import { productService } from './assets/js/api-services.js';
+            import { loadLatestArrivals } from './assets/js/home.js';
             
             document.addEventListener('DOMContentLoaded', () => {
                 loadLatestArrivals(productService, 'home-products-grid');
