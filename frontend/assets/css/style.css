@@ -638,17 +638,14 @@ button {
   border-radius: 16px; /* Elegant roundness exclusively on the image */
   overflow: hidden;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block; /* Native block container for natural height flow */
 }
 
 .product-card__img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  height: auto !important; /* Forces the image to preserve its original aspect ratio */
   display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .product-card:hover .product-card__img {
@@ -832,56 +829,7 @@ button {
   display: inline-block;
 }
 
-/* Dynamic heights for Masonry variety if aspect-ratio is not set inline */
-.product-card:nth-child(2n) .product-card__image {
-  aspect-ratio: 4 / 5;
-}
-.product-card:nth-child(3n) .product-card__image {
-  aspect-ratio: 3 / 4;
-}
-.product-card:nth-child(5n) .product-card__image {
-  aspect-ratio: 2 / 3;
-}
-.product-card:nth-child(7n) .product-card__image {
-  aspect-ratio: 1 / 1;
-}
 
-
-/* Product Card - Catalog View */
-
-.product-card__visual {
-    position: relative;
-    aspect-ratio: 5/6;
-    background: var(--color-stone-50);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-}
-
-.product-card__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s ease;
-}
-
-.product-card:hover .product-card__img {
-    transform: scale(1.02);
-}
-
-.product-card__overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.1);
-    opacity: 0;
-    transition: var(--transition-base);
-}
-
-.product-card:hover .product-card__overlay {
-    opacity: 1;
-}
 
 /* Filters */
 .filters-bar {
@@ -1964,7 +1912,7 @@ h1, h2, h3, h4,
 }
 
 /* Professional Retail Product Cards & Sidebars */
-.product-card, .section-card, .panel-card, .calc-results, .intranet-sidebar {
+.section-card, .panel-card, .calc-results, .intranet-sidebar {
     background: #ffffff !important;
     border: 1px solid #e5e5e5 !important;
     border-radius: 8px !important; /* Clean rounded cards */
@@ -1973,7 +1921,7 @@ h1, h2, h3, h4,
     overflow: hidden;
 }
 
-.product-card:hover, .section-card:hover {
+.section-card:hover {
     transform: translateY(-4px) !important;
     border-color: #006580 !important;
     box-shadow: 0 10px 25px rgba(0, 101, 128, 0.12) !important;

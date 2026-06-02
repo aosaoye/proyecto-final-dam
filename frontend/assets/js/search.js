@@ -93,16 +93,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ? `http://${window.location.hostname}:5000${p.image}` 
                 : (p.image || 'https://via.placeholder.com/300');
             
-            // Elegant staggered aspects for a robust Pinterest masonry flow
-            const aspects = ['0.8', '1.15', '1.0', '1.35', '0.9', '1.1', '1.25'];
-            const cardAspect = aspects[(p.id || idx) % aspects.length];
-
             const isFavorited = getFavorites().includes(p.name);
             const favClass = isFavorited ? 'product-card__favorite-btn--active' : '';
             const favIcon = isFavorited ? 'heart' : 'heart-outline';
 
             card.innerHTML = `
-              <div class="product-card__image" style="cursor:pointer; aspect-ratio: ${cardAspect};">
+              <div class="product-card__image" style="cursor:pointer;">
                 <img src="${img}" alt="${p.name}" class="product-card__img">
                 <button class="product-card__favorite-btn ${favClass}" aria-label="Add to favorites"><ion-icon name="${favIcon}"></ion-icon></button>
                 
