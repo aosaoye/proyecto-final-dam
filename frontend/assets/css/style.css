@@ -576,46 +576,68 @@ button {
 }
 
 .products-section__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--spacing-lg);
-  justify-items: stretch;
+  column-count: 5;
+  column-gap: 16px;
+  display: block; /* Pinterest Masonry Columns */
+  width: 100%;
+  margin: 0 auto;
 }
 
-@media (max-width: 1200px) {
-  .products-section__grid { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1400px) {
+  .products-section__grid {
+    column-count: 4;
+    column-gap: 16px;
+  }
 }
 
-@media (max-width: 992px) {
-  .products-section__grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1100px) {
+  .products-section__grid {
+    column-count: 3;
+    column-gap: 12px;
+  }
 }
 
 @media (max-width: 768px) {
-  .products-section__grid { grid-template-columns: 1fr; }
+  .products-section__grid {
+    column-count: 2;
+    column-gap: 10px;
+  }
 }
 
 .product-card {
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  display: flex;
+  break-inside: avoid;
+  display: inline-flex;
   flex-direction: column;
-  position: relative;
   width: 100%;
-  transition: var(--transition-base);
-  overflow: hidden;
+  background: transparent !important; /* Pinterest card is completely transparent */
+  border-radius: 0 !important; /* Rounded corners only on the image container */
+  box-shadow: none !important; /* Flat design, no shadow on card wrapper */
+  border: none !important; /* No container borders */
+  overflow: visible;
+  position: relative;
+  margin-bottom: 20px;
+  transition: none;
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    margin-bottom: 12px;
+  }
 }
 
 .product-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
 }
 
 .product-card__image {
   position: relative;
   width: 100%;
-  aspect-ratio: 1/1;
-  background: var(--color-surface-variant);
+  background: #f1f1f1; /* Delicate Pinterest placeholder color */
+  border-radius: 16px; /* Elegant roundness exclusively on the image */
+  overflow: hidden;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -625,70 +647,161 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  display: block;
 }
 
 .product-card:hover .product-card__img {
-    transform: scale(1.04);
+  transform: scale(1.03); /* Extremely subtle zoom */
 }
 
-
-.product-card__favorite-btn {
+/* Beautiful Pinterest Pin Overlay */
+.product-card__pin-overlay {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  background: var(--color-surface);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25); /* Light dimming like Pinterest */
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.product-card:hover .product-card__pin-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Pinterest Red Save Button */
+.product-card__save-btn {
+  align-self: flex-end;
+  background: #e60023; /* Signature Pinterest Red */
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  pointer-events: auto;
+  font-family: inherit;
+}
+
+.product-card__save-btn:hover {
+  background: #ad0018;
+}
+
+.product-card__save-btn:active {
+  transform: scale(0.95);
+}
+
+/* Row for other Pinterest actions at the bottom of overlay */
+.product-card__actions-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.product-card__action-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111111;
   border: none;
   border-radius: 50%;
-  color: var(--color-on-surface-variant);
-  font-size: 1.2rem;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  pointer-events: auto;
+}
+
+.product-card__action-btn:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Original Favorite Heart Button - customized for Pinterest overlay */
+.product-card__favorite-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  color: #111111;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition-base);
+  transition: all 0.2s ease;
   z-index: 5;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+}
+
+.product-card:hover .product-card__favorite-btn {
+  opacity: 1;
 }
 
 .product-card__favorite-btn:hover {
-  background: var(--color-surface-variant);
+  background: #ffffff;
   transform: scale(1.05);
-  color: var(--color-primary);
+  color: #e60023; /* Turns red on hover like Pinterest */
 }
 
 .product-card__favorite-btn--active {
-  color: var(--color-primary);
-  background: var(--color-primary-container);
+  color: #e60023 !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
 }
 
 .product-card__info {
-  padding: 1rem;
+  padding: 8px 4px 0 4px; /* Placed immediately below the rounded pin with left alignment */
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 2px;
+  background: transparent !important;
 }
 
 .product-card__header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Pinterest lists name then price underneath */
+  align-items: flex-start;
   width: 100%;
+  gap: 1px;
 }
 
 .product-card__name {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-on-surface);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #111111; /* Clean charcoal color */
+  line-height: 1.25;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .product-card__price {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #5f5f5f; /* Subtle gray metadata */
 }
 
 .product-card__footer {
@@ -696,14 +809,14 @@ button {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-top: 2px;
 }
 
 .product-card__category {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  color: var(--color-stone-400);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: #767676;
+  text-transform: capitalize;
 }
 
 .product-card__colors {
@@ -712,11 +825,25 @@ button {
 }
 
 .product-card__color-swatch {
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.1);
   display: inline-block;
+}
+
+/* Dynamic heights for Masonry variety if aspect-ratio is not set inline */
+.product-card:nth-child(2n) .product-card__image {
+  aspect-ratio: 4 / 5;
+}
+.product-card:nth-child(3n) .product-card__image {
+  aspect-ratio: 3 / 4;
+}
+.product-card:nth-child(5n) .product-card__image {
+  aspect-ratio: 2 / 3;
+}
+.product-card:nth-child(7n) .product-card__image {
+  aspect-ratio: 1 / 1;
 }
 
 
