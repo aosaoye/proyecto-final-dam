@@ -583,6 +583,24 @@ button {
   margin: 0 auto;
 }
 
+.products-grid-normal {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 30px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.products-grid-normal .product-card__image {
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+}
+
+.products-grid-normal .product-card__img {
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
 @media (max-width: 1400px) {
   .products-section__grid {
     column-count: 4;
@@ -595,12 +613,20 @@ button {
     column-count: 3;
     column-gap: 12px;
   }
+  .products-grid-normal {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+  }
 }
 
 @media (max-width: 768px) {
   .products-section__grid {
     column-count: 2;
     column-gap: 10px;
+  }
+  .products-grid-normal {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
   }
 }
 
@@ -1042,6 +1068,10 @@ button {
 @media (max-width: 480px) {
   .products-section__grid {
     column-count: 1 !important;
+  }
+  .products-grid-normal {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
   }
   .container {
     padding: 0 var(--spacing-sm);
@@ -1550,13 +1580,13 @@ body:not(:has(.hero)) .mobile-menu-toggle span {
 }
 
 .hero-detail .container {
-    max-width: 1200px; 
+    max-width: 1400px; 
     padding: 0 var(--spacing-lg);
 }
 
 .hero-detail__grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 0.3fr;
+    grid-template-columns: 1.8fr 1.1fr 0.2fr;
     gap: 4rem;
     align-items: center;
 }
@@ -1573,12 +1603,6 @@ body:not(:has(.hero)) .mobile-menu-toggle span {
     width: 100%;
     height: auto;
     filter: drop-shadow(0 30px 60px rgba(0,0,0,0.08));
-    animation: floating 6s ease-in-out infinite;
-}
-
-@keyframes floating {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
 }
 
 .info-col {
@@ -3279,6 +3303,19 @@ h1, h2, h3, h4,
 .main-container--wide {
     max-width: 1600px !important;
     width: 94% !important;
+}
+
+/* Hide favorite and share buttons on product cards, and hide category label */
+.product-card__favorite-btn {
+    display: none !important;
+}
+
+.share-btn {
+    display: none !important;
+}
+
+.product-card__category {
+    display: none !important;
 }
 
 
