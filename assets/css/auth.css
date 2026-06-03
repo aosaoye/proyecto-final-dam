@@ -17,26 +17,34 @@ body {
 }
 
 .auth-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
     min-height: 100vh;
-    padding: 2rem;
-    box-sizing: border-box;
-    position: relative;
-    background-color: #ffffff;
 }
 
-/* Cover Panel is hidden */
 .auth-image-col {
-    display: none !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    position: relative;
+}
+
+.auth-image-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
 }
 
 .auth-content-col {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    padding: 4rem 2rem;
+    background: #ffffff;
 }
 
 .auth-inner-form {

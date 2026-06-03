@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Productos | Modsy Profishop</title>
     <meta name="description" content="Explore el catálogo completo de Modsy Profishop: sillas ergonómicas, estanterías nórdicas, mesas de madera maciza y equipamiento comercial con envío gratis y entrega rápida.">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=2.2">
 </head>
 <body>
 
@@ -141,6 +141,66 @@
 
         if (!grid) return;
 
+        // Pinterest local favorites helpers
+        const FAVORITE_KEY = 'modsy_favorites';
+        function getFavorites() {
+            return JSON.parse(localStorage.getItem(FAVORITE_KEY) || '[]');
+        }
+        function toggleFavorite(productName) {
+            let favs = getFavorites();
+            const isFav = favs.includes(productName);
+            if (isFav) {
+                favs = favs.filter(f => f !== productName);
+            } else {
+                favs.push(productName);
+            }
+            localStorage.setItem(FAVORITE_KEY, JSON.stringify(favs));
+            return !isFav;
+        }
+
+        // Pinterest styled Toast Notification
+        function showPinterestToast(message) {
+            let toast = document.querySelector('.pinterest-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'pinterest-toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 40px;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(100px);
+                    background: #1c1917;
+                    color: #ffffff;
+                    padding: 14px 28px;
+                    border-radius: 30px;
+                    font-size: 0.95rem;
+                    font-weight: 700;
+                    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+                    z-index: 9999;
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    opacity: 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+                `;
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = `<span style="background:#e60023; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; color:white; font-size:0.75rem;">✓</span> ${message}`;
+            
+            // Trigger active animations
+            setTimeout(() => {
+                toast.style.transform = 'translateX(-50%) translateY(0)';
+                toast.style.opacity = '1';
+            }, 50);
+            
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.style.transform = 'translateX(-50%) translateY(100px)';
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+
         // Extract category parameter from URL
         const urlParams = new URLSearchParams(window.location.search);
         let selectedCategory = urlParams.get('category') || 'All';
@@ -188,7 +248,7 @@
                 return;
             }
 
-            filtered.forEach(p => {
+            filtered.forEach((p, idx) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.setAttribute('data-id', p.id || p._id);
@@ -206,10 +266,22 @@
                     });
                 }
 
+                const isFavorited = getFavorites().includes(p.name);
+                const favClass = isFavorited ? 'product-card__favorite-btn--active' : '';
+                const favIcon = isFavorited ? 'heart' : 'heart-outline';
+
                 card.innerHTML = `
                   <div class="product-card__image" style="cursor:pointer;">
                     <img src="${imgUrl}" alt="${p.name}" class="product-card__img">
-                    <button class="product-card__favorite-btn" aria-label="Add to favorites"><ion-icon name="heart-outline"></ion-icon></button>
+                    <button class="product-card__favorite-btn ${favClass}" aria-label="Add to favorites"><ion-icon name="${favIcon}"></ion-icon></button>
+                    
+                    <div class="product-card__pin-overlay">
+                      <button class="product-card__save-btn">Guardar</button>
+                      <div class="product-card__actions-row">
+                        <button class="product-card__action-btn share-btn" title="Compartir"><ion-icon name="arrow-redo-outline"></ion-icon></button>
+                        <button class="product-card__action-btn options-btn" title="Más opciones"><ion-icon name="ellipsis-horizontal-outline"></ion-icon></button>
+                      </div>
+                    </div>
                   </div>
                   <div class="product-card__info">
                     <div class="product-card__header">
@@ -232,6 +304,66 @@
                         const newImg = swatch.getAttribute('data-img');
                         card.querySelector('.product-card__img').src = newImg;
                     });
+                });
+
+                // Pinterest Save Red Button
+                const saveBtn = card.querySelector('.product-card__save-btn');
+                saveBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const favBtn = card.querySelector('.product-card__favorite-btn');
+                    const nowFavorited = toggleFavorite(p.name);
+                    
+                    if (nowFavorited) {
+                        favBtn.classList.add('product-card__favorite-btn--active');
+                        favBtn.querySelector('ion-icon').setAttribute('name', 'heart');
+                        showPinterestToast(`¡Guardado en tu colección de Favoritos!`);
+                    } else {
+                        favBtn.classList.remove('product-card__favorite-btn--active');
+                        favBtn.querySelector('ion-icon').setAttribute('name', 'heart-outline');
+                        showPinterestToast(`Eliminado de tu colección de Favoritos`);
+                    }
+                });
+
+                // Favorite Heart Button toggling
+                const favBtn = card.querySelector('.product-card__favorite-btn');
+                favBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nowFavorited = toggleFavorite(p.name);
+                    
+                    if (nowFavorited) {
+                        favBtn.classList.add('product-card__favorite-btn--active');
+                        favBtn.querySelector('ion-icon').setAttribute('name', 'heart');
+                        showPinterestToast(`¡Guardado en tu colección de Favoritos!`);
+                    } else {
+                        favBtn.classList.remove('product-card__favorite-btn--active');
+                        favBtn.querySelector('ion-icon').setAttribute('name', 'heart-outline');
+                        showPinterestToast(`Eliminado de tu colección de Favoritos`);
+                    }
+                });
+
+                // Share Button triggers standard navigator.share or copies link
+                const shareBtn = card.querySelector('.share-btn');
+                shareBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const shareUrl = `${window.location.origin}/product-detail.html?id=${p.id || p._id}`;
+                    if (navigator.share) {
+                        navigator.share({
+                            title: p.name,
+                            text: `¡Mira este producto espectacular: ${p.name}!`,
+                            url: shareUrl
+                        }).catch(console.error);
+                    } else {
+                        navigator.clipboard.writeText(shareUrl).then(() => {
+                            showPinterestToast(`¡Enlace copiado al portapapeles!`);
+                        }).catch(console.error);
+                    }
+                });
+
+                // Options Button toggles a neat contextual alert
+                const optionsBtn = card.querySelector('.options-btn');
+                optionsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showPinterestToast(`Opciones de Pin: Descargar imagen o reportar`);
                 });
 
                 // Detail routing

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Producto | Modsy Profishop</title>
+    <meta name="description" content="Vea las especificaciones, características y detalles de este producto de mobiliario premium en Modsy Profishop. Envíos gratis y garantía extendida.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <!-- Unified Premium Loader Overlay -->
+    <div id="page-loader" class="modsy-loader-overlay">
+        <div class="modsy-spinner"></div>
+        <div class="modsy-loader-text">Loading Modsy Experience</div>
+    </div>
+
+    <header class="site-header site-header--solid">
+        <div class="site-header__container container">
+            <div class="header-left">
+                <div class="logo">
+                    <button class="mobile-menu-toggle" aria-label="Open Menu">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="index.html" class="logo-link">
+                        <svg class="logo-spiral" viewBox="0 0 100 100" width="36" height="36" fill="none" stroke="var(--color-primary)" stroke-width="4.5" stroke-linecap="round">
+                            <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
+                        </svg>
+                        <div class="logo-text">
+                            <span class="logo-title">Modsy</span>
+                            <span class="logo-subtitle">FURNITURE</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="main-nav__list">
+                    <li><a href="index.html" class="main-nav__link">Home</a></li>
+                    <li><a href="products.html" class="main-nav__link main-nav__link--active">Products</a></li>
+                    <li><a href="contact.html" class="main-nav__link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="search.html" class="header-action-link"><ion-icon name="search-outline"></ion-icon></a>
+                    <a href="#" class="header-action-link"><ion-icon name="cart-outline"></ion-icon></a>
+                    <a href="auth/login.html" class="header-action-link"><ion-icon name="person-outline"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 130px; margin-bottom: 0;">
+        <a href="products.html" class="back-link"><ion-icon name="arrow-back-outline"></ion-icon> Back to collection</a>
+    </main>
+
+    <section class="hero-detail" style="padding-top: 20px;">
+        <div class="container">
+            <div class="hero-detail__grid">
+                <!-- Image (Left) -->
+                <div class="image-col">
+                    <img src="" alt="" class="image-col__img" id="detail-img">
+                </div>
+
+                <!-- Info (Right) -->
+                <div class="info-col">
+                    <div class="info-col__price" id="detail-price">0€</div>
+                    <h1 class="info-col__name" id="detail-title">Product Name</h1>
+                    <span class="info-col__tagline" id="detail-tagline">Premium Collection</span>
+                    
+                    <p class="info-col__desc" id="detail-desc">Loading description...</p>
+
+                    <!-- Shipping / Quick Delivery Status Badge -->
+                    <div class="delivery-status" style="color: #007715; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-top: 15px; margin-bottom: 20px; font-family: 'Signika', sans-serif;">
+                        <ion-icon name="checkmark-circle-outline" style="font-size: 1.25rem; color: #007715;"></ion-icon>
+                        <span>Envío GRATIS • Entrega en 3-5 días laborables</span>
+                    </div>
+
+                    <div class="color-options" id="detail-colors"></div>
+
+                    <div class="product-actions">
+                        <div class="qty-box">
+                            <button class="qty-btn" id="btn-qty-minus"><ion-icon name="remove-outline"></ion-icon></button>
+                            <span id="qty-value" class="qty-value">1</span>
+                            <button class="qty-btn" id="btn-qty-plus"><ion-icon name="add-outline"></ion-icon></button>
+                        </div>
+                        <button class="btn-buy" id="btn-add-to-cart">Add</button>
+                    </div>
+                </div>
+
+                <!-- Label (Far Right) -->
+                <div class="category-label">
+                    <span class="category-label__text" id="detail-category-v">CATEGORY</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="similar-products container">
+        <h2 class="similar-products__title">You may also like</h2>
+        <div class="products-section__grid" id="similar-grid">
+            <!-- Dynamic -->
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <!-- Col 1: Brand Info -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4 style="font-size: 1.2rem !important; color: var(--color-primary) !important;">Modsy Profishop</h4>
+                    <p style="color: #6e6e6e; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">Su proveedor de confianza para equipamiento comercial y mobiliario premium de oficina e interiores.</p>
+                    <div style="display: flex; gap: 10px; font-size: 1.25rem; color: var(--color-primary);">
+                        <ion-icon name="logo-facebook" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-twitter" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-instagram" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-linkedin" style="cursor:pointer;"></ion-icon>
+                    </div>
+                </div>
+                <!-- Col 2: Customer Service -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Atención al Cliente</h4>
+                    <ul>
+                        <li><a href="contact.html">Contacto y Ayuda</a></li>
+                        <li><a href="#">Envíos y Entregas</a></li>
+                        <li><a href="#">Garantía de Calidad</a></li>
+                        <li><a href="#">Devoluciones y Reclamaciones</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Categories -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Categorías Populares</h4>
+                    <ul>
+                        <li><a href="products.html?category=Garden">Mobiliario de Jardín</a></li>
+                        <li><a href="products.html?category=Kitchen">Mobiliario de Cocina</a></li>
+                        <li><a href="products.html?category=Dining">Salón y Comedor</a></li>
+                        <li><a href="products.html?category=Office">Equipamiento de Oficina</a></li>
+                    </ul>
+                </div>
+                <!-- Col 4: Corporate / Legal -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Información Legal</h4>
+                    <ul>
+                        <li><a href="intranet.html">Intranet de Empleados (PRL)</a></li>
+                        <li><a href="#">Aviso Legal y LSSI</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__brand-text">Modsy.</div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/products-data.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <!-- Add visual alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../assets/js/navbar-updater.js"></script>
+
+    <script type="module">
+    import { productService, cartService, authService } from '../assets/js/api-services.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+
+        if (!id) {
+            window.location.href = 'products.html';
+            return;
+        }
+
+        let currentProduct = null;
+
+        try {
+            // UI Populate using API call
+            currentProduct = await productService.getById(id);
+            if (!currentProduct) throw new Error('Product not found');
+
+            // Standard image loader
+            const imgUrl = currentProduct.image && currentProduct.image.startsWith('/uploads') 
+                ? `http://${window.location.hostname}:5000${currentProduct.image}` 
+                : (currentProduct.image || 'https://via.placeholder.com/500x500');
+
+            document.getElementById('detail-img').src = imgUrl;
+            document.getElementById('detail-title').textContent = currentProduct.name;
+            document.getElementById('detail-price').textContent = String(currentProduct.price).includes('€') ? currentProduct.price : `${currentProduct.price}€`;
+            document.getElementById('detail-desc').textContent = currentProduct.description;
+            document.getElementById('detail-category-v').textContent = (currentProduct.category || 'Collection').toUpperCase();
+            document.getElementById('detail-tagline').textContent = `${currentProduct.category} Series`;
+
+            // Populate color options dynamically and bind click triggers to swap visual
+            const colorsContainer = document.getElementById('detail-colors');
+            if (colorsContainer && currentProduct.colors && Array.isArray(currentProduct.colors) && currentProduct.colors.length > 0) {
+                colorsContainer.innerHTML = currentProduct.colors.map((c, idx) => `
+                    <div class="color-dot ${idx === 0 ? 'color-dot--active' : ''}" data-img="${c.img}" style="background:${c.code}" title="${c.name || ''}">
+                        <div class="color-dot-inner" style="background:${c.code};"></div>
+                    </div>
+                `).join('');
+
+                colorsContainer.querySelectorAll('.color-dot').forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        colorsContainer.querySelectorAll('.color-dot').forEach(d => d.classList.remove('color-dot--active'));
+                        dot.classList.add('color-dot--active');
+                        const newImg = dot.getAttribute('data-img');
+                        if (newImg) {
+                            const parsedImg = newImg.startsWith('/uploads') 
+                                ? `http://${window.location.hostname}:5000${newImg}` 
+                                : newImg;
+                            document.getElementById('detail-img').src = parsedImg;
+                        }
+                    });
+                });
+            }
+
+        } catch (err) {
+            console.error(err);
+            Swal.fire('Error', 'Could not fetch product information', 'error');
+            return;
+        } finally {
+            // Dismiss page loader gracefully
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                loader.classList.add('modsy-loader-overlay--hidden');
+                setTimeout(() => loader.remove(), 400);
+            }
+        }
+
+        // Qty Counter
+        let qty = 1;
+        const qtyDisplay = document.getElementById('qty-value');
+        document.getElementById('btn-qty-minus').addEventListener('click', () => { 
+            if(qty > 1) { qty--; qtyDisplay.textContent = qty; }
+        });
+        document.getElementById('btn-qty-plus').addEventListener('click', () => { 
+            qty++; 
+            qtyDisplay.textContent = qty; 
+        });
+
+        // Add to backend Cart logic
+        document.getElementById('btn-add-to-cart').addEventListener('click', async () => {
+            if (!authService.isAuthenticated()) {
+                Swal.fire({
+                    title: 'Sign In Required',
+                    text: 'Please log in to add items to your cart.',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Go to Login'
+                }).then(res => {
+                    if (res.isConfirmed) window.location.href = 'auth/login.html';
+                });
+                return;
+            }
+
+            try {
+                Swal.fire({
+                    title: 'Adding...',
+                    didOpen: () => Swal.showLoading()
+                });
+                
+                // Connect to API service
+                await cartService.addItem(id, qty);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Added to Cart',
+                    text: `${qty}x ${currentProduct.name} added successfully!`,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            } catch (error) {
+                Swal.fire('Error', error.message, 'error');
+            }
+        });
+
+        // Load simple recommendation list 
+        try {
+            const all = await productService.getAll();
+            const similarGrid = document.getElementById('similar-grid');
+            if (similarGrid && all) {
+                const similar = all.filter(p => p.id !== id).slice(0, 4);
+                similarGrid.innerHTML = similar.map(p => {
+                    const sImg = p.image && p.image.startsWith('/uploads') 
+                        ? `http://${window.location.hostname}:5000${p.image}` 
+                        : (p.image || 'https://via.placeholder.com/300x300');
+                    
+                    return `
+                        <div class="product-card" style="cursor:pointer;" onclick="window.location.href='product-detail.html?id=${p.id || p._id}'">
+                            <div class="product-card__image">
+                                <img src="${sImg}" alt="${p.name}" class="product-card__img">
+                            </div>
+                            <div class="product-card__info">
+                                <div class="product-card__header">
+                                    <h3 class="product-card__name">${p.name}</h3>
+                                    <span class="product-card__price">${String(p.price).includes('€') ? p.price : p.price + '€'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        } catch (e) { /* Silent fail recommendations */ }
+    });
+    </script>
+</body>
+</html>

@@ -165,9 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     let baseFolder = '';
-    if (!path.includes('/pages/')) {
-        baseFolder = 'pages/';
-    }
 
     const user = authService.getCurrentUser();
     const isSearchPage = path.includes('search.html');

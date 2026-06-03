@@ -3,228 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modsy | Admin Enterprise</title>
-    <!-- Core Styles & Custom Dashboard Style Extension -->
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/intranet.css">
-    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <title>Intranet & Comité de Empresa | Modsy Profishop</title>
     
-    <!-- External Vendor Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Design System Styling -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/intranet.css">
+    
+    <!-- Ionicons CDN for beautiful micro-glyphs -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 
-    <!-- Strict Privilege Authorization Gate -->
-    <script type="module">
-        import { authService } from '../../assets/js/api-services.js';
-        const u = authService.getCurrentUser();
-        if (!u || u.role !== 'admin') window.location.replace('../index.html');
-    </script>
-
-    <!-- Mobile Interface Shield Overlay -->
-    <div class="overlay-screen" id="nav-overlay" onclick="toggleMobileSidebar()"></div>
-
-    <div class="app-shell">
-        
-        <!-- PERSISTENT NAVIGATION SIDEBAR -->
-        <aside class="sidebar">
-            <div class="sidebar-top">
-                <div style="display:flex; align-items:center; gap:0.6rem;">
-                    <svg class="logo-spiral" viewBox="0 0 100 100" width="32" height="32" fill="none" stroke="var(--color-secondary)" stroke-width="4.5" stroke-linecap="round">
-                        <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
-                    </svg>
-                    <span style="font-weight:800; font-size:1.4rem; letter-spacing:-0.025em; color:var(--color-primary);">Modsy</span>
-                </div>
-            </div>
-
-            <div class="nav-section-label">Core Portal</div>
-            <nav class="nav-group">
-                <div class="nav-item active" onclick="switchTab('view-overview', this, 'Dashboard')">
-                    <ion-icon name="home-outline"></ion-icon> Dashboard
-                </div>
-                <div class="nav-item" onclick="switchTab('view-sales', this, 'Analytics')">
-                    <ion-icon name="stats-chart-outline"></ion-icon> Analytics
-                </div>
-                <div class="nav-item" onclick="switchTab('view-products', this, 'Inventory')">
-                    <ion-icon name="cube-outline"></ion-icon> Inventory
-                </div>
-                <div class="nav-item" onclick="switchTab('view-users', this, 'Clients')">
-                    <ion-icon name="people-outline"></ion-icon> Clients
-                </div>
-            </nav>
-
-            <div class="nav-section-label">Intranet & Comité</div>
-            <nav class="nav-group">
-                <div class="nav-item" onclick="switchTab('view-intranet-inicio', this, 'Intranet / Novedades')">
-                    <ion-icon name="megaphone-outline"></ion-icon> Inicio y Novedades
-                </div>
-                <div class="nav-item" onclick="switchTab('view-intranet-derechos', this, 'Intranet / Derechos Laborales')">
-                    <ion-icon name="briefcase-outline"></ion-icon> Estatuto Laboral
-                </div>
-                <div class="nav-item" onclick="switchTab('view-intranet-convenio', this, 'Intranet / Convenio Colectivo')">
-                    <ion-icon name="document-text-outline"></ion-icon> Convenio Colectivo
-                </div>
-                <div class="nav-item" onclick="switchTab('view-intranet-comite', this, 'Intranet / Comité de Empresa')">
-                    <ion-icon name="people-outline"></ion-icon> Comité de Empresa
-                </div>
-                <div class="nav-item" onclick="switchTab('view-intranet-prevencion', this, 'Intranet / Salud y PRL')">
-                    <ion-icon name="shield-checkmark-outline"></ion-icon> Salud Laboral y PRL
-                </div>
-                <div class="nav-item" onclick="switchTab('view-intranet-fichajes', this, 'Intranet / Registro de Jornada')">
-                    <ion-icon name="alarm-outline"></ion-icon> Registro de Jornada
-                </div>
-                <div class="nav-item" onclick="switchTab('view-intranet-calculadora', this, 'Intranet / Simular Nómina')">
-                    <ion-icon name="calculator-outline"></ion-icon> Simular Nómina
-                </div>
-                <div class="nav-item" onclick="switchTab('view-intranet-buzon', this, 'Intranet / Buzón del Comité')">
-                    <ion-icon name="mail-unread-outline"></ion-icon> Buzón del Comité
-                </div>
-            </nav>
-
-            <div class="nav-section-label">System</div>
-            <nav class="nav-group">
-                <div class="nav-item" onclick="switchTab('view-settings', this, 'Permissions')">
-                    <ion-icon name="shield-checkmark-outline"></ion-icon> Access Control
-                </div>
-            </nav>
-
-            <div class="nav-group" style="margin-top: auto;">
-                <div class="nav-item" id="logout-link" style="color: #ef4444;">
-                    <ion-icon name="log-out-outline" style="color: #ef4444;"></ion-icon> Disconnect
-                </div>
-            </div>
-        </aside>
-
-        <!-- DYNAMIC SCROLLABLE DATA PLANE -->
-        <main class="main-content">
-            
-            <header class="toolbar">
-                <div style="display:flex; align-items:center; gap:1rem;">
-                    <div class="hamburger-menu" onclick="toggleMobileSidebar()">
+    <!-- Header Navigation Grid -->
+    <header class="site-header site-header--solid">
+        <div class="site-header__container container">
+            <div class="header-left">
+                <div class="logo">
+                    <button class="mobile-menu-toggle" aria-label="Open Menu">
                         <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="index.html" class="logo-link">
+                        <svg class="logo-spiral" viewBox="0 0 100 100" width="36" height="36" fill="none" stroke="var(--color-primary)" stroke-width="4.5" stroke-linecap="round">
+                            <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
+                        </svg>
+                        <div class="logo-text">
+                            <span class="logo-title">Modsy</span>
+                            <span class="logo-subtitle">FURNITURE</span>
+                        </div>
+                    </a>
+                </div>
+                <nav class="main-nav" style="margin-left: 2rem;">
+                    <ul class="main-nav__list">
+                        <li><a href="index.html" class="main-nav__link">Home</a></li>
+                        <li><a href="products.html" class="main-nav__link">Products</a></li>
+                        <li><a href="intranet.html" class="main-nav__link main-nav__link--active">Intranet</a></li>
+                        <li><a href="contact.html" class="main-nav__link">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="header-right">
+                <div class="nav-controls" id="user-controls-placeholder">
+                    <!-- Loaded dynamically via navbar-updater.js -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container section-padding" style="margin-top: 130px;">
+        
+        <!-- Welcome Hero Info -->
+        <header style="margin-bottom: 3rem;">
+            <h1 class="view-title">Portal de la Intranet</h1>
+            <p class="view-subtitle">Bienvenido al espacio informativo oficial de los trabajadores y el Comité de Empresa de Modsy. Toda la información jurídica y laboral oficial de la empresa centralizada aquí.</p>
+        </header>
+
+        <!-- Intranet Grid Layout -->
+        <div class="intranet-layout">
+            
+            <!-- Sidebar Navigation Menu -->
+            <aside class="intranet-sidebar">
+                <div class="intranet-profile">
+                    <div class="intranet-avatar" id="avatar-letters">EM</div>
+                    <div class="intranet-user-info">
+                        <h3 id="sidebar-user-name">Empleado Modsy</h3>
+                        <span id="sidebar-user-role">Colaborador</span>
                     </div>
-                    <div class="breadcrumbs">Portal / <span id="breadcrumb-active">Dashboard</span></div>
                 </div>
                 
-                <div class="toolbar-right">
-                    <div class="search-wrapper">
-                        <ion-icon name="search-outline"></ion-icon>
-                        <input type="text" id="global-search" placeholder="Filter results...">
+                <nav class="intranet-nav">
+                    <div class="intranet-nav-btn intranet-nav-btn--active" data-view="inicio">
+                        <ion-icon name="home-outline"></ion-icon> Inicio y Novedades
                     </div>
-
-                    <div class="user-profile-badge">
-                        <div id="user-initial" style="width:24px; height:24px; background:var(--color-white); color:var(--color-primary); border-radius:50%; font-size:0.75rem; font-weight:800; display:flex; align-items:center; justify-content:center;">?</div>
-                        <span id="user-name-display" style="font-size:0.8rem; font-weight:700;">Authenticating...</span>
+                    <div class="intranet-nav-btn" data-view="derechos">
+                        <ion-icon name="briefcase-outline"></ion-icon> Estatuto de Trabajadores
                     </div>
-                </div>
-            </header>
+                    <div class="intranet-nav-btn" data-view="convenio">
+                        <ion-icon name="document-text-outline"></ion-icon> Convenio Colectivo
+                    </div>
+                    <div class="intranet-nav-btn" data-view="comite">
+                        <ion-icon name="people-outline"></ion-icon> Comité de Empresa
+                    </div>
+                    <div class="intranet-nav-btn" data-view="prevencion">
+                        <ion-icon name="shield-checkmark-outline"></ion-icon> Salud Laboral y PRL
+                    </div>
+                    <div class="intranet-nav-btn" data-view="fichajes">
+                        <ion-icon name="alarm-outline"></ion-icon> Registro de Jornada
+                    </div>
+                    <div class="intranet-nav-btn" data-view="calculadora">
+                        <ion-icon name="calculator-outline"></ion-icon> Calculadora Salarial
+                    </div>
+                    <div class="intranet-nav-btn" data-view="buzon">
+                        <ion-icon name="mail-unread-outline"></ion-icon> Buzón del Comité
+                    </div>
+                </nav>
+            </aside>
 
-            <div class="content-body">
+            <!-- Main Content Sections -->
+            <section class="intranet-content">
                 
-                <!-- DOMAIN: OVERVIEW METRICS -->
-                <div id="view-overview" class="content-view active">
-                    <div class="hero-metric-section">
-                        <h1 class="hero-label">Operational Revenue</h1>
-                        <h1 class="hero-value" id="stat-revenue">Loading...</h1>
-                    </div>
-
-                    <div class="metrics-grid">
-                        <div class="metric-tile">
-                            <span class="metric-label">Catalog Size</span>
-                            <div class="metric-flex">
-                                <div class="metric-number-group">
-                                    <h3 id="stat-products">---</h3>
-                                    <div class="metric-trend" style="color:var(--color-primary);"><ion-icon name="cube-outline"></ion-icon> Total items</div>
-                                </div>
-                                <svg class="sparkline" viewBox="0 0 100 40"><path d="M0,30 Q25,20 50,25 T100,10" stroke="var(--color-accent)" stroke-width="2.5" fill="none"/></svg>
-                            </div>
-                        </div>
-                        
-                        <div class="metric-tile">
-                            <span class="metric-label">User Registry</span>
-                            <div class="metric-flex">
-                                <div class="metric-number-group">
-                                    <h3 id="stat-total-users">---</h3>
-                                    <div class="metric-trend"><ion-icon name="arrow-up"></ion-icon> Stable</div>
-                                </div>
-                                <svg class="sparkline" viewBox="0 0 100 40"><path d="M0,35 Q30,25 60,30 T100,5" stroke="#22c55e" stroke-width="2.5" fill="none"/></svg>
-                            </div>
-                        </div>
-
-                        <div class="metric-tile">
-                            <span class="metric-label">Cluster Network</span>
-                            <div class="metric-flex">
-                                <div class="metric-number-group">
-                                    <h3>SECURE</h3>
-                                    <div class="metric-subtext" style="font-size:0.7rem; color:var(--color-secondary);">SSL Protocol Active</div>
-                                </div>
-                                <svg class="sparkline" viewBox="0 0 100 40"><path d="M0,20 H100" stroke="var(--color-accent)" stroke-dasharray="4" stroke-width="2" fill="none"/></svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="section-title-row">
-                        <h2>Latest Activity</h2>
-                    </div>
-                    <div class="panel-card">
-                        <div id="latest-orders-container">
-                            <div style="text-align:center; padding: 3rem; color: var(--color-secondary);">Streaming operations...</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DOMAIN: PRODUCTS MANAGEMENT -->
-                <div id="view-products" class="content-view">
-                    <div class="section-title-row">
-                        <h2>Global Inventory</h2>
-                        <button class="btn-primary-minimal" onclick="openAddProductModal()">Add Item</button>
-                    </div>
-                    
-                    <div class="panel-card">
-                        <table class="app-table">
-                            <thead>
-                                <tr><th>Media</th><th>Product Name</th><th>Group</th><th>Rate</th><th>Status</th><th style="text-align:right;">Control</th></tr>
-                            </thead>
-                            <tbody id="product-table-body">
-                                <tr><td colspan="6" style="text-align:center; padding: 3rem; color:var(--color-secondary);">Aggregating inventory ledger...</td></tr>
-                            </tbody>
-                        </table>
-                        <div class="pagination-controls" id="products-pagination"></div>
-                    </div>
-                </div>
-
-                <!-- DOMAIN: ANALYTICS LOGS -->
-                <div id="view-sales" class="content-view">
-                    <div class="section-title-row"><h2>Analytics stream</h2></div>
-                    <div class="panel-card">
-                        <table class="app-table">
-                            <thead><tr><th>UUID</th><th>Identity</th><th>Cart</th><th>Volume</th><th>Stamped</th><th>Status</th></tr></thead>
-                            <tbody id="orders-table-body"><tr><td colspan="6" style="text-align:center; padding: 4rem; color:var(--color-secondary);">Tracing audit streams...</td></tr></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- DOMAIN: CLIENTELE DIRECTORY -->
-                <div id="view-users" class="content-view">
-                    <div class="section-title-row"><h2>Customer Vault</h2></div>
-                    <div class="panel-card">
-                        <table class="app-table">
-                            <thead><tr><th>FullName</th><th>Network Email</th><th>Privilege</th><th>Condition</th></tr></thead>
-                            <tbody id="users-placeholder-body"><tr><td colspan="4" style="padding:3rem; text-align:center; color:var(--color-secondary);">Fetching directory...</td></tr></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- DOMAIN: INTRANET INICIO -->
-                <div id="view-intranet-inicio" class="content-view">
+                <!-- VIEW 1: INICIO -->
+                <div class="intranet-view intranet-view--active" id="view-inicio">
                     <div class="section-card">
                         <h3><ion-icon name="megaphone-outline"></ion-icon> Tablón de Anuncios Oficial</h3>
                         <p style="font-size: 0.95rem; line-height: 1.6; color: var(--color-secondary); margin-bottom: 1.5rem;">
                             Desde la representación legal de los trabajadores queremos daros la bienvenida a esta nueva sección integrada en nuestro ecosistema. Aquí podréis consultar las actas de reuniones, circulares de salud e higiene, y registrar vuestras horas ordinarias de trabajo.
                         </p>
                         
-                        <div style="background: var(--color-stone-50); border: 1px dashed var(--color-stone-300); padding: 1.25rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem;">
+                        <div style="background: #fafaf9; border: 1px dashed #d6d3d1; padding: 1.25rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem;">
                             <span class="legal-badge" style="background:#fef3c7; color:#d97706; border-color:#fde68a;">Aviso Urgente</span>
                             <h4 style="font-family: var(--font-general-sans), sans-serif; font-size: 1rem; font-weight: 700; margin: 0.5rem 0 0.25rem 0;">Elecciones Sindicales Modsy 2026</h4>
                             <p style="font-size: 0.85rem; color: var(--color-secondary); line-height: 1.5;">
@@ -232,7 +120,7 @@
                             </p>
                         </div>
 
-                        <div style="background: var(--color-stone-50); border: 1px dashed var(--color-stone-300); padding: 1.25rem; border-radius: var(--radius-sm);">
+                        <div style="background: #fafaf9; border: 1px dashed #d6d3d1; padding: 1.25rem; border-radius: var(--radius-sm);">
                             <span class="legal-badge" style="background:#dcfce7; color:#15803d; border-color:#bbf7d0;">Actualización Legal</span>
                             <h4 style="font-family: var(--font-general-sans), sans-serif; font-size: 1rem; font-weight: 700; margin: 0.5rem 0 0.25rem 0;">Publicadas las Tablas Salariales de Oficinas y Despachos</h4>
                             <p style="font-size: 0.85rem; color: var(--color-secondary); line-height: 1.5;">
@@ -277,8 +165,8 @@
                     </div>
                 </div>
 
-                <!-- DOMAIN: INTRANET DERECHOS -->
-                <div id="view-intranet-derechos" class="content-view">
+                <!-- VIEW 2: DERECHOS LABORALES (ET) -->
+                <div class="intranet-view" id="view-derechos">
                     <div class="section-card">
                         <h2 class="view-title" style="font-size: 1.75rem; margin-bottom: 1rem;">Estatuto de los Trabajadores (Real Decreto Legislativo 2/2015)</h2>
                         <p style="font-size: 0.95rem; line-height: 1.6; color: var(--color-secondary); margin-bottom: 2rem;">
@@ -290,8 +178,8 @@
                                 <span class="legal-badge">Artículo 34: Jornada de Trabajo</span>
                                 <h4>Duración máxima y descansos diarios</h4>
                                 <p>
-                                    La duración de la jornada de trabajo se pactará en los convenios colectivos o contratos. La jornada ordinaria máxima de trabajo efectivo no podrá exceder las <strong>40 horas semanales de promedio en cómputo anual</strong>.
-                                    Entre el final de una jornada diaria y el comienzo de la siguiente, debe existir un <strong>mínimo de 12 horas</strong> de descanso ininterrumpido. El número de horas de trabajo ordinario diario no podrá ser superior a <strong>9 horas</strong>, salvo que por convenio o acuerdo se establezca otra distribución.
+                                    La duración de la jornada de trabajo se pactará en los convenios colectivos o contratos. La jornada ordinaria máxima de trabajo efectivo no podrá exceder las **40 horas semanales de promedio en cómputo anual**.
+                                    Entre el final de una jornada diaria y el comienzo de la siguiente, debe existir un **mínimo de 12 horas** de descanso ininterrumpido. El número de horas de trabajo ordinario diario no podrá ser superior a **9 horas**, salvo que por convenio o acuerdo se establezca otra distribución.
                                 </p>
                             </div>
 
@@ -299,8 +187,8 @@
                                 <span class="legal-badge">Artículo 38: Vacaciones Anuales</span>
                                 <h4>Derecho a periodo vacacional retribuido</h4>
                                 <p>
-                                    El periodo de vacaciones anuales retribuidas, no sustituible por compensación económica, será el pactado en convenio colectivo o contrato de trabajo. En ningún caso la duración será inferior a <strong>30 días naturales</strong> al año.
-                                    El calendario de vacaciones se fijará en cada empresa de mutuo acuerdo. El trabajador deberá conocer las fechas asignadas que le corresponden con un <strong>mínimo de 2 meses de antelación</strong> al comienzo de su disfrute.
+                                    El periodo de vacaciones anuales retribuidas, no sustituible por compensación económica, será el pactado en convenio colectivo o contrato de trabajo. En ningún caso la duración será inferior a **30 días naturales** al año.
+                                    El calendario de vacaciones se fijará en cada empresa de mutuo acuerdo. El trabajador deberá conocer las fechas asignadas que le corresponden con un **mínimo de 2 meses de antelación** al comienzo de su disfrute.
                                 </p>
                             </div>
 
@@ -309,7 +197,7 @@
                                 <h4>Limitaciones y compensaciones económicas</h4>
                                 <p>
                                     Tienen la consideración de horas extraordinarias aquellas horas de trabajo efectivo que se realicen sobre la duración máxima de la jornada ordinaria de trabajo. 
-                                    El número de horas extraordinarias <strong>no podrá ser superior a 80 horas al año</strong> (salvo las realizadas para prevenir o reparar siniestros u otros daños extraordinarios). Las horas extras se abonarán en la cuantía fijada en convenio (nunca inferior al valor de la hora ordinaria) o se compensarán por tiempos equivalentes de descanso retribuido dentro de los 4 meses siguientes a su realización.
+                                    El número de horas extraordinarias **no podrá ser superior a 80 horas al año** (salvo las realizadas para prevenir o reparar siniestros u otros daños extraordinarios). Las horas extras se abonarán en la cuantía fijada en convenio (nunca inferior al valor de la hora ordinaria) o se compensarán por tiempos equivalentes de descanso retribuido dentro de los 4 meses siguientes a su realización.
                                 </p>
                             </div>
 
@@ -317,24 +205,24 @@
                                 <span class="legal-badge">Artículo 37: Descanso semanal, fiestas y permisos</span>
                                 <h4>Permisos retribuidos e interrupciones obligatorias</h4>
                                 <p>
-                                    Los trabajadores tendrán derecho a un descanso semanal ininterrumpido de, como mínimo, <strong>un día y medio</strong>. 
+                                    Los trabajadores tendrán derecho a un descanso semanal ininterrumpido de, como mínimo, **un día y medio**. 
                                     Asimismo, el trabajador, previo aviso y justificación, podrá ausentarse del trabajo, con derecho a remuneración, por alguno de los siguientes motivos:
-                                    <br>• <strong>Matrimonio o registro de pareja de hecho</strong>: 15 días naturales.
-                                    <br>• <strong>Traslado de domicilio habitual</strong>: 1 día.
-                                    <br>• <strong>Enfermedad grave, hospitalización o fallecimiento de parientes hasta el segundo grado</strong>: 2 a 4 días según la necesidad de desplazamiento.
-                                    <br>• <strong>Cumplimiento de un deber inexcusable de carácter público y personal</strong> (voto en elecciones, citación judicial): El tiempo indispensable.
+                                    <br>• **Matrimonio o registro de pareja de hecho**: 15 días naturales.
+                                    <br>• **Traslado de domicilio habitual**: 1 día.
+                                    <br>• **Enfermedad grave, hospitalización o fallecimiento de parientes hasta el segundo grado**: 2 a 4 días según la necesidad de desplazamiento.
+                                    <br>• **Cumplimiento de un deber inexcusable de carácter público y personal** (voto en elecciones, citación judicial): El tiempo indispensable.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- DOMAIN: INTRANET CONVENIO -->
-                <div id="view-intranet-convenio" class="content-view">
+                <!-- VIEW 3: CONVENIO COLECTIVO -->
+                <div class="intranet-view" id="view-convenio">
                     <div class="section-card">
                         <h2 class="view-title" style="font-size: 1.75rem; margin-bottom: 1rem;">Convenio Colectivo Aplicable</h2>
                         <p style="font-size: 0.95rem; line-height: 1.6; color: var(--color-secondary); margin-bottom: 1.5rem;">
-                            La actividad comercial, logística y de desarrollo de software de <strong>Modsy</strong> se encuentra regulada y amparada bajo el <strong>Convenio Colectivo Estatal del Sector de Oficinas y Despachos (Código Oficial BOE: 99003885011981)</strong>. Esto garantiza el marco de derechos mínimos y mejoras sociales de nuestra plantilla.
+                            La actividad comercial, logística y de desarrollo de software de **Modsy** se encuentra regulada y amparada bajo el **Convenio Colectivo Estatal del Sector de Oficinas y Despachos (Código Oficial BOE: 99003885011981)**. Esto garantiza el marco de derechos mínimos y mejoras sociales de nuestra plantilla.
                         </p>
                         
                         <h4 style="font-family: var(--font-general-sans), sans-serif; font-size: 1.1rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem;">Tablas Salariales Mínimas Garantizadas de Convenio (Cómputo Anual Bruto)</h4>
@@ -384,8 +272,8 @@
                     </div>
                 </div>
 
-                <!-- DOMAIN: INTRANET COMITE -->
-                <div id="view-intranet-comite" class="content-view">
+                <!-- VIEW 4: COMITÉ DE EMPRESA -->
+                <div class="intranet-view" id="view-comite">
                     <div class="section-card">
                         <h2 class="view-title" style="font-size: 1.75rem; margin-bottom: 1rem;">Comité de Empresa / Representación Sindical</h2>
                         <p style="font-size: 0.95rem; line-height: 1.6; color: var(--color-secondary); margin-bottom: 1.5rem;">
@@ -397,8 +285,8 @@
                                 <span class="legal-badge">Artículos 62 y 63 del Estatuto</span>
                                 <h4>Composición según el tamaño de plantilla</h4>
                                 <p>
-                                    La legislación española dicta que las empresas de entre 10 y 49 trabajadores contarán con <strong>Delegados de Personal</strong> como órgano representativo (1 delegado en empresas de hasta 30 trabajadores, y 3 delegados en empresas de entre 31 y 49 trabajadores). Las empresas de 50 o más trabajadores contarán con un <strong>Comité de Empresa</strong>.
-                                    <br>Actualmente, <strong>Modsy cuenta con una plantilla activa de 42 trabajadores</strong>, por lo que legalmente disponemos de <strong>3 Delegados de Personal</strong> elegidos democráticamente en las últimas elecciones de representantes de los trabajadores.
+                                    La legislación española dicta que las empresas de entre 10 y 49 trabajadores contarán con **Delegados de Personal** como órgano representativo (1 delegado en empresas de hasta 30 trabajadores, y 3 delegados en empresas de entre 31 y 49 trabajadores). Las empresas de 50 o más trabajadores contarán con un **Comité de Empresa**.
+                                    <br>Actualmente, **Modsy cuenta con una plantilla activa de 42 trabajadores**, por lo que legalmente disponemos de **3 Delegados de Personal** elegidos democráticamente en las últimas elecciones de representantes de los trabajadores.
                                 </p>
                             </div>
                             
@@ -406,29 +294,29 @@
                                 <span class="legal-badge">Artículo 68: Garantías y Crédito Horario</span>
                                 <h4>Horas retribuidas para la labor de representación</h4>
                                 <p>
-                                    Los representantes de los trabajadores disponen de un crédito de <strong>15 horas mensuales retribuidas</strong> (crédito horario) para el ejercicio de sus funciones de representación legal, pudiendo acumularse por convenio las horas en uno o varios miembros sin sobrepasar el máximo total legal.
+                                    Los representantes de los trabajadores disponen de un crédito de **15 horas mensuales retribuidas** (crédito horario) para el ejercicio de sus funciones de representación legal, pudiendo acumularse por convenio las horas en uno o varios miembros sin sobrepasar el máximo total legal.
                                 </p>
                             </div>
                         </div>
 
                         <h4 style="font-family: var(--font-general-sans), sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Tus Representantes Electos en Modsy</h4>
                         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem;">
-                            <div style="background:var(--color-stone-50); border:1px solid var(--color-stone-200); padding:1.5rem; border-radius:var(--radius-md); text-align:center;">
+                            <div style="background:#fafaf9; border:1px solid #e7e5e4; padding:1.5rem; border-radius:var(--radius-md); text-align:center;">
                                 <div style="width:64px; height:64px; border-radius:50%; background:var(--color-primary); color:white; display:flex; align-items:center; justify-content:center; font-family:var(--font-general-sans); font-weight:800; font-size:1.5rem; margin:0 auto 1rem auto;">SA</div>
                                 <h5 style="font-family:var(--font-general-sans); font-size:1rem; font-weight:700; margin-bottom:0.25rem;">Sofía Alarcón</h5>
                                 <p style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--color-secondary); margin-bottom:0.75rem;">Delegada Principal (Logística)</p>
                                 <a href="mailto:sofia.alarcon@modsy.com" style="font-size:0.8rem; color:var(--color-primary); font-weight:700; text-decoration:none;">sofia.alarcon@modsy.com</a>
                             </div>
 
-                            <div style="background:var(--color-stone-50); border:1px solid var(--color-stone-200); padding:1.5rem; border-radius:var(--radius-md); text-align:center;">
+                            <div style="background:#fafaf9; border:1px solid #e7e5e4; padding:1.5rem; border-radius:var(--radius-md); text-align:center;">
                                 <div style="width:64px; height:64px; border-radius:50%; background:#78716c; color:white; display:flex; align-items:center; justify-content:center; font-family:var(--font-general-sans); font-weight:800; font-size:1.5rem; margin:0 auto 1rem auto;">DG</div>
                                 <h5 style="font-family:var(--font-general-sans); font-size:1rem; font-weight:700; margin-bottom:0.25rem;">Daniel Giner</h5>
                                 <p style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--color-secondary); margin-bottom:0.75rem;">Vocal de RLT (Desarrollo)</p>
                                 <a href="mailto:daniel.giner@modsy.com" style="font-size:0.8rem; color:var(--color-primary); font-weight:700; text-decoration:none;">daniel.giner@modsy.com</a>
                             </div>
 
-                            <div style="background:var(--color-stone-50); border:1px solid var(--color-stone-200); padding:1.5rem; border-radius:var(--radius-md); text-align:center;">
-                                <div style="width:64px; height:64px; border-radius:50%; background:var(--color-stone-200); color:var(--color-stone-900); display:flex; align-items:center; justify-content:center; font-family:var(--font-general-sans); font-weight:800; font-size:1.5rem; margin:0 auto 1rem auto;">LB</div>
+                            <div style="background:#fafaf9; border:1px solid #e7e5e4; padding:1.5rem; border-radius:var(--radius-md); text-align:center;">
+                                <div style="width:64px; height:64px; border-radius:50%; background:#d6d3d1; color:#1c1917; display:flex; align-items:center; justify-content:center; font-family:var(--font-general-sans); font-weight:800; font-size:1.5rem; margin:0 auto 1rem auto;">LB</div>
                                 <h5 style="font-family:var(--font-general-sans); font-size:1rem; font-weight:700; margin-bottom:0.25rem;">Lucía Benítez</h5>
                                 <p style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--color-secondary); margin-bottom:0.75rem;">Vocal de RLT (Diseño)</p>
                                 <a href="mailto:lucia.benitez@modsy.com" style="font-size:0.8rem; color:var(--color-primary); font-weight:700; text-decoration:none;">lucia.benitez@modsy.com</a>
@@ -437,12 +325,12 @@
                     </div>
                 </div>
 
-                <!-- DOMAIN: INTRANET SALUD Y PRL -->
-                <div id="view-intranet-prevencion" class="content-view">
+                <!-- VIEW 5: SALUD LABORAL Y PRL -->
+                <div class="intranet-view" id="view-prevencion">
                     <div class="section-card">
                         <h2 class="view-title" style="font-size: 1.75rem; margin-bottom: 1rem;">Salud Laboral y Prevención de Riesgos (PRL)</h2>
                         <p style="font-size: 0.95rem; line-height: 1.6; color: var(--color-secondary); margin-bottom: 1.5rem;">
-                            En Modsy garantizamos un entorno de trabajo saludable y seguro según marca la <strong>Ley 31/1995 de Prevención de Riesgos Laborales</strong>. A continuación se exponen las pautas fundamentales que deben respetarse en los puestos administrativos, almacenes y oficinas.
+                            En Modsy garantizamos un entorno de trabajo saludable y seguro según marca la **Ley 31/1995 de Prevención de Riesgos Laborales**. A continuación se exponen las pautas fundamentales que deben respetarse en los puestos administrativos, almacenes y oficinas.
                         </p>
 
                         <div class="legal-list" style="margin-bottom: 2rem;">
@@ -450,9 +338,9 @@
                                 <span class="legal-badge">Ergonomía frente a Pantallas (PVD)</span>
                                 <h4>Postura correcta en el escritorio de oficina</h4>
                                 <p>
-                                    • <strong>Altura de pantalla:</strong> El borde superior del monitor debe alinearse horizontalmente a la altura de tus ojos, a una distancia aproximada de 50-60 cm.
-                                    <br>• <strong>Silla ergonómica:</strong> Ajusta la altura del asiento para que tus pies queden planos apoyados en el suelo y tus rodillas formen un ángulo de 90º. Apoya la espalda firmemente contra el respaldo lumbar.
-                                    <br>• <strong>Disposición de teclado y ratón:</strong> Mantén los antebrazos apoyados horizontalmente sobre la mesa en un ángulo de 90 grados al escribir. Evita forzar las muñecas.
+                                    • **Altura de pantalla:** El borde superior del monitor debe alinearse horizontalmente a la altura de tus ojos, a una distancia aproximada de 50-60 cm.
+                                    <br>• **Silla ergonómica:** Ajusta la altura del asiento para que tus pies queden planos apoyados en el suelo y tus rodillas formen un ángulo de 90º. Apoya la espalda firmemente contra el respaldo lumbar.
+                                    <br>• **Disposición de teclado y ratón:** Mantén los antebrazos apoyados horizontalmente sobre la mesa en un ángulo de 90 grados al escribir. Evita forzar las muñecas.
                                 </p>
                             </div>
                             
@@ -460,8 +348,8 @@
                                 <span class="legal-badge">Cuidado Visual e Higiene Laboral</span>
                                 <h4>Pausas periódicas de fatiga mental y ocular</h4>
                                 <p>
-                                    Para evitar la fatiga visual o síndrome de ojo seco ante pantallas, aplica la <strong>regla del 20-20-20</strong>: cada 20 minutos de trabajo continuado, desvía la mirada a un punto a 6 metros de distancia durante al menos 20 segundos.
-                                    Además, realiza un <strong>descanso físico de 10 minutos de pie</strong> por cada 2 horas de digitación ininterrumpida para activar la circulación sanguínea.
+                                    Para evitar la fatiga visual o síndrome de ojo seco ante pantallas, aplica la **regla del 20-20-20**: cada 20 minutos de trabajo continuado, desvía la mirada a un punto a 6 metros de distancia durante al menos 20 segundos.
+                                    Además, realiza un **descanso físico de 10 minutos de pie** por cada 2 horas de digitación ininterrumpida para activar la circulación sanguínea.
                                 </p>
                             </div>
                         </div>
@@ -478,7 +366,7 @@
                             <div class="evac-step">
                                 <ion-icon name="exit-outline"></ion-icon>
                                 <h5>2. Evacuación Segura</h5>
-                                <p>Dirígete a las salidas de emergencia señalizadas. Camina, no corras. Está <strong>estrictamente prohibido</strong> usar el ascensor.</p>
+                                <p>Dirígete a las salidas de emergencia señalizadas. Camina, no corras. Está **estrictamente prohibido** usar el ascensor.</p>
                             </div>
                             <div class="evac-step">
                                 <ion-icon name="location-outline"></ion-icon>
@@ -489,8 +377,8 @@
                     </div>
                 </div>
 
-                <!-- DOMAIN: INTRANET FICHAJES -->
-                <div id="view-intranet-fichajes" class="content-view">
+                <!-- VIEW 6: REGISTRO DE JORNADA (FANTASY EXTRA) -->
+                <div class="intranet-view" id="view-fichajes">
                     <div class="section-card">
                         <h2 class="view-title" style="font-size: 1.75rem; margin-bottom: 0.5rem;">Registro de Jornada Obligatorio</h2>
                         <p class="view-subtitle" style="margin-bottom:1.5rem;">De acuerdo con el Real Decreto-ley 8/2019, todos los trabajadores deben registrar diariamente su jornada de trabajo efectiva indicando el inicio y fin.</p>
@@ -498,7 +386,7 @@
                         <!-- Interactive Clock-In Widget -->
                         <div class="clock-widget">
                             <div class="clock-time" id="live-time">00:00:00</div>
-                            <div class="clock-date" id="live-date">---</div>
+                            <div class="clock-date" id="live-date">Martes, 19 de Mayo</div>
                             
                             <div class="clock-actions">
                                 <button class="clock-btn clock-btn--in" id="btn-clock-in">
@@ -512,6 +400,7 @@
                             <div class="clock-log">
                                 <h4>Historial de Fichajes Recientes (Hoy)</h4>
                                 <div class="clock-log-list" id="clock-history">
+                                    <!-- Populated dynamically via JS -->
                                     <div style="font-size:0.85rem; color:#d6d3d1; text-align:center; padding:1rem 0;">Ningún registro guardado hoy.</div>
                                 </div>
                             </div>
@@ -519,8 +408,8 @@
                     </div>
                 </div>
 
-                <!-- DOMAIN: INTRANET CALCULADORA -->
-                <div id="view-intranet-calculadora" class="content-view">
+                <!-- VIEW 7: CALCULADORA SALARIAL (FANTASY EXTRA) -->
+                <div class="intranet-view" id="view-calculadora">
                     <div class="section-card">
                         <h2 class="view-title" style="font-size: 1.75rem; margin-bottom: 0.5rem;">Calculadora de Nómina Estimada</h2>
                         <p class="view-subtitle" style="margin-bottom:2rem;">Estima de manera orientativa tu salario neto mensual en base a tu salario bruto anual y las retenciones legales de la Seguridad Social e IRPF de España.</p>
@@ -580,8 +469,8 @@
                     </div>
                 </div>
 
-                <!-- DOMAIN: INTRANET BUZON -->
-                <div id="view-intranet-buzon" class="content-view">
+                <!-- VIEW 8: BUZÓN DE SUGERENCIAS (FANTASY EXTRA) -->
+                <div class="intranet-view" id="view-buzon">
                     <div class="section-card">
                         <h2 class="view-title" style="font-size: 1.75rem; margin-bottom: 0.5rem;">Buzón Anónimo y de Consultas</h2>
                         <p class="view-subtitle" style="margin-bottom:2rem;">Envía de forma totalmente confidencial o identificada cualquier queja, duda laboral o sugerencia al Comité de Empresa. Responderemos en la mayor brevedad posible.</p>
@@ -607,7 +496,7 @@
 
                             <div class="form-group">
                                 <label for="suggest-msg">Mensaje / Exposición de Motivos</label>
-                                <textarea id="suggest-msg" class="input-modsy" placeholder="Describe aquí detalladamente tu consulta, queja o aportación..." rows="5" required style="height:120px; resize:vertical; padding-left:0.5rem !important; border:1px solid var(--color-stone-300) !important; border-radius:var(--radius-sm) !important; background:transparent !important;"></textarea>
+                                <textarea id="suggest-msg" class="input-modsy" placeholder="Describe aquí detalladamente tu consulta, queja o aportación..." rows="5" required style="height:120px; resize:vertical; padding-left:0.5rem !important; border:1px solid #d6d3d1 !important; border-radius:var(--radius-sm) !important;"></textarea>
                             </div>
                             
                             <button type="submit" class="btn btn--primary suggest-btn" id="btn-submit-suggest">
@@ -617,67 +506,88 @@
                     </div>
                 </div>
 
-                <!-- DOMAIN: SYSTEM PERMISSIONS -->
-                <div id="view-settings" class="content-view">
-                    <div class="section-title-row"><h2>Security Profiles</h2></div>
-                    <div class="panel-card" style="max-width:600px; padding: 2rem;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <h4 style="margin:0; font-weight:700;">Elevated SysOp Permission</h4>
-                                <p style="font-size:0.8rem; color:var(--color-secondary); margin:0.25rem 0 0 0;">Runtime configuration locked under admin override.</p>
-                            </div>
-                            <div class="badge" style="background:#dcfce7; color:#166534;">ACTIVE</div>
-                        </div>
-                    </div>
-                </div>
+            </section>
+        </div>
+    </main>
 
-            </div> <!-- End content-body -->
-        </main>
-    </div>
-
-    <!-- Runtime Orchestrator Bootloader -->
+    <!-- SweetAlert2 + Javascript for Tab control and Interactive Elements -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../assets/js/script.js"></script>
+    <script type="module" src="../assets/js/navbar-updater.js"></script>
+    
     <script type="module">
-        import { authService, productService, orderService } from '../../assets/js/api-services.js';
-        import { DashboardController } from '../../assets/js/dashboard.js';
+        import { authService } from '../assets/js/api-services.js';
 
-        // Initialize logic via dependency injection
-        const dashboard = new DashboardController(authService, productService, orderService);
-        dashboard.init();
-
-        // Hook instance securely for visibility 
-        window.dashboardInstance = dashboard;
-
-        // Intranet Interactive Subsystems initialization
         document.addEventListener('DOMContentLoaded', () => {
+            
             // ==========================================
-            // 1. LIVE CLOCK-IN SYSTEM (WITH LOCALSTORAGE)
+            // 1. DYNAMIC USER PROFILE LOADER
+            // ==========================================
+            const user = authService.getCurrentUser();
+            if (user) {
+                document.getElementById('sidebar-user-name').textContent = user.name || user.email;
+                document.getElementById('sidebar-user-role').textContent = user.role === 'admin' ? 'Administrador' : 'Colaborador Modsy';
+                
+                // Get initials
+                const initials = (user.name || user.email)
+                    .split(' ')
+                    .map(n => n[0])
+                    .slice(0, 2)
+                    .join('')
+                    .toUpperCase();
+                document.getElementById('avatar-letters').textContent = initials;
+            }
+
+            // ==========================================
+            // 2. SIDEBAR NAVIGATION TAB SWITCHER
+            // ==========================================
+            const navButtons = document.querySelectorAll('.intranet-nav-btn');
+            const views = document.querySelectorAll('.intranet-view');
+
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetView = btn.getAttribute('data-view');
+                    
+                    // Toggle Sidebar active buttons
+                    navButtons.forEach(b => b.classList.remove('intranet-nav-btn--active'));
+                    btn.classList.add('intranet-nav-btn--active');
+
+                    // Toggle content views with smooth slide-in animation
+                    views.forEach(v => {
+                        v.classList.remove('intranet-view--active');
+                        if (v.id === `view-${targetView}`) {
+                            v.classList.add('intranet-view--active');
+                        }
+                    });
+                });
+            });
+
+            // ==========================================
+            // 3. LIVE CLOCK-IN SYSTEM (WITH LOCALSTORAGE)
             // ==========================================
             const clockEl = document.getElementById('live-time');
             const dateEl = document.getElementById('live-date');
             
-            if (clockEl && dateEl) {
-                const updateClock = () => {
-                    const now = new Date();
-                    
-                    // Hour digital ticker
-                    const hrs = String(now.getHours()).padStart(2, '0');
-                    const mins = String(now.getMinutes()).padStart(2, '0');
-                    const secs = String(now.getSeconds()).padStart(2, '0');
-                    clockEl.textContent = `${hrs}:${mins}:${secs}`;
-                    
-                    // Date layout
-                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                    dateEl.textContent = now.toLocaleDateString('es-ES', options);
-                };
+            const updateClock = () => {
+                const now = new Date();
                 
-                updateClock();
-                setInterval(updateClock, 1000);
-            }
+                // Hour digital ticker
+                const hrs = String(now.getHours()).padStart(2, '0');
+                const mins = String(now.getMinutes()).padStart(2, '0');
+                const secs = String(now.getSeconds()).padStart(2, '0');
+                clockEl.textContent = `${hrs}:${mins}:${secs}`;
+                
+                // Date layout
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateEl.textContent = now.toLocaleDateString('es-ES', options);
+            };
+            
+            updateClock();
+            setInterval(updateClock, 1000);
 
             // History control
             const historyContainer = document.getElementById('clock-history');
             const loadClockHistory = () => {
-                if (!historyContainer) return;
                 const logs = JSON.parse(localStorage.getItem('modsy_clock_logs') || '[]');
                 if (logs.length === 0) {
                     historyContainer.innerHTML = `<div style="font-size:0.85rem; color:#d6d3d1; text-align:center; padding:1rem 0;">Ningún registro guardado hoy.</div>`;
@@ -712,20 +622,16 @@
                     title: `¡Fichaje Registrado!`,
                     text: `Se ha registrado tu ${type.toLowerCase()} correctamente a las ${newLog.time}.`,
                     icon: 'success',
-                    confirmButtonColor: '#0F172A'
+                    confirmButtonColor: '#1c1917'
                 });
             };
 
-            const btnClockIn = document.getElementById('btn-clock-in');
-            const btnClockOut = document.getElementById('btn-clock-out');
-            if (btnClockIn && btnClockOut) {
-                btnClockIn.addEventListener('click', () => addClockLog('ENTRADA'));
-                btnClockOut.addEventListener('click', () => addClockLog('SALIDA'));
-            }
+            document.getElementById('btn-clock-in').addEventListener('click', () => addClockLog('ENTRADA'));
+            document.getElementById('btn-clock-out').addEventListener('click', () => addClockLog('SALIDA'));
             loadClockHistory();
 
             // ==========================================
-            // 2. NET SALARY CALCULATOR (ESTIMATED IN REAL TIME)
+            // 4. NET SALARY CALCULATOR (ESTIMATED IN REAL TIME)
             // ==========================================
             const grossInput = document.getElementById('calc-gross');
             const paymentsInput = document.getElementById('calc-payments');
@@ -738,7 +644,6 @@
             const resNetSalary = document.getElementById('res-net-salary');
 
             const calculateSalary = () => {
-                if (!grossInput) return;
                 const gross = parseFloat(grossInput.value) || 0;
                 const payments = parseInt(paymentsInput.value) || 12;
                 const children = parseInt(childrenInput.value) || 0;
@@ -747,80 +652,79 @@
                 // Monthly Gross
                 const monthlyGross = gross / payments;
 
-                // SS Deduction
+                // SS Deduction: 6.35% for Indefinido (contingencias comunes + desempleo + FP), 6.4% or more for temporal
                 const ssRate = isTemporal ? 0.064 : 0.0635;
                 const ssDeduction = (gross * ssRate) / payments;
 
-                // IRPF Deduction Tier
+                // IRPF Deduction Tier (Simplified estimate for Spanish Tax Bracket limits)
                 let irpfRate = 0.09;
                 if (gross > 60000) irpfRate = 0.35;
                 else if (gross > 35000) irpfRate = 0.24;
                 else if (gross > 20000) irpfRate = 0.15;
                 else if (gross > 14000) irpfRate = 0.11;
 
+                // Deduction decreases with children
                 if (children > 0) {
                     irpfRate -= children * 0.015;
-                    if (irpfRate < 0.02) irpfRate = 0.02;
+                    if (irpfRate < 0.02) irpfRate = 0.02; // minimum statutory retention rate
                 }
 
                 const irpfDeduction = (gross * irpfRate) / payments;
+
+                // Net Salary Calculation
                 const net = monthlyGross - ssDeduction - irpfDeduction;
 
-                if (resMonthlyGross) resMonthlyGross.textContent = `${monthlyGross.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
-                if (resSSDeduction) resSSDeduction.textContent = `-${ssDeduction.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
-                if (resIRPFDeduction) resIRPFDeduction.textContent = `-${irpfDeduction.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
-                if (resNetSalary) resNetSalary.textContent = `${net.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+                // Format values for DOM
+                resMonthlyGross.textContent = `${monthlyGross.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+                resSSDeduction.textContent = `-${ssDeduction.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+                resIRPFDeduction.textContent = `-${irpfDeduction.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+                resNetSalary.textContent = `${net.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
             };
 
-            if (grossInput) {
-                [grossInput, paymentsInput, childrenInput, contractInput].forEach(el => {
-                    if (el) {
-                        el.addEventListener('input', calculateSalary);
-                        el.addEventListener('change', calculateSalary);
-                    }
-                });
-                calculateSalary();
-            }
+            // Event Triggers on keyboard/change input
+            [grossInput, paymentsInput, childrenInput, contractInput].forEach(el => {
+                el.addEventListener('input', calculateSalary);
+                el.addEventListener('change', calculateSalary);
+            });
+            calculateSalary(); // Initialize at start
 
             // ==========================================
-            // 3. ANONYMOUS SUGGESTIONS FORM HANDLER
+            // 5. ANONYMOUS SUGGESTIONS FORM HANDLER
             // ==========================================
             const suggestForm = document.getElementById('suggestions-form');
-            if (suggestForm) {
-                suggestForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    
-                    const type = document.getElementById('suggest-type').value;
-                    const identity = document.getElementById('suggest-identity').value;
-                    const msg = document.getElementById('suggest-msg').value;
+            suggestForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const type = document.getElementById('suggest-type').value;
+                const identity = document.getElementById('suggest-identity').value;
+                const msg = document.getElementById('suggest-msg').value;
 
-                    if (!msg.trim()) return;
+                if (!msg.trim()) return;
 
-                    Swal.fire({
-                        title: 'Enviando al Comité...',
-                        html: 'Encriptando datos de sugerencia y depositando en buzón...',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
-
-                    setTimeout(() => {
-                        Swal.fire({
-                            title: '¡Sugerencia Recibida!',
-                            text: `Tu consulta sobre "${type}" ha sido depositada de manera segura e ${identity} en el archivo del Comité. Gracias por colaborar en mejorar nuestro entorno laboral.`,
-                            icon: 'success',
-                            confirmButtonColor: '#0F172A'
-                        });
-                        
-                        document.getElementById('suggest-msg').value = '';
-                    }, 1500);
+                Swal.fire({
+                    title: 'Enviando al Comité...',
+                    html: 'Encriptando datos de sugerencia y depositando en buzón...',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
                 });
-            }
+
+                // Simulate secure, anonymous API submit delay
+                setTimeout(() => {
+                    Swal.fire({
+                        title: '¡Sugerencia Recibida!',
+                        text: `Tu consulta sobre "${type}" ha sido depositada de manera segura e ${identity} en el archivo del Comité. Gracias por colaborar en mejorar nuestro entorno laboral.`,
+                        icon: 'success',
+                        confirmButtonColor: '#1c1917'
+                    });
+                    
+                    // Reset text
+                    document.getElementById('suggest-msg').value = '';
+                }, 1500);
+            });
+
         });
     </script>
-    
-    <!-- Secondary vendor modules -->
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
