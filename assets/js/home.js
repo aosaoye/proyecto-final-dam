@@ -175,12 +175,12 @@ export async function loadLatestArrivals(productService, gridElementId) {
                 if (navigator.share) {
                     navigator.share({
                         title: p.name,
-                        text: \`¡Mira este producto espectacular: \${p.name}!\`,
+                        text: `¡Mira este producto espectacular: ${p.name}!`,
                         url: shareUrl
                     }).catch(console.error);
                 } else {
                     navigator.clipboard.writeText(shareUrl).then(() => {
-                        showPinterestToast(\`¡Enlace copiado al portapapeles!\`);
+                        showPinterestToast(`¡Enlace copiado al portapapeles!`);
                     }).catch(console.error);
                 }
             });
@@ -188,12 +188,12 @@ export async function loadLatestArrivals(productService, gridElementId) {
             const optionsBtn = card.querySelector('.options-btn');
             optionsBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                showPinterestToast(\`Opciones de Pin: Descargar imagen o reportar\`);
+                showPinterestToast(`Opciones de Pin: Descargar imagen o reportar`);
             });
 
             // Navigation handler
             const handleNav = () => {
-                window.location.href = \`product-detail.html?id=\${p.id || p._id}\`;
+                window.location.href = `product-detail.html?id=${p.id || p._id}`;
             };
             card.querySelector('.product-card__image').addEventListener('click', handleNav);
             card.querySelector('.product-card__name').addEventListener('click', handleNav);

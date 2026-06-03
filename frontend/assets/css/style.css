@@ -3094,36 +3094,74 @@ h1, h2, h3, h4,
 /* Responsive */
 @media (max-width: 992px) {
     .museum-hero {
-        height: auto;
+        height: auto !important;
     }
     .museum-hero__grid {
-        flex-direction: column;
+        flex-direction: column !important;
+        height: auto !important;
+        width: 100% !important;
     }
     .museum-brand-col,
     .museum-active-col,
     .museum-preview-col {
-        flex: 0 0 100%;
-        max-width: 100%;
-        width: 100%;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
     }
     .museum-brand-col {
-        padding: 3rem 2rem;
-        flex-direction: row;
+        padding: 1.5rem 1rem !important;
+        flex-direction: row !important;
+        height: auto !important;
     }
     .museum-vertical-nav {
-        flex-direction: row;
-        border-left: none;
-        padding-left: 0;
-        height: auto;
+        flex-direction: row !important;
+        border-left: none !important;
+        padding-left: 0 !important;
+        height: auto !important;
+        width: 100% !important;
+        justify-content: center !important;
+        gap: 1.5rem !important;
     }
     .museum-nav-pages {
-        flex-direction: row;
+        flex-direction: row !important;
+        gap: 12px !important;
     }
     .museum-active-col {
-        height: 500px;
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .museum-image-box {
+        height: 350px !important;
+        width: 100% !important;
+        flex: none !important;
+    }
+    .museum-details-box {
+        height: auto !important;
+        padding: 2rem 1.5rem !important;
+        flex: none !important;
+        text-align: center !important;
+        align-items: center !important;
+    }
+    .museum-slide-details {
+        text-align: center !important;
+        align-items: center !important;
+    }
+    .museum-hero__title {
+        font-size: 2.5rem !important;
+        letter-spacing: -1px !important;
+        text-align: center !important;
+    }
+    .museum-hero__subtitle {
+        font-size: 0.95rem !important;
+        max-width: 100% !important;
+        text-align: center !important;
+    }
+    .museum-hero__cta {
+        align-self: center !important;
     }
     .museum-preview-col {
-        display: none; /* Hide secondary crops on mobile for clean hierarchy */
+        display: none !important; /* Hide secondary crops on mobile for clean hierarchy */
     }
 }
 
