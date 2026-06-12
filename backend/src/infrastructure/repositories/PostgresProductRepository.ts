@@ -26,8 +26,8 @@ export class PostgresProductRepository implements ProductRepository {
 
   async save(product: Product): Promise<Product> {
     const result = await pool.query(
-      `INSERT INTO products (name, description, price, image, category, stock) 
-       VALUES ($1, $2, $3, $4, $5, $6) 
+      `INSERT INTO products (name, description, price, image, category, stock, glb_url) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7) 
        RETURNING *`,
       [
         product.name,
@@ -35,7 +35,8 @@ export class PostgresProductRepository implements ProductRepository {
         product.price,
         product.image || null,
         product.category,
-        product.stock || 10
+        product.stock || 10,
+        product.glbUrl || null
       ]
     );
     return this.mapToEntity(result.rows[0]);
@@ -51,8 +52,8 @@ export class PostgresProductRepository implements ProductRepository {
 
     const result = await pool.query(
       `UPDATE products 
-       SET name = $1, description = $2, price = $3, image = $4, category = $5, stock = $6
-       WHERE id = $7 
+       SET name = $1, description = $2, price = $3, image = $4, category = $5, stock = $6, glb_url = $7
+       WHERE id = $8 
        RETURNING *`,
       [
         updated.name,
@@ -61,6 +62,7 @@ export class PostgresProductRepository implements ProductRepository {
         updated.image || null,
         updated.category,
         updated.stock,
+        updated.glbUrl || null,
         id
       ]
     );
@@ -83,6 +85,7 @@ export class PostgresProductRepository implements ProductRepository {
       image: row.image,
       category: row.category,
       stock: parseInt(row.stock, 10),
+      glbUrl: row.glb_url,
       createdAt: row.created_at
     };
   }

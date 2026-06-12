@@ -6,6 +6,7 @@ import authRoutes from './infrastructure/routes/auth.routes';
 import productRoutes from './infrastructure/routes/product.routes';
 import cartRoutes from './infrastructure/routes/cart.routes';
 import orderRoutes from './infrastructure/routes/order.routes';
+import paymentRoutes from './infrastructure/routes/payment.routes';
 
 import { globalErrorHandler } from './infrastructure/middleware/error.middleware';
 
@@ -31,6 +32,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/payments', paymentRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'UP' });

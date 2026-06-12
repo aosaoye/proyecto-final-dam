@@ -37,12 +37,12 @@ export class PostgresUserRepository implements UserRepository {
       );
       return this.mapToEntity(result.rows[0]);
     } else {
-      // Insert new
+      // Insert new — password may be NULL for OAuth users
       const result = await pool.query(
         `INSERT INTO users (name, email, role, password) 
          VALUES ($1, $2, $3, $4) 
          RETURNING *`,
-        [user.name, user.email, user.role || 'customer', user.password]
+        [user.name, user.email, user.role || 'user', user.password ?? null]
       );
       return this.mapToEntity(result.rows[0]);
     }

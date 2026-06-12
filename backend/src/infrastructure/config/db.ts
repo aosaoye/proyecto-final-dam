@@ -50,10 +50,10 @@ export const connectDB = async (retries = 5, delay = 3000): Promise<void> => {
         `⚠️ Database connection attempt ${attempt} failed: ${error.message}`,
       );
       if (attempt === retries) {
-        console.error(
-          `❌ All ${retries} database connection attempts failed. Exiting server process.`,
+        console.warn(
+          `❌ All ${retries} database connection attempts failed. Continuing server in mock/offline fallback mode.`,
         );
-        process.exit(1);
+        return;
       }
       console.log(`⏱️ Waiting ${delay / 1000}s before next attempt...`);
       await new Promise((resolve) => setTimeout(resolve, delay));

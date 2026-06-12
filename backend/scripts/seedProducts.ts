@@ -140,10 +140,18 @@ async function seed() {
     console.log(`📦 Injecting ${products.length} products...`);
     
     for (const prod of products) {
+      // Set glb_url depending on item characteristics or defaults
+      let glbUrl: string | null = null;
+      if (prod.name === 'Relax Lounger' || prod.name === 'Baltic Modular Sofa' || prod.name === 'Leather Lounge Chair') {
+        glbUrl = 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/SheenChair/glTF-Binary/SheenChair.glb';
+      } else if (prod.name === 'Ergo Pro Chair' || prod.name === 'Oak Dining Table' || prod.name === 'Industrial Stool') {
+        glbUrl = 'https://modelviewer.dev/shared-assets/models/Chair.glb';
+      }
+
       await client.query(
-        `INSERT INTO products (name, description, price, stock, category, image) 
-         VALUES ($1, $2, $3, $4, $5, $6)`,
-        [prod.name, prod.description, prod.price, prod.stock, prod.category, prod.image]
+        `INSERT INTO products (name, description, price, stock, category, image, glb_url) 
+         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        [prod.name, prod.description, prod.price, prod.stock, prod.category, prod.image, glbUrl]
       );
     }
     

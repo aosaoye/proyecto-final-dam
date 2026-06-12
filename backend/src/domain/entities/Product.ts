@@ -6,6 +6,7 @@ export interface Product {
   image?: string;
   stock: number;
   category: string;
+  glbUrl?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

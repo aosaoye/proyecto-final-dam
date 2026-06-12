@@ -4,6 +4,7 @@ import { RegisterUser } from '../../application/use-cases/auth/RegisterUser';
 import { ResetPassword } from '../../application/use-cases/auth/ResetPassword';
 import { RequestPasswordReset } from '../../application/use-cases/auth/RequestPasswordReset';
 import { GetAllUsers } from '../../application/use-cases/auth/GetAllUsers';
+import { GoogleAuthUser } from '../../application/use-cases/auth/GoogleAuthUser';
 
 export class AuthController {
   constructor(
@@ -11,7 +12,8 @@ export class AuthController {
     private registerUser: RegisterUser,
     private resetPasswordUseCase: ResetPassword,
     private requestResetUseCase: RequestPasswordReset,
-    private getAllUsersUseCase: GetAllUsers
+    private getAllUsersUseCase: GetAllUsers,
+    private googleAuthUser?: GoogleAuthUser
   ) {}
 
   async getAllUsers(req: Request, res: Response, next: NextFunction) {
@@ -59,6 +61,18 @@ export class AuthController {
       if (!token || !newPassword) throw new Error('Código y Nueva Contraseña obligatorios.');
       const success = await this.resetPasswordUseCase.execute(token, newPassword);
       res.json({ success, message: 'Contraseña restablecida correctamente.' });
+    } catch (error: any) {
+      next(error);
+    }
+  }
+
+  async googleAuth(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { idToken } = req.body;
+      if (!idToken) throw new Error('Google id_token is required.');
+      if (!this.googleAuthUser) throw new Error('Google auth not configured.');
+      const result = await this.googleAuthUser.execute(idToken);
+      res.json(result);
     } catch (error: any) {
       next(error);
     }
