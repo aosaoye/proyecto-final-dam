@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos | Modsy Profishop</title>
+    <meta name="description" content="Explore el catálogo completo de Modsy Profishop: sillas ergonómicas, estanterías nórdicas, mesas de madera maciza y equipamiento comercial con envío gratis y entrega rápida.">
+    <link rel="stylesheet" href="assets/css/style.css?v=3.1">
+</head>
+<body>
+
+    <header class="site-header site-header--solid">
+        <div class="site-header__container container">
+            <div class="header-left">
+                <div class="logo">
+                    <button class="mobile-menu-toggle" aria-label="Open Menu">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="index.html" class="logo-link">
+                        <svg class="logo-spiral" viewBox="0 0 100 100" width="36" height="36" fill="none" stroke="var(--color-primary)" stroke-width="4.5" stroke-linecap="round">
+                            <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
+                        </svg>
+                        <div class="logo-text">
+                            <span class="logo-title">Modsy</span>
+                            <span class="logo-subtitle">FURNITURE</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="main-nav__list">
+                    <li><a href="index.html" class="main-nav__link">Home</a></li>
+                    <li><a href="products.html" class="main-nav__link main-nav__link--active">Products</a></li>
+                    <li><a href="contact.html" class="main-nav__link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="search.html" class="header-action-link"><ion-icon name="search-outline"></ion-icon></a>
+                    <a href="#" class="header-action-link"><ion-icon name="cart-outline"></ion-icon></a>
+                    <a href="auth/login.html" class="header-action-link"><ion-icon name="person-outline"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container main-container--wide section-padding" style="margin-top: 90px;">
+        <header class="categories__header">
+            <h2 class="categories__title">Our Collection</h2>
+            <div class="categories__nav">
+                <span class="categories__view-all" id="results-count">12 Results</span>
+            </div>
+        </header>
+
+        <!-- Filters -->
+        <div class="filters-bar scrollbar-hide" id="categories-filter">
+            <button class="filter-btn filter-btn--active" data-category="All">All Products</button>
+            <button class="filter-btn" data-category="Garden">Garden</button>
+            <button class="filter-btn" data-category="Kitchen">Kitchen</button>
+            <button class="filter-btn" data-category="Dining">Dining</button>
+            <button class="filter-btn" data-category="Living">Living</button>
+            <button class="filter-btn" data-category="Bedroom">Bedroom</button>
+            <button class="filter-btn" data-category="Kids Room">Kids Room</button>
+            <button class="filter-btn" data-category="Bathroom">Bathroom</button>
+            <button class="filter-btn" data-category="Office">Office</button>
+            <button class="filter-btn" data-category="Storage">Storage</button>
+        </div>
+
+        <!-- Estructura de tarjetas de productos estilo galería moderna -->
+        <section class="products-section">
+            <div class="products-section__grid" id="products-grid">
+                <!-- Dynamic cards loaded via JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <!-- Col 1: Brand Info -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4 style="font-size: 1.2rem !important; color: var(--color-primary) !important;">Modsy Profishop</h4>
+                    <p style="color: #6e6e6e; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">Su proveedor de confianza para equipamiento comercial y mobiliario premium de oficina e interiores.</p>
+                    <div style="display: flex; gap: 10px; font-size: 1.25rem; color: var(--color-primary);">
+                        <ion-icon name="logo-facebook" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-twitter" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-instagram" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-linkedin" style="cursor:pointer;"></ion-icon>
+                    </div>
+                </div>
+                <!-- Col 2: Customer Service -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Atención al Cliente</h4>
+                    <ul>
+                        <li><a href="contact.html">Contacto y Ayuda</a></li>
+                        <li><a href="#">Envíos y Entregas</a></li>
+                        <li><a href="#">Garantía de Calidad</a></li>
+                        <li><a href="#">Devoluciones y Reclamaciones</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Categories -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Categorías Populares</h4>
+                    <ul>
+                        <li><a href="products.html?category=Garden">Mobiliario de Jardín</a></li>
+                        <li><a href="products.html?category=Kitchen">Mobiliario de Cocina</a></li>
+                        <li><a href="products.html?category=Dining">Salón y Comedor</a></li>
+                        <li><a href="products.html?category=Office">Equipamiento de Oficina</a></li>
+                    </ul>
+                </div>
+                <!-- Col 4: Corporate / Legal -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Información Legal</h4>
+                    <ul>
+                        <li><a href="intranet.html">Intranet de Empleados (PRL)</a></li>
+                        <li><a href="#">Aviso Legal y LSSI</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__brand-text">Modsy.</div>
+        </div>
+    </footer>
+
+    <script src="assets/js/products-data.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="assets/js/navbar-updater.js"></script>
+    <script type="module">
+    import { productService } from 'assets/js/api-services.js';
+ 
+     document.addEventListener('DOMContentLoaded', async () => {
+         const grid = document.getElementById('products-grid');
+         const filterContainer = document.getElementById('categories-filter');
+         const countEl = document.getElementById('results-count');
+ 
+         if (!grid) return;
+ 
+         // Pinterest local favorites helpers
+         const FAVORITE_KEY = 'modsy_favorites';
+         function getFavorites() {
+             return JSON.parse(localStorage.getItem(FAVORITE_KEY) || '[]');
+         }
+         function toggleFavorite(productName) {
+             let favs = getFavorites();
+             const isFav = favs.includes(productName);
+             if (isFav) {
+                 favs = favs.filter(f => f !== productName);
+             } else {
+                 favs.push(productName);
+             }
+             localStorage.setItem(FAVORITE_KEY, JSON.stringify(favs));
+             return !isFav;
+         }
+ 
+         // Pinterest styled Toast Notification
+         function showPinterestToast(message) {
+             let toast = document.querySelector('.pinterest-toast');
+             if (!toast) {
+                 toast = document.createElement('div');
+                 toast.className = 'pinterest-toast';
+                 toast.style.cssText = `
+                     position: fixed;
+                     bottom: 40px;
+                     left: 50%;
+                     transform: translateX(-50%) translateY(100px);
+                     background: #1c1917;
+                     color: #ffffff;
+                     padding: 14px 28px;
+                     border-radius: 30px;
+                     font-size: 0.95rem;
+                     font-weight: 700;
+                     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+                     z-index: 9999;
+                     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                     opacity: 0;
+                     display: flex;
+                     align-items: center;
+                     gap: 10px;
+                     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+                 `;
+                 document.body.appendChild(toast);
+             }
+             toast.innerHTML = `<span style="background:#e60023; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; color:white; font-size:0.75rem;">✓</span> ${message}`;
+             
+             // Trigger active animations
+             setTimeout(() => {
+                 toast.style.transform = 'translateX(-50%) translateY(0)';
+                 toast.style.opacity = '1';
+             }, 50);
+             
+             clearTimeout(toast._timeout);
+             toast._timeout = setTimeout(() => {
+                 toast.style.transform = 'translateX(-50%) translateY(100px)';
+                 toast.style.opacity = '0';
+             }, 3000);
+         }
+ 
+         // Extract category parameter from URL
+         const urlParams = new URLSearchParams(window.location.search);
+         let selectedCategory = urlParams.get('category') || 'All';
+ 
+         let allApiProducts = [];
+ 
+         try {
+             // Render beautiful staggered skeleton cards while loading
+             let skeletonHtml = '';
+             const skeletonAspects = ['0.8', '1.2', '1.0', '1.4', '0.9', '1.1', '1.3', '1.0'];
+             for(let i = 0; i < 8; i++) {
+                 const aspect = skeletonAspects[i % skeletonAspects.length];
+                 skeletonHtml += `
+                     <div class="product-card skeleton-card">
+                         <div class="product-card__image skeleton" style="aspect-ratio: ${aspect}; width: 100%;"></div>
+                         <div class="product-card__info" style="padding: 1rem 0; display:flex; flex-direction:column; gap:0.5rem;">
+                             <div style="display:flex; justify-content:space-between; gap:1rem;">
+                                 <div class="skeleton" style="height: 1rem; width: 60%; border-radius:4px;"></div>
+                                 <div class="skeleton" style="height: 1rem; width: 20%; border-radius:4px;"></div>
+                             </div>
+                             <div class="skeleton" style="height: 0.75rem; width: 45%; border-radius:4px; margin-top:0.25rem;"></div>
+                         </div>
+                     </div>
+                 `;
+             }
+             grid.innerHTML = skeletonHtml;
+             allApiProducts = await productService.getAll();
+         } catch (err) {
+             grid.innerHTML = `<p style="grid-column: 1/-1; color: red; text-align:center;">Error loading products from server.</p>`;
+             console.error(err);
+             return;
+         }
+ 
+         function renderProducts(category) {
+             grid.innerHTML = '';
+             
+             const filtered = category === 'All' 
+                 ? allApiProducts 
+                 : allApiProducts.filter(p => p.category && p.category.toLowerCase() === category.toLowerCase());
+ 
+             if (countEl) {
+                 countEl.textContent = `${filtered.length} Results`;
+             }
+ 
+             if (filtered.length === 0) {
+                 grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--color-stone-400); padding: 4rem 0;">No products found.</p>';
+                 return;
+             }
+ 
+             filtered.forEach((p, idx) => {
+                 const card = document.createElement('div');
+                 card.className = 'product-card';
+                 card.setAttribute('data-id', p.id || p._id);
+                 
+                 // Support for uploaded images vs absolute urls
+                 const imgUrl = p.image && p.image.startsWith('/uploads') 
+                     ? `http://${window.location.hostname}:5000${p.image}` 
+                     : (p.image || 'https://via.placeholder.com/300x300?text=No+Image');
+ 
+                 // Fallback for colors not stored in backend
+                 let colorsHtml = '';
+                 if (p.colors && Array.isArray(p.colors)) {
+                     p.colors.forEach((c, idx) => {
+                         colorsHtml += `<span class="product-card__color-swatch" style="background:${c.code}; cursor:pointer;" data-img="${c.img}"></span>`;
+                     });
+                 }
+                  const isFavorited = getFavorites().includes(p.name);
+                 const favClass = isFavorited ? 'product-card__favorite-btn--active' : '';
+                 const favIcon = isFavorited ? 'heart' : 'heart-outline';
+ 
+                 card.innerHTML = `
+                   <div class="product-card__image" style="cursor:pointer;">
+                     <img src="${imgUrl}" alt="${p.name}" class="product-card__img">
+                     <button class="product-card__favorite-btn ${favClass}" aria-label="Add to favorites"><ion-icon name="${favIcon}"></ion-icon></button>
+                     
+                     <div class="product-card__pin-overlay">
+                       <button class="product-card__save-btn">Guardar</button>
+                       <div class="product-card__actions-row">
+                         <button class="product-card__action-btn share-btn" title="Compartir"><ion-icon name="arrow-redo-outline"></ion-icon></button>
+                         <button class="product-card__action-btn options-btn" title="Más opciones"><ion-icon name="ellipsis-horizontal-outline"></ion-icon></button>
+                       </div>
+                     </div>
+                   </div>
+                   <div class="product-card__info">
+                     <div class="product-card__header">
+                       <div class="product-card__name" style="cursor:pointer;">${p.name}</div>
+                       <div class="product-card__price">${String(p.price).includes('€') ? p.price : p.price + '€'}</div>
+                     </div>
+                     <div class="product-card__footer">
+                       <div class="product-card__category">${(p.category || 'UNSORTED').toUpperCase()}</div>
+                       <div class="product-card__colors">
+                         ${colorsHtml}
+                       </div>
+                     </div>
+                   </div>
+                 `;
+ 
+                 // Handle Swatches
+                 card.querySelectorAll('.product-card__color-swatch').forEach(swatch => {
+                     swatch.addEventListener('click', (e) => {
+                         e.stopPropagation();
+                         const newImg = swatch.getAttribute('data-img');
+                         card.querySelector('.product-card__img').src = newImg;
+                     });
+                 });
+ 
+                 // Pinterest Save Red Button
+                 const saveBtn = card.querySelector('.product-card__save-btn');
+                 saveBtn.addEventListener('click', (e) => {
+                     e.stopPropagation();
+                     const favBtn = card.querySelector('.product-card__favorite-btn');
+                     const nowFavorited = toggleFavorite(p.name);
+                     
+                     if (nowFavorited) {
+                         favBtn.classList.add('product-card__favorite-btn--active');
+                         favBtn.querySelector('ion-icon').setAttribute('name', 'heart');
+                         showPinterestToast(`¡Guardado en tu colección de Favoritos!`);
+                     } else {
+                         favBtn.classList.remove('product-card__favorite-btn--active');
+                         favBtn.querySelector('ion-icon').setAttribute('name', 'heart-outline');
+                         showPinterestToast(`Eliminado de tus Favoritos`);
+                     }
+                 });
+ 
+                 // Heart Favorite Button
+                 const favBtn = card.querySelector('.product-card__favorite-btn');
+                 favBtn.addEventListener('click', (e) => {
+                     e.stopPropagation();
+                     const nowFavorited = toggleFavorite(p.name);
+                     
+                     if (nowFavorited) {
+                         favBtn.classList.add('product-card__favorite-btn--active');
+                         favBtn.querySelector('ion-icon').setAttribute('name', 'heart');
+                         showPinterestToast(`Añadido a tus Favoritos`);
+                     } else {
+                         favBtn.classList.remove('product-card__favorite-btn--active');
+                         favBtn.querySelector('ion-icon').setAttribute('name', 'heart-outline');
+                         showPinterestToast(`Eliminado de tus Favoritos`);
+                     }
+                 });
+ 
+                 // Share button cute reaction
+                 card.querySelector('.share-btn').addEventListener('click', (e) => {
+                     e.stopPropagation();
+                     showPinterestToast(`¡Enlace copiado al portapapeles!`);
+                     if (navigator.clipboard) {
+                         navigator.clipboard.writeText(`${window.location.origin}/pages/product-detail.html?id=${p.id || p._id}`);
+                     }
+                 });
+ 
+                 // Options button cute reaction
+                 card.querySelector('.options-btn').addEventListener('click', (e) => {
+                     e.stopPropagation();
+                     showPinterestToast(`Colección: ${(p.category || 'Mobiliario').toUpperCase()}`);
+                 });
+ 
+                 // Detail routing
+                 const detailTrigger = card.querySelector('.product-card__image');
+                 const nameTrigger = card.querySelector('.product-card__name');
+                 const handleDetail = () => {
+                     window.location.href = `product-detail.html?id=${p.id || p._id}`;
+                 };
+                 detailTrigger.addEventListener('click', handleDetail);
+                 nameTrigger.addEventListener('click', handleDetail);
+ 
+                 grid.appendChild(card);
+             });
+ 
+             // Update active state on buttons
+             document.querySelectorAll('.filter-btn').forEach(btn => {
+                 if (btn.getAttribute('data-category').toLowerCase() === category.toLowerCase()) {
+                     btn.classList.add('filter-btn--active');
+                 } else {
+                     btn.classList.remove('filter-btn--active');
+                 }
+             });
+         }
+ 
+         if (filterContainer) {
+             filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
+                 btn.addEventListener('click', () => {
+                     const cat = btn.getAttribute('data-category');
+                     const url = new URL(window.location);
+                     url.searchParams.set('category', cat);
+                     window.history.pushState({}, '', url);
+                     renderProducts(cat);
+                 });
+             });
+         }
+ 
+         renderProducts(selectedCategory);
+     });
+     </script>
+</body>
+</html>

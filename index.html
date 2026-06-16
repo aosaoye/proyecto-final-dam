@@ -2,13 +2,422 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=frontend/pages/index.html" />
-    <title>Redireccionando...</title>
-    <script type="text/javascript">
-        window.location.href = "frontend/pages/index.html";
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modsy Profishop | Tienda Online de Mobiliario y Equipamiento Premium</title>
+    <meta name="description" content="Bienvenido a Modsy Profishop, su tienda de confianza para mobiliario premium de interiores, oficina y jardín. Calidad profesional, ergonomía excepcional y envío gratis.">
+    <link rel="stylesheet" href="assets/css/style.css?v=3.1">
 </head>
 <body>
-    Si no eres redirigido automáticamente, <a href="frontend/pages/index.html">haz clic aquí</a>.
+
+    <header class="site-header">
+        <div class="site-header__container container">
+            <div class="header-left">
+                <div class="logo">
+                    <button class="mobile-menu-toggle" aria-label="Open Menu">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="index.html" class="logo-link">
+                        <svg class="logo-spiral" viewBox="0 0 100 100" width="36" height="36" fill="none" stroke="var(--color-primary)" stroke-width="4.5" stroke-linecap="round">
+                            <path d="M 50,50 A 6,6 0 1,0 56,56 A 12,12 0 1,1 44,44 A 18,18 0 1,0 68,68 A 24,24 0 1,1 32,32 A 30,30 0 1,0 80,80" />
+                        </svg>
+                        <div class="logo-text">
+                            <span class="logo-title">Modsy</span>
+                            <span class="logo-subtitle">FURNITURE</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="main-nav__list">
+                    <li><a href="index.html" class="main-nav__link main-nav__link--active">Home</a></li>
+                    <li><a href="products.html" class="main-nav__link">Products</a></li>
+                    <li><a href="contact.html" class="main-nav__link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="search.html" class="header-action-link"><ion-icon name="search-outline"></ion-icon></a>
+                    <a href="#" class="header-action-link"><ion-icon name="cart-outline"></ion-icon></a>
+                    <a href="auth/login.html" class="header-action-link"><ion-icon name="person-outline"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Ultra-Premium Light Asymmetric Grid Carousel (User Selected Layout) -->
+        <section class="museum-hero" id="museum-hero">
+            <div class="museum-hero__grid">
+                
+                <!-- Col 1: Vertical Pager Control (10% width) -->
+                <div class="museum-col museum-brand-col">
+                    <!-- Vertical Page Navigation -->
+                    <div class="museum-vertical-nav" style="border-left: none; padding-left: 0; width: 100%;">
+                        <button class="museum-nav-arrow up-arrow" aria-label="Slide anterior">
+                            <ion-icon name="arrow-up-outline"></ion-icon>
+                        </button>
+                        <div class="museum-nav-pages">
+                            <span class="museum-page-indicator active" data-slide="0">01</span>
+                            <span class="museum-page-indicator" data-slide="1">02</span>
+                            <span class="museum-page-indicator" data-slide="2">03</span>
+                        </div>
+                        <button class="museum-nav-arrow down-arrow" aria-label="Siguiente slide">
+                            <ion-icon name="arrow-down-outline"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Col 2: Active Slide Column (45% width) -->
+                <div class="museum-col museum-active-col">
+                    <!-- Slide Image Container -->
+                    <div class="museum-image-box">
+                        <!-- Slide 1 Image -->
+                        <img src="assets/images/custom_garden_lounge.png" alt="Nature Collection" class="museum-slide-img active" data-index="0">
+                        <!-- Slide 2 Image -->
+                        <img src="assets/images/custom_oak_table.png" alt="Luxury Craftsmanship" class="museum-slide-img" data-index="1" style="display: none;">
+                        <!-- Slide 3 Image -->
+                        <img src="assets/images/custom_modular_living.png" alt="Minimalist Living" class="museum-slide-img" data-index="2" style="display: none;">
+                    </div>
+                    <!-- Slide Details Container -->
+                    <div class="museum-details-box">
+                        <div class="museum-slide-details active" data-index="0">
+                            <span class="museum-designer">Colección Nature</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Jardines y Exteriores</h2>
+                        </div>
+                        <div class="museum-slide-details" data-index="1" style="display: none;">
+                            <span class="museum-designer">Artesanía de Roble Macizo</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Cocina y Comedor</h2>
+                        </div>
+                        <div class="museum-slide-details" data-index="2" style="display: none;">
+                            <span class="museum-designer">Estilo Nórdico Minimalista</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Salón y Zonas de Estar</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Col 3: Secondary Previews Column (45% width) -->
+                <div class="museum-col museum-preview-col">
+                    <!-- Top Crop Image -->
+                    <div class="museum-crop-box top-crop">
+                        <img src="assets/images/custom_oak_table.png" alt="Preview Top" class="museum-preview-img-1">
+                    </div>
+                    
+                    <!-- Middle Preview Details -->
+                    <div class="museum-preview-details-box">
+                        <div class="museum-preview-details active" data-index="0">
+                            <span class="museum-designer">Próximo Diseño</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Roble Rústico Moderno</h2>
+                        </div>
+                        <div class="museum-preview-details" data-index="1" style="display: none;">
+                            <span class="museum-designer">Próximo Diseño</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Estructura Minimalista</h2>
+                        </div>
+                        <div class="museum-preview-details" data-index="2" style="display: none;">
+                            <span class="museum-designer">Próximo Diseño</span>
+                            <h2 class="museum-location"><ion-icon name="location-outline"></ion-icon> Exteriores Exclusivos</h2>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Crop Image -->
+                    <div class="museum-crop-box bottom-crop">
+                        <img src="assets/images/custom_modular_living.png" alt="Preview Bottom" class="museum-preview-img-2">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Museum Slider Controller JS -->
+        <script>
+            let currentMuseumIndex = 0;
+            const totalMuseumSlides = 3;
+
+            const museumData = [
+                {
+                    title: "Nature",
+                    subtitle: "Explore a premium collection perfect for adding a natural touch to your home.",
+                    ctaText: "Explore Now",
+                    designer: "Colección Nature",
+                    location: "Jardines y Exteriores",
+                    nextTopImg: "assets/images/custom_oak_table.png",
+                    nextBottomImg: "assets/images/custom_modular_living.png"
+                },
+                {
+                    title: "Luxury",
+                    subtitle: "Discover timeless handcrafted solid oak designs tailored for contemporary living.",
+                    ctaText: "Shop Collection",
+                    designer: "Artesanía de Roble Macizo",
+                    location: "Cocina y Comedor",
+                    nextTopImg: "assets/images/custom_modular_living.png",
+                    nextBottomImg: "assets/images/custom_garden_lounge.png"
+                },
+                {
+                    title: "Minimalist",
+                    subtitle: "Create clean, modern interiors with our elegant Nordic elements and functional furniture sets.",
+                    ctaText: "View Catalog",
+                    designer: "Estilo Nórdico Minimalista",
+                    location: "Salón y Comedor",
+                    nextTopImg: "assets/images/custom_garden_lounge.png",
+                    nextBottomImg: "assets/images/custom_oak_table.png"
+                }
+            ];
+
+            function goToMuseumSlide(idx) {
+                currentMuseumIndex = idx;
+                
+                const data = museumData[idx];
+                
+                // Update main active column details
+                const activeDetails = document.querySelectorAll('.museum-slide-details');
+                activeDetails.forEach((el, i) => {
+                    el.style.display = (i === idx) ? 'flex' : 'none';
+                });
+                
+                const activeImages = document.querySelectorAll('.museum-slide-img');
+                activeImages.forEach((img, i) => {
+                    if (i === idx) {
+                        img.style.display = 'block';
+                        setTimeout(() => img.classList.add('active'), 20);
+                    } else {
+                        img.classList.remove('active');
+                        img.style.display = 'none';
+                    }
+                });
+
+                // Update indicators
+                const indicators = document.querySelectorAll('.museum-page-indicator');
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === idx);
+                });
+
+                // Update preview column details and crop images dynamically!
+                const previewDetails = document.querySelectorAll('.museum-preview-details');
+                previewDetails.forEach((el, i) => {
+                    el.style.display = (i === idx) ? 'flex' : 'none';
+                });
+                
+                const topCrop = document.querySelector('.museum-preview-img-1');
+                const bottomCrop = document.querySelector('.museum-preview-img-2');
+                
+                if (topCrop) topCrop.src = data.nextTopImg;
+                if (bottomCrop) bottomCrop.src = data.nextBottomImg;
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const downBtn = document.querySelector('.museum-nav-arrow.down-arrow');
+                const upBtn = document.querySelector('.museum-nav-arrow.up-arrow');
+                
+                if (downBtn) {
+                    downBtn.addEventListener('click', () => {
+                        let nextIndex = (currentMuseumIndex + 1) % totalMuseumSlides;
+                        goToMuseumSlide(nextIndex);
+                    });
+                }
+                
+                if (upBtn) {
+                    upBtn.addEventListener('click', () => {
+                        let prevIndex = (currentMuseumIndex - 1 + totalMuseumSlides) % totalMuseumSlides;
+                        goToMuseumSlide(prevIndex);
+                    });
+                }
+                
+                // Bind click events on indicators
+                const indicators = document.querySelectorAll('.museum-page-indicator');
+                indicators.forEach((indicator, i) => {
+                    indicator.addEventListener('click', () => goToMuseumSlide(i));
+                });
+            });
+        </script>
+
+        <!-- Asymmetric Typography Promo Banner (User Selected Layout) -->
+        <section class="promo-banner container">
+            <div class="promo-banner__grid">
+                <!-- Left: Big Bold Statement -->
+                <div class="promo-banner__left">
+                    <span class="promo-banner__eyebrow">LEGACY OF EXCELLENCE</span>
+                    <h2 class="promo-banner__title">
+                        Spaces that<br>
+                        <span class="promo-banner__title-alt">define home</span>
+                    </h2>
+                </div>
+                <!-- Right: Small Sub-statement & Est tag -->
+                <div class="promo-banner__right">
+                    <p class="promo-banner__statement"># Crafting premium modular elements, solid oak tables, and custom outdoor environments for your modern living.</p>
+                    <div class="promo-banner__est">
+                        <span class="promo-banner__line"></span>
+                        <span class="promo-banner__year">EST. 2011</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alternating Seamless Showcase Grid Categories Section -->
+        <section class="categories" id="categories" style="padding: 0 !important; margin: 4rem 0 0 0 !important; max-width: 100% !important; width: 100% !important;">
+            <div class="categories__grid-showcase">
+                <!-- Category 1: Garden -->
+                <div class="showcase-row" onclick="window.location.href='products.html?category=Garden'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="assets/img/garden.png" alt="Mobiliario de Jardín" class="showcase-img">
+                    </div>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Mobiliario de Jardín</h3>
+                            <p class="showcase-subtitle">Explore la colección exclusiva para exteriores</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: Kitchen -->
+                <div class="showcase-row showcase-row--reverse" onclick="window.location.href='products.html?category=Kitchen'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="assets/img/kitchen.png" alt="Cocinas Modernas" class="showcase-img">
+                    </div>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Mobiliario de Cocina</h3>
+                            <p class="showcase-subtitle">Espacios funcionales y diseños contemporáneos</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3: Dining -->
+                <div class="showcase-row" onclick="window.location.href='products.html?category=Dining'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="assets/img/dining.png" alt="Salón y Comedor" class="showcase-img">
+                    </div>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Salón y Comedor</h3>
+                            <p class="showcase-subtitle">Calidez y confort para los momentos en familia</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 4: Living -->
+                <div class="showcase-row showcase-row--reverse" onclick="window.location.href='products.html?category=Living'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="assets/img/living.png" alt="Zonas de Estar" class="showcase-img">
+                    </div>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Zonas de Estar</h3>
+                            <p class="showcase-subtitle">Sofás y complementos de diseño minimalista</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 5: Bedroom -->
+                <div class="showcase-row" onclick="window.location.href='products.html?category=Bedroom'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="assets/img/bedroom.png" alt="Dormitorios Confortables" class="showcase-img">
+                    </div>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Dormitorios</h3>
+                            <p class="showcase-subtitle">Sistemas de descanso y confort premium</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 6: Office -->
+                <div class="showcase-row showcase-row--reverse" onclick="window.location.href='products.html?category=Office'">
+                    <div class="showcase-col showcase-image-col">
+                        <img src="assets/img/office.png" alt="Equipamiento de Oficina" class="showcase-img">
+                    </div>
+                    <div class="showcase-col showcase-text-col">
+                        <div class="showcase-content">
+                            <h3 class="showcase-title">Equipamiento de Oficina</h3>
+                            <p class="showcase-subtitle">Ergonomía excepcional para productividad profesional</p>
+                            <span class="showcase-link">Ver Colección <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured/New Arrivals Section -->
+        <section class="container section-padding" style="margin-top: 4rem;">
+            <div class="categories__header" style="margin-bottom: 2rem;">
+                <h2 class="categories__title">New Arrivals</h2>
+                <a href="products.html" class="hero__link" style="font-size: 1rem; padding: 0.5rem 1rem;">View All</a>
+            </div>
+            
+            <!-- Normal Grid Layout -->
+            <div id="home-products-grid" class="products-grid-normal">
+                <p style="text-align:center; grid-column: 1/-1;">Checking latest inventory...</p>
+            </div>
+        </section>
+
+        <script type="module">
+            import { productService } from 'assets/js/api-services.js';
+            import { loadLatestArrivals } from 'assets/js/home.js';
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                loadLatestArrivals(productService, 'home-products-grid');
+            });
+        </script>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <!-- Col 1: Brand Info -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4 style="font-size: 1.2rem !important; color: var(--color-primary) !important;">Modsy Profishop</h4>
+                    <p style="color: #6e6e6e; font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px;">Su proveedor de confianza para equipamiento comercial y mobiliario premium de oficina e interiores.</p>
+                    <div style="display: flex; gap: 10px; font-size: 1.25rem; color: var(--color-primary);">
+                        <ion-icon name="logo-facebook" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-twitter" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-instagram" style="cursor:pointer;"></ion-icon>
+                        <ion-icon name="logo-linkedin" style="cursor:pointer;"></ion-icon>
+                    </div>
+                </div>
+                <!-- Col 2: Customer Service -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Atención al Cliente</h4>
+                    <ul>
+                        <li><a href="contact.html">Contacto y Ayuda</a></li>
+                        <li><a href="#">Envíos y Entregas</a></li>
+                        <li><a href="#">Garantía de Calidad</a></li>
+                        <li><a href="#">Devoluciones y Reclamaciones</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Categories -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Categorías Populares</h4>
+                    <ul>
+                        <li><a href="products.html?category=Garden">Mobiliario de Jardín</a></li>
+                        <li><a href="products.html?category=Kitchen">Mobiliario de Cocina</a></li>
+                        <li><a href="products.html?category=Dining">Salón y Comedor</a></li>
+                        <li><a href="products.html?category=Office">Equipamiento de Oficina</a></li>
+                    </ul>
+                </div>
+                <!-- Col 4: Corporate / Legal -->
+                <div class="footer-col" style="grid-column: span 3;">
+                    <h4>Información Legal</h4>
+                    <ul>
+                        <li><a href="intranet.html">Intranet de Empleados (PRL)</a></li>
+                        <li><a href="#">Aviso Legal y LSSI</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__brand-text">Modsy.</div>
+        </div>
+    </footer>
+
+    <script src="assets/js/products-data.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="assets/js/navbar-updater.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

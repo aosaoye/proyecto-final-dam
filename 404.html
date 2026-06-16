@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Page Not Found | Modsy</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .error-page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #F7F5F0 0%, #E2D5C2 100%);
+        }
+        .error-content {
+            max-width: 600px;
+        }
+        .error-code {
+            font-size: 10rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--color-primary);
+            opacity: 0.1;
+            margin-bottom: -3rem;
+        }
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+        .error-desc {
+            color: var(--color-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-page">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Lost in space?</h1>
+            <p class="error-desc">The piece of furniture you're looking for doesn't exist yet, or the page has moved to a new home.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="index.html" class="btn btn--primary">Back to Home</a>
+                <a href="products.html" class="btn" style="border: 1px solid var(--color-stone-300);">See Catalog</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
