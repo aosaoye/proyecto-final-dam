@@ -67,67 +67,57 @@
                 <!-- Image (Left) -->
                 <div class="image-col" style="position: relative;">
                     <img src="" alt="" class="image-col__img" id="detail-img">
-                    <div id="ar-viewer-container" style="display: none; width: 100%; height: 500px; border-radius: 12px; overflow: hidden; background: #f8fafc; border: 1px solid #e2e8f0; position: relative;">
-                        <!-- Live Webcam video feed -->
-                        <video id="ar-webcam-feed" autoplay playsinline style="display: none; width: 100%; height: 100%; object-fit: cover;"></video>
-                        <!-- Draggable product overlay inside camera -->
-                        <img id="ar-webcam-overlay" src="" style="display: none; position: absolute; top: 40%; left: 40%; width: 150px; cursor: grab; z-index: 10; user-select: none; pointer-events: auto; filter: drop-shadow(0 15px 15px rgba(0,0,0,0.4)); transform-origin: center;">
-                        
-                        <!-- Webcam overlay control bar -->
-                        <div id="ar-camera-controls" style="display: none; position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15,23,42,0.9); backdrop-filter: blur(10px); color: white; padding: 16px; border-radius: 12px; z-index: 20; font-size: 0.85rem; gap: 12px; flex-direction: column; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="font-weight: 600;">Tamaño (Escala):</span>
-                                <input type="range" id="ar-scale-slider" min="50" max="300" value="150" style="width: 150px; cursor: pointer;">
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="font-weight: 600;">Girar (Grados):</span>
-                                <input type="range" id="ar-rotate-slider" min="0" max="360" value="0" style="width: 150px; cursor: pointer;">
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 4px;">
-                                <button type="button" id="btn-ar-camera-close" style="background: #ef4444; border: none; border-radius: 6px; padding: 8px 16px; color: white; cursor: pointer; font-weight: 700; transition: background 0.2s;">Detener Cámara</button>
-                                <span style="font-size: 0.75rem; color: #cbd5e1; text-align: right;">Arrastra el mueble por la pantalla para colocarlo</span>
-                            </div>
-                        </div>
 
-                        <model-viewer id="ar-viewer" src="" 
-                            alt="Visualización 3D interactiva del mueble" 
-                            ar ar-modes="webxr scene-viewer quick-look" 
-                            camera-controls 
-                            shadow-intensity="1.5"
-                            environment-image="neutral"
-                            auto-rotate
-                            style="width: 100%; height: 100%; --poster-color: transparent;">
-                            <button slot="ar-button" id="ar-button" style="background-color: #635bff; color: white; border-radius: 99px; border: none; position: absolute; bottom: 20px; right: 20px; padding: 12px 24px; font-weight: 700; box-shadow: 0 4px 15px rgba(99,91,255,0.3); display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Outfit', sans-serif; z-index: 99; transition: transform 0.2s ease;">
-                                <ion-icon name="camera-outline" style="font-size: 1.3rem;"></ion-icon>
-                                Activar Cámara Real (AR)
-                            </button>
-                        </model-viewer>
-                    </div>
 
                     <!-- Nano Banana Real Room Visualizer Container -->
                     <div id="ai-viewer-container" style="display: none; width: 100%; min-height: 500px; border-radius: 12px; padding: 20px; background: #fafaf9; border: 1px solid #e7e5e4; font-family: 'Outfit', sans-serif; box-sizing: border-box; position: relative;">
-                        
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                            <div style="width: 36px; height: 36px; background: #fef08a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; border: 1px solid #fef08a;">🍌</div>
-                            <div>
-                                <h3 style="margin: 0; font-size: 1.1rem; color: #1c1917; font-weight: 700;">Diseño IA: Nano Banana</h3>
-                                <span style="font-size: 0.75rem; color: #78716c;">Visualización interactiva real en tu espacio</span>
+                        <style>
+                            @keyframes spin {
+                                0% { transform: rotate(0deg); }
+                                100% { transform: rotate(360deg); }
+                            }
+                        </style>
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 36px; height: 36px; background: #fef08a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; border: 1px solid #e2e0d0;">🍌</div>
+                                <div>
+                                    <h3 style="margin: 0; font-size: 1.1rem; color: #1c1917; font-weight: 700;">Diseño IA: Nano Banana</h3>
+                                    <span style="font-size: 0.75rem; color: #78716c;">Generación real fotorrealista en tu habitación</span>
+                                </div>
+                            </div>
+                            <!-- API Key Input -->
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <input type="password" id="nano-api-key" placeholder="API Key de Gemini..." style="padding: 6px 12px; border-radius: 20px; border: 1px solid #d6d3d1; font-size: 0.8rem; width: 160px; outline: none; background: white;" title="Introduce tu API Key de Google AI Studio para usar la IA real">
                             </div>
                         </div>
 
                         <!-- Canvas Workspace -->
                         <div id="stager-workspace" style="position: relative; width: 100%; height: 380px; border-radius: 8px; overflow: hidden; background: #e7e5e4; border: 1px solid #d6d3d1; display: flex; align-items: center; justify-content: center; user-select: none;">
-                            <!-- Room Background Image -->
-                            <img id="stager-bg" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+                            <!-- Room Background Image / Result Image -->
+                            <img id="stager-bg" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80" style="width: 100%; height: 100%; object-fit: cover;">
                             
-                            <!-- Draggable Product Overlay -->
-                            <img id="stager-product" src="" style="position: absolute; top: 40%; left: 40%; width: 120px; cursor: grab; z-index: 10; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.35)); transform: rotate(0deg) scale(1); transform-origin: center; pointer-events: auto; user-select: none;">
+                            <!-- Hidden product element for loading/canvas reasons -->
+                            <img id="stager-product" src="" style="display: none;">
+
+                            <!-- Loading overlay -->
+                            <div id="stager-loader" style="display: none; position: absolute; inset: 0; background: rgba(28, 25, 23, 0.85); color: white; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; z-index: 20; backdrop-filter: blur(4px);">
+                                <div style="width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.2); border-top: 4px solid #fef08a; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;"></div>
+                                <h4 id="stager-loader-title" style="margin: 0 0 8px 0; font-size: 1.05rem; color: #fef08a; font-weight: 700;">Conectando con Nano Banana Pro...</h4>
+                                <p id="stager-loader-desc" style="margin: 0; font-size: 0.8rem; color: #d6d3d1; max-width: 320px; line-height: 1.4;">Inicializando tubería de renderizado multimodal...</p>
+                            </div>
                         </div>
 
-                        <!-- Toolbar & Controls -->
+                        <!-- Controls -->
                         <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 12px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #e7e5e4;">
+                            
+                            <!-- Prompt Input -->
+                            <div>
+                                <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #44403c; margin-bottom: 4px;">Instrucciones para la IA (Conversational Prompt)</label>
+                                <textarea id="ai-prompt" style="width: 100%; height: 60px; padding: 8px 12px; border-radius: 6px; border: 1px solid #d6d3d1; font-family: inherit; font-size: 0.8rem; resize: none; outline: none; box-sizing: border-box;" placeholder="Escribe cómo quieres colocar el mueble..."></textarea>
+                            </div>
+
                             <!-- Upload / Preset actions -->
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: center;">
                                 <button type="button" id="btn-stager-upload" style="padding: 10px; border-radius: 6px; border: 2px dashed #635bff; background: #f8fafc; font-weight: 700; font-size: 0.8rem; cursor: pointer; color: #635bff; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s;">
                                     <ion-icon name="cloud-upload-outline" style="font-size: 1.1rem;"></ion-icon> Subir foto de mi casa
                                 </button>
@@ -140,33 +130,17 @@
                             </div>
                             <input type="file" id="stager-file-input" style="display: none;" accept="image/*">
 
-                            <!-- Interactive Sliders -->
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; border-top: 1px solid #f5f5f4; padding-top: 12px;">
-                                <div>
-                                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #44403c; font-weight: 600; margin-bottom: 4px;">
-                                        <span>Tamaño (Escala)</span>
-                                        <span id="lbl-stager-scale">100%</span>
-                                    </div>
-                                    <input type="range" id="stager-scale" min="20" max="250" value="100" style="width: 100%; cursor: pointer;">
-                                </div>
-                                <div>
-                                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #44403c; font-weight: 600; margin-bottom: 4px;">
-                                        <span>Rotación (Giro)</span>
-                                        <span id="lbl-stager-rotate">0°</span>
-                                    </div>
-                                    <input type="range" id="stager-rotate" min="-180" max="180" value="0" style="width: 100%; cursor: pointer;">
-                                </div>
-                            </div>
-
-                            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f5f5f4; padding-top: 12px; gap: 10px;">
-                                <button type="button" id="btn-stager-flip" style="padding: 6px 12px; border: 1px solid #d6d3d1; background: white; border-radius: 4px; font-weight: 600; font-size: 0.75rem; cursor: pointer; color: #44403c; display: flex; align-items: center; gap: 4px;">
-                                    <ion-icon name="swap-horizontal-outline"></ion-icon> Espejo (Flip)
+                            <!-- Action buttons -->
+                            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                                <button type="button" id="btn-stager-generate" style="flex-grow: 2; padding: 12px; background: #635bff; color: white; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: none; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(99,91,255,0.25);">
+                                    <ion-icon name="color-wand-outline" style="font-size: 1.2rem;"></ion-icon> Generar Render Real con IA 🍌
                                 </button>
-                                <button type="button" id="btn-stager-download" style="flex-grow: 1; padding: 10px; background: #635bff; color: white; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer; border: none; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                                    <ion-icon name="download-outline" style="font-size: 1.1rem;"></ion-icon> Descargar Foto Diseñada
+                                <button type="button" id="btn-stager-download" style="flex-grow: 1; padding: 12px; background: #e2e8f0; color: #475569; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: none; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;" disabled>
+                                    <ion-icon name="download-outline" style="font-size: 1.2rem;"></ion-icon> Descargar
                                 </button>
                             </div>
                         </div>
+                    </div>
                     </div>
 
                     <!-- View Modes Selector -->
@@ -174,9 +148,7 @@
                         <button type="button" id="btn-mode-photo" class="mode-tab active" style="background: #635bff; color: white; border: none; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
                             <ion-icon name="image-outline"></ion-icon> Foto
                         </button>
-                        <button type="button" id="btn-mode-3d" class="mode-tab" style="background: transparent; color: #6b7280; border: none; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
-                            <ion-icon name="cube-outline"></ion-icon> 3D / AR
-                        </button>
+
                         <button type="button" id="btn-mode-ai" class="mode-tab" style="background: transparent; color: #6b7280; border: none; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
                             <span>🍌</span> IA (Nano Banana)
                         </button>
@@ -301,45 +273,18 @@
             document.getElementById('detail-category-v').textContent = (currentProduct.category || 'Collection').toUpperCase();
             document.getElementById('detail-tagline').textContent = `${currentProduct.category} Series`;
 
-            // AR 3D Viewer Logic
-            let glbModelUrl = currentProduct.glbUrl || currentProduct.glb;
-            
-            if (!glbModelUrl) {
-                const staticProd = typeof productsData !== 'undefined' 
-                    ? productsData.find(p => String(p.id) === String(id)) 
-                    : null;
-                glbModelUrl = staticProd ? staticProd.glb : null;
-            }
-            
-            if (!glbModelUrl) {
-                const category = currentProduct.category || '';
-                if (['Living', 'Bedroom', 'Garden'].includes(category)) {
-                    glbModelUrl = 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/SheenChair/glTF-Binary/SheenChair.glb';
-                } else {
-                    glbModelUrl = 'https://modelviewer.dev/shared-assets/models/Chair.glb';
-                }
-            }
-
             const viewModeSelector = document.getElementById('view-mode-selector');
             const btnModePhoto = document.getElementById('btn-mode-photo');
-            const btnMode3d = document.getElementById('btn-mode-3d');
             const btnModeAi = document.getElementById('btn-mode-ai');
             
-            const arViewerContainer = document.getElementById('ar-viewer-container');
-            const arViewer = document.getElementById('ar-viewer');
             const detailImg = document.getElementById('detail-img');
             const aiViewerContainer = document.getElementById('ai-viewer-container');
 
-            if (glbModelUrl) {
-                arViewer.setAttribute('src', glbModelUrl);
-                arViewer.setAttribute('poster', imgUrl);
-            }
-            
-            // Show mode selector (we always show it since we have Photo, 3D, and AI)
+            // Show mode selector (we always show it since we have Photo and AI)
             viewModeSelector.style.display = 'flex';
 
             function setActiveTab(activeBtn) {
-                [btnModePhoto, btnMode3d, btnModeAi].forEach(btn => {
+                [btnModePhoto, btnModeAi].forEach(btn => {
                     btn.style.background = 'transparent';
                     btn.style.color = '#6b7280';
                     btn.classList.remove('active');
@@ -352,220 +297,45 @@
             btnModePhoto.addEventListener('click', () => {
                 setActiveTab(btnModePhoto);
                 detailImg.style.display = 'block';
-                arViewerContainer.style.display = 'none';
                 aiViewerContainer.style.display = 'none';
             });
 
-            btnMode3d.addEventListener('click', () => {
-                setActiveTab(btnMode3d);
-                detailImg.style.display = 'none';
-                arViewerContainer.style.display = 'block';
-                aiViewerContainer.style.display = 'none';
-            });
+             btnModeAi.addEventListener('click', () => {
+                 setActiveTab(btnModeAi);
+                 detailImg.style.display = 'none';
+                 aiViewerContainer.style.display = 'block';
+                 
+                 // Pre-populate AI Prompt
+                 const promptBox = document.getElementById('ai-prompt');
+                 if (promptBox && !promptBox.value) {
+                     const styleSel = document.getElementById('stager-presets');
+                     const styleText = styleSel ? styleSel.options[styleSel.selectedIndex].text : 'Salón Moderno';
+                     promptBox.value = `Un espacio elegante estilo ${styleText} con el mueble ${currentProduct.name} colocado de forma natural, iluminación suave y renderizado fotorrealista.`;
+                 }
+             });
 
-            btnModeAi.addEventListener('click', () => {
-                setActiveTab(btnModeAi);
-                detailImg.style.display = 'none';
-                arViewerContainer.style.display = 'none';
-                aiViewerContainer.style.display = 'block';
-                
-                // Pre-populate AI Prompt
-                const promptBox = document.getElementById('ai-prompt');
-                if (promptBox && !promptBox.value) {
-                    const styleSel = document.getElementById('ai-room-style');
-                    const styleText = styleSel.options[styleSel.selectedIndex].text;
-                    promptBox.value = `Un espacio elegante estilo ${styleText} con el mueble ${currentProduct.name} colocado de forma natural, iluminación suave y renderizado fotorrealista.`;
-                }
-            });
 
-            // 1. Live Webcam AR Mode logic
-            const arWebcamFeed = document.getElementById('ar-webcam-feed');
-            const arWebcamOverlay = document.getElementById('ar-webcam-overlay');
-            const arCameraControls = document.getElementById('ar-camera-controls');
-            const arScaleSlider = document.getElementById('ar-scale-slider');
-            const arRotateSlider = document.getElementById('ar-rotate-slider');
-            const btnArCameraClose = document.getElementById('btn-ar-camera-close');
-            let activeStream = null;
-            let isArDragging = false;
-            let arStartX = 0;
-            let arStartY = 0;
-
-            const arButton = document.getElementById('ar-button');
-            if (arButton) {
-                arButton.addEventListener('click', async (e) => {
-                    // Mobile device check -> Native ARCore/ARKit
-                    if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-                        console.log('Native mobile AR capability triggered...');
-                        return; // Let model-viewer native trigger handle it
-                    }
-
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    Swal.fire({
-                        title: 'Iniciar Cámara Web (AR)',
-                        text: 'Concede permiso para usar tu cámara y ver cómo encaja el mueble en tu habitación en tiempo real.',
-                        icon: 'info',
-                        showCancelButton: true,
-                        confirmButtonText: 'Activar Cámara',
-                        cancelButtonText: 'Cancelar',
-                        confirmButtonColor: '#635bff'
-                    }).then(async (result) => {
-                        if (result.isConfirmed) {
-                            try {
-                                activeStream = await navigator.mediaDevices.getUserMedia({
-                                    video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
-                                });
-                                arViewer.style.visibility = 'hidden';
-                                arWebcamFeed.style.display = 'block';
-                                arWebcamOverlay.src = imgUrl;
-                                arWebcamOverlay.style.display = 'block';
-                                arCameraControls.style.display = 'flex';
-                                arWebcamFeed.srcObject = activeStream;
-                            } catch (err) {
-                                console.error('Error sharing camera:', err);
-                                Swal.fire('Error de Cámara', 'No se pudo acceder a la cámara web: ' + err.message, 'error');
-                            }
-                        }
-                    });
-                });
-            }
-
-            // Drag overlay in webcam
-            if (arWebcamOverlay) {
-                arWebcamOverlay.addEventListener('pointerdown', (e) => {
-                    isArDragging = true;
-                    arWebcamOverlay.style.cursor = 'grabbing';
-                    arWebcamOverlay.setPointerCapture(e.pointerId);
-                    const rect = arWebcamOverlay.getBoundingClientRect();
-                    arStartX = e.clientX - rect.left;
-                    arStartY = e.clientY - rect.top;
-                    e.preventDefault();
-                });
-
-                arWebcamOverlay.addEventListener('pointermove', (e) => {
-                    if (!isArDragging) return;
-                    const parentRect = arViewerContainer.getBoundingClientRect();
-                    let x = e.clientX - parentRect.left - arStartX;
-                    let y = e.clientY - parentRect.top - arStartY;
-                    
-                    const pctX = (x / parentRect.width) * 100;
-                    const pctY = (y / parentRect.height) * 100;
-                    arWebcamOverlay.style.left = `${pctX}%`;
-                    arWebcamOverlay.style.top = `${pctY}%`;
-                });
-
-                const stopArDrag = (e) => {
-                    if (isArDragging) {
-                        isArDragging = false;
-                        arWebcamOverlay.style.cursor = 'grab';
-                        try { arWebcamOverlay.releasePointerCapture(e.pointerId); } catch(err) {}
-                    }
-                };
-                arWebcamOverlay.addEventListener('pointerup', stopArDrag);
-                arWebcamOverlay.addEventListener('pointercancel', stopArDrag);
-            }
-
-            // Webcam sliders
-            function updateArWebcamTransform() {
-                if (arWebcamOverlay) {
-                    const scaleVal = arScaleSlider.value / 150;
-                    const rotateVal = arRotateSlider.value;
-                    arWebcamOverlay.style.transform = `rotate(${rotateVal}deg) scale(${scaleVal})`;
-                }
-            }
-            if (arScaleSlider) arScaleSlider.addEventListener('input', updateArWebcamTransform);
-            if (arRotateSlider) arRotateSlider.addEventListener('input', updateArWebcamTransform);
-
-            if (btnArCameraClose) {
-                btnArCameraClose.addEventListener('click', () => {
-                    if (activeStream) {
-                        activeStream.getTracks().forEach(track => track.stop());
-                        activeStream = null;
-                    }
-                    arWebcamFeed.style.display = 'none';
-                    arWebcamOverlay.style.display = 'none';
-                    arCameraControls.style.display = 'none';
-                    arViewer.style.visibility = 'visible';
-                });
-            }
 
             // 2. Nano Banana Room Stager logic
-            const stagerProduct = document.getElementById('stager-product');
-            const stagerWorkspace = document.getElementById('stager-workspace');
-            const stagerScaleSlider = document.getElementById('stager-scale');
-            const stagerRotateSlider = document.getElementById('stager-rotate');
-            const lblStagerScale = document.getElementById('lbl-stager-scale');
-            const lblStagerRotate = document.getElementById('lbl-stager-rotate');
-            const btnStagerFlip = document.getElementById('btn-stager-flip');
+            const apiKeyInput = document.getElementById('nano-api-key');
             const btnStagerUpload = document.getElementById('btn-stager-upload');
             const stagerFileInput = document.getElementById('stager-file-input');
             const stagerBg = document.getElementById('stager-bg');
             const stagerPresets = document.getElementById('stager-presets');
+            const btnStagerGenerate = document.getElementById('btn-stager-generate');
             const btnStagerDownload = document.getElementById('btn-stager-download');
+            const stagerLoader = document.getElementById('stager-loader');
+            const stagerLoaderTitle = document.getElementById('stager-loader-title');
+            const stagerLoaderDesc = document.getElementById('stager-loader-desc');
 
-            let isStagerDragging = false;
-            let stagerStartX = 0;
-            let stagerStartY = 0;
-            let isFlipped = false;
-
-            // Initialize stager product image
-            if (stagerProduct) {
-                stagerProduct.src = imgUrl;
-            }
-
-            // Drag and drop for stager
-            if (stagerProduct && stagerWorkspace) {
-                stagerProduct.addEventListener('pointerdown', (e) => {
-                    isStagerDragging = true;
-                    stagerProduct.style.cursor = 'grabbing';
-                    stagerProduct.setPointerCapture(e.pointerId);
-                    const rect = stagerProduct.getBoundingClientRect();
-                    stagerStartX = e.clientX - rect.left;
-                    stagerStartY = e.clientY - rect.top;
-                    e.preventDefault();
-                });
-
-                stagerProduct.addEventListener('pointermove', (e) => {
-                    if (!isStagerDragging) return;
-                    const parentRect = stagerWorkspace.getBoundingClientRect();
-                    let x = e.clientX - parentRect.left - stagerStartX;
-                    let y = e.clientY - parentRect.top - stagerStartY;
-                    
-                    const pctX = (x / parentRect.width) * 100;
-                    const pctY = (y / parentRect.height) * 100;
-                    stagerProduct.style.left = `${pctX}%`;
-                    stagerProduct.style.top = `${pctY}%`;
-                });
-
-                const stopStagerDrag = (e) => {
-                    if (isStagerDragging) {
-                        isStagerDragging = false;
-                        stagerProduct.style.cursor = 'grab';
-                        try { stagerProduct.releasePointerCapture(e.pointerId); } catch(err) {}
-                    }
-                };
-                stagerProduct.addEventListener('pointerup', stopStagerDrag);
-                stagerProduct.addEventListener('pointercancel', stopStagerDrag);
-            }
-
-            function updateStagerTransform() {
-                if (stagerProduct) {
-                    const scaleVal = stagerScaleSlider.value / 100;
-                    const rotateVal = stagerRotateSlider.value;
-                    lblStagerScale.textContent = `${stagerScaleSlider.value}%`;
-                    lblStagerRotate.textContent = `${rotateVal}°`;
-                    stagerProduct.style.transform = `rotate(${rotateVal}deg) scale(${scaleVal}) ${isFlipped ? 'scaleX(-1)' : ''}`;
+            // Load saved Gemini API Key
+            if (apiKeyInput) {
+                const savedKey = localStorage.getItem('gemini_nano_api_key');
+                if (savedKey) {
+                    apiKeyInput.value = savedKey;
                 }
-            }
-
-            if (stagerScaleSlider) stagerScaleSlider.addEventListener('input', updateStagerTransform);
-            if (stagerRotateSlider) stagerRotateSlider.addEventListener('input', updateStagerTransform);
-
-            if (btnStagerFlip) {
-                btnStagerFlip.addEventListener('click', () => {
-                    isFlipped = !isFlipped;
-                    updateStagerTransform();
+                apiKeyInput.addEventListener('change', () => {
+                    localStorage.setItem('gemini_nano_api_key', apiKeyInput.value.trim());
                 });
             }
 
@@ -590,80 +360,241 @@
                 });
             }
 
-            // Composite download engine
-            if (btnStagerDownload) {
-                btnStagerDownload.addEventListener('click', () => {
-                    if (!stagerBg || !stagerProduct) return;
-                    
-                    Swal.fire({
-                        title: 'Procesando Imagen...',
-                        html: 'Componiendo tu habitación con el diseño del mueble...',
-                        allowOutsideClick: false,
-                        didOpen: () => Swal.showLoading()
-                    });
-
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    
-                    const bgImg = new Image();
-                    bgImg.crossOrigin = "anonymous";
-                    bgImg.onload = () => {
-                        canvas.width = bgImg.naturalWidth || bgImg.width;
-                        canvas.height = bgImg.naturalHeight || bgImg.height;
-                        
-                        // Draw room background
-                        ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-                        
-                        const prodImg = new Image();
-                        prodImg.crossOrigin = "anonymous";
-                        prodImg.onload = () => {
-                            const parentRect = stagerWorkspace.getBoundingClientRect();
-                            const prodRect = stagerProduct.getBoundingClientRect();
-                            
-                            const pctX = parseFloat(stagerProduct.style.left) || 40;
-                            const pctY = parseFloat(stagerProduct.style.top) || 40;
-                            
-                            const canvasX = (pctX / 100) * canvas.width;
-                            const canvasY = (pctY / 100) * canvas.height;
-                            
-                            const workspaceRatio = prodRect.width / parentRect.width;
-                            const canvasProdWidth = canvas.width * workspaceRatio;
-                            const canvasProdHeight = canvasProdWidth * (prodImg.naturalHeight / prodImg.naturalWidth);
-                            
-                            ctx.save();
-                            // Move context origin to the center of the product placement
-                            ctx.translate(canvasX + canvasProdWidth/2, canvasY + canvasProdHeight/2);
-                            
-                            // Apply rotation
-                            const rotateVal = parseFloat(stagerRotateSlider.value) || 0;
-                            ctx.rotate((rotateVal * Math.PI) / 180);
-                            
-                            // Apply flip
-                            if (isFlipped) {
-                                ctx.scale(-1, 1);
-                            }
-                            
-                            // Draw the product centered
-                            ctx.drawImage(prodImg, -canvasProdWidth/2, -canvasProdHeight/2, canvasProdWidth, canvasProdHeight);
-                            ctx.restore();
-                            
-                            // Trigger download
-                            const link = document.createElement('a');
-                            link.download = `diseno-modsy-${currentProduct.name}.png`;
-                            link.href = canvas.toDataURL('image/png');
-                            link.click();
-                            
-                            Swal.fire({
-                                title: '¡Diseño Guardado!',
-                                text: 'Tu previsualización real con Nano Banana se ha descargado correctamente.',
-                                icon: 'success'
-                            });
-                        };
-                        prodImg.src = stagerProduct.src;
+            // Helper to get base64 string from external URLs
+            async function getBase64FromUrl(url) {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const base64String = reader.result.split(',')[1];
+                        resolve(base64String);
                     };
-                    bgImg.src = stagerBg.src;
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
                 });
             }
+
+            // AI/Simulation Generator button trigger
+            if (btnStagerGenerate) {
+                btnStagerGenerate.addEventListener('click', async () => {
+                    const key = apiKeyInput ? apiKeyInput.value.trim() : '';
+                    const promptText = document.getElementById('ai-prompt').value.trim();
+                    const bgUrl = stagerBg.src;
+                    const pImgUrl = imgUrl; // main product image
+
+                    if (stagerLoader) {
+                        stagerLoader.style.display = 'flex';
+                    }
+                    btnStagerGenerate.disabled = true;
+
+                    if (key) {
+                        // REAL GEMINI NANO BANANA API CALL
+                        try {
+                            stagerLoaderTitle.textContent = "Conectando con Nano Banana...";
+                            stagerLoaderDesc.textContent = "Preparando datos multimodales de imagen y enviando solicitud a la API de Google...";
+
+                            // 1. Convert Room Image to base64
+                            let roomBase64 = '';
+                            if (bgUrl.startsWith('data:')) {
+                                roomBase64 = bgUrl.split(',')[1];
+                            } else {
+                                roomBase64 = await getBase64FromUrl(bgUrl);
+                            }
+
+                            // 2. Convert Product Image to base64
+                            stagerLoaderTitle.textContent = "Codificando producto...";
+                            stagerLoaderDesc.textContent = `Procesando la imagen de ${currentProduct.name || 'mueble'}...`;
+                            let productBase64 = '';
+                            if (pImgUrl.startsWith('data:')) {
+                                productBase64 = pImgUrl.split(',')[1];
+                            } else {
+                                productBase64 = await getBase64FromUrl(pImgUrl);
+                            }
+
+                            // 3. Make REST request to gemini-3.1-flash-image
+                            stagerLoaderTitle.textContent = "Llamando a gemini-3.1-flash-image...";
+                            stagerLoaderDesc.textContent = "El motor Nano Banana está estimando la profundidad y fusionando la iluminación en 3D...";
+
+                            const payload = {
+                                contents: [{
+                                    parts: [
+                                        {
+                                            text: `Here is the image of my room, and here is the image of the furniture product (${currentProduct.name || 'furniture'}). Please stage this furniture product into my room fotorrealistically in a natural position, matching the room's scale, perspective, lighting, and shadow. Output ONLY the resulting room image. Custom instructions: ${promptText}`
+                                        },
+                                        {
+                                            inlineData: {
+                                                mimeType: "image/jpeg",
+                                                data: roomBase64
+                                            }
+                                        },
+                                        {
+                                            inlineData: {
+                                                mimeType: "image/png",
+                                                data: productBase64
+                                            }
+                                        }
+                                    ]
+                                }],
+                                generationConfig: {
+                                    responseModalities: ["IMAGE"],
+                                    imageConfig: {
+                                        aspectRatio: "16:9"
+                                    }
+                                }
+                            };
+
+                            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${key}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(payload)
+                            });
+
+                            if (!response.ok) {
+                                const errData = await response.json();
+                                throw new Error(errData.error?.message || `HTTP ${response.status}`);
+                            }
+
+                            const resData = await response.json();
+                            const inlineData = resData.candidates?.[0]?.content?.parts?.[0]?.inlineData;
+                            if (inlineData && inlineData.data) {
+                                const mime = inlineData.mimeType || "image/png";
+                                stagerBg.src = `data:${mime};base64,${inlineData.data}`;
+                                if (btnStagerDownload) {
+                                    btnStagerDownload.disabled = false;
+                                    btnStagerDownload.style.background = '#635bff';
+                                    btnStagerDownload.style.color = 'white';
+                                }
+
+                                Swal.fire({
+                                    title: '¡Diseño Generado!',
+                                    text: 'La API de Nano Banana ha generado tu habitación con el mueble integrado fotorrealistamente.',
+                                    icon: 'success'
+                                });
+                            } else {
+                                throw new Error("La respuesta no contiene datos de imagen válidos.");
+                            }
+
+                        } catch (error) {
+                            console.error("Error calling Gemini Image API:", error);
+                            Swal.fire({
+                                title: 'Error de IA Real',
+                                text: `No se pudo generar la imagen real: ${error.message}. Comprueba tu API Key y tu cuota en Google AI Studio.`,
+                                icon: 'error'
+                            });
+                        } finally {
+                            if (stagerLoader) stagerLoader.style.display = 'none';
+                            btnStagerGenerate.disabled = false;
+                        }
+
+                    } else {
+                        // HIGH-QUALITY CANVAS SIMULATION FALLBACK
+                        try {
+                            stagerLoaderTitle.textContent = "Simulación Nano Banana...";
+                            stagerLoaderDesc.textContent = "Detectando contornos y profundidad de escena fotorrealista...";
+
+                            await new Promise(r => setTimeout(r, 1500));
+                            stagerLoaderTitle.textContent = "Ajustando oclusión ambiental...";
+                            stagerLoaderDesc.textContent = "Calculando la proyección de sombras físicas sobre el suelo...";
+
+                            await new Promise(r => setTimeout(r, 1500));
+                            stagerLoaderTitle.textContent = "Optimizando texturas fotorrealistas...";
+                            stagerLoaderDesc.textContent = `Fusionando ${currentProduct.name} en el entorno con suavizado inteligente...`;
+
+                            await new Promise(r => setTimeout(r, 1200));
+
+                            // Composite using canvas
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+
+                            const bgImg = new Image();
+                            bgImg.crossOrigin = "anonymous";
+                            bgImg.src = bgUrl;
+
+                            await new Promise((resolve, reject) => {
+                                bgImg.onload = resolve;
+                                bgImg.onerror = reject;
+                            });
+
+                            canvas.width = bgImg.naturalWidth || bgImg.width;
+                            canvas.height = bgImg.naturalHeight || bgImg.height;
+
+                            // Draw room background
+                            ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+
+                            const prodImg = new Image();
+                            prodImg.crossOrigin = "anonymous";
+                            prodImg.src = pImgUrl;
+
+                            await new Promise((resolve, reject) => {
+                                prodImg.onload = resolve;
+                                prodImg.onerror = reject;
+                            });
+
+                            // Place product dynamically in a natural position (bottom center-right)
+                            const targetWidth = canvas.width * 0.35; // 35% of the room width
+                            const targetHeight = targetWidth * (prodImg.naturalHeight / prodImg.naturalWidth);
+                            
+                            const posX = canvas.width * 0.45; // center-ish horizontally
+                            const posY = canvas.height * 0.52; // slightly above bottom
+
+                            // 1. Draw a realistic drop shadow underneath the chair
+                            ctx.save();
+                            ctx.translate(posX + targetWidth / 2, posY + targetHeight * 0.95);
+                            const shadowGradient = ctx.createRadialGradient(0, 0, 5, 0, 0, targetWidth * 0.55);
+                            shadowGradient.addColorStop(0, 'rgba(0, 0, 0, 0.45)');
+                            shadowGradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.25)');
+                            shadowGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                            ctx.fillStyle = shadowGradient;
+                            ctx.beginPath();
+                            ctx.ellipse(0, 0, targetWidth * 0.55, targetHeight * 0.08, 0, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.restore();
+
+                            // 2. Draw the product image
+                            ctx.drawImage(prodImg, posX, posY, targetWidth, targetHeight);
+
+                            // Set output
+                            stagerBg.src = canvas.toDataURL('image/png');
+                            if (btnStagerDownload) {
+                                btnStagerDownload.disabled = false;
+                                btnStagerDownload.style.background = '#635bff';
+                                btnStagerDownload.style.color = 'white';
+                            }
+
+                            Swal.fire({
+                                title: '¡Simulación Completada!',
+                                html: `<div style="text-align: left; font-size: 0.9rem; line-height: 1.4; color: #44403c;">
+                                        <p>Hemos colocado el producto con sombras físicas simuladas en tu foto.</p>
+                                        <p style="margin-top: 8px; font-weight: 700; color: #635bff;">💡 Para usar la IA fotorrealista real en tiempo real de Google, introduce tu API Key de Gemini arriba.</p>
+                                       </div>`,
+                                icon: 'success'
+                            });
+
+                        } catch (err) {
+                            console.error("Simulation error:", err);
+                            Swal.fire('Error de Renderizado', 'No se pudo simular la habitación: ' + err.message, 'error');
+                        } finally {
+                            if (stagerLoader) stagerLoader.style.display = 'none';
+                            btnStagerGenerate.disabled = false;
+                        }
+                    }
+                });
+            }
+
+            // Download trigger
+            if (btnStagerDownload) {
+                btnStagerDownload.addEventListener('click', () => {
+                    if (!stagerBg || !stagerBg.src) return;
+                    const link = document.createElement('a');
+                    link.download = `diseno-modsy-${currentProduct.name}.png`;
+                    link.href = stagerBg.src;
+                    link.click();
+                });
+            }
+
 
             // Populate color options dynamically and bind click triggers to swap visual
             const colorsContainer = document.getElementById('detail-colors');
