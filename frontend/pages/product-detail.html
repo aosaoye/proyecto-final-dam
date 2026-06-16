@@ -9,12 +9,111 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <!-- Google Model Viewer for 3D & Augmented Reality preview -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+    <style>
+        /* Estructura Principal del Producto */
+        .hero-detail__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .image-col__img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        /* Ajustes de los botones de acción del producto */
+        .product-actions {
+            display: flex;
+            gap: 0.8rem;
+            width: 100%;
+            flex-wrap: wrap;
+            align-items: stretch;
+            margin-top: 20px;
+        }
+
+        .btn-buy {
+            padding: 12px 24px;
+            border-radius: 99px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        /* Utilidades del Footer */
+        .footer__grid-responsive {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-col-6 { grid-column: span 6; }
+        .footer-col-3 { grid-column: span 3; }
+
+        /* Consultas de Medios (Media Queries) para Móviles y Tablets */
+        @media (max-width: 992px) {
+            .hero-detail__grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-label {
+                display: none; /* Ocultar etiqueta flotante en pantallas pequeñas */
+            }
+
+            .footer__grid-responsive {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-col-6, .footer-col-3 {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 576px) {
+            #ai-viewer-container {
+                padding: 12px !important;
+                min-height: auto !important;
+            }
+
+            #stager-workspace {
+                height: 250px !important;
+            }
+
+            /* Apilar botones en móviles */
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .product-actions > * {
+                width: 100%;
+                flex: none !important;
+            }
+
+            .qty-box {
+                padding: 10px !important;
+                justify-content: space-between !important;
+            }
+
+            #view-mode-selector {
+                top: 8px !important;
+                right: 8px !important;
+                padding: 2px !important;
+            }
+
+            .mode-tab {
+                padding: 4px 10px !important;
+                font-size: 0.75rem !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Unified Premium Loader Overlay -->
     <div id="page-loader" class="modsy-loader-overlay">
         <div class="modsy-spinner"></div>
         <div class="modsy-loader-text">Loading Modsy Experience</div>
@@ -58,18 +157,15 @@
     </header>
 
     <main class="container" style="margin-top: 130px; margin-bottom: 0;">
-        <a href="products.html" class="back-link"><ion-icon name="arrow-back-outline"></ion-icon> Back to collection</a>
+        <a href="products.html" class="back-link" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #44403c; font-weight: 600;"><ion-icon name="arrow-back-outline"></ion-icon> Back to collection</a>
     </main>
 
     <section class="hero-detail" style="padding-top: 20px;">
         <div class="container">
             <div class="hero-detail__grid">
-                <!-- Image (Left) -->
-                <div class="image-col" style="position: relative;">
+                <div class="image-col" style="position: relative; width: 100%;">
                     <img src="" alt="" class="image-col__img" id="detail-img">
 
-
-                    <!-- Nano Banana Real Room Visualizer Container -->
                     <div id="ai-viewer-container" style="display: none; width: 100%; min-height: 500px; border-radius: 12px; padding: 20px; background: #fafaf9; border: 1px solid #e7e5e4; font-family: 'Outfit', sans-serif; box-sizing: border-box; position: relative;">
                         <style>
                             @keyframes spin {
@@ -79,27 +175,22 @@
                         </style>
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <div style="width: 36px; height: 36px; background: #fef08a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; border: 1px solid #e2e0d0;">🍌</div>
+                                <div style="width: 36px; height: 36px; background: #fef08a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; border: 1px solid #e2e0d0; flex-shrink: 0;">🍌</div>
                                 <div>
                                     <h3 style="margin: 0; font-size: 1.1rem; color: #1c1917; font-weight: 700;">Diseño IA: Nano Banana</h3>
-                                    <span style="font-size: 0.75rem; color: #78716c;">Generación real fotorrealista en tu habitación</span>
+                                    <span style="font-size: 0.75rem; color: #78716c;">Generación real fotorrealista</span>
                                 </div>
                             </div>
-                            <!-- API Key Input -->
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <input type="password" id="nano-api-key" placeholder="API Key de Gemini..." style="padding: 6px 12px; border-radius: 20px; border: 1px solid #d6d3d1; font-size: 0.8rem; width: 160px; outline: none; background: white;" title="Introduce tu API Key de Google AI Studio para usar la IA real">
+                            <div style="display: flex; align-items: center; gap: 8px; flex-grow: 1; max-width: 100%;">
+                                <input type="password" id="nano-api-key" placeholder="API Key de Gemini..." style="padding: 8px 12px; border-radius: 20px; border: 1px solid #d6d3d1; font-size: 0.8rem; width: 100%; max-width: 200px; outline: none; background: white;" title="Introduce tu API Key de Google AI Studio para usar la IA real">
                             </div>
                         </div>
 
-                        <!-- Canvas Workspace -->
                         <div id="stager-workspace" style="position: relative; width: 100%; height: 380px; border-radius: 8px; overflow: hidden; background: #e7e5e4; border: 1px solid #d6d3d1; display: flex; align-items: center; justify-content: center; user-select: none;">
-                            <!-- Room Background Image / Result Image -->
                             <img id="stager-bg" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80" style="width: 100%; height: 100%; object-fit: cover;">
                             
-                            <!-- Hidden product element for loading/canvas reasons -->
                             <img id="stager-product" src="" style="display: none;">
 
-                            <!-- Loading overlay -->
                             <div id="stager-loader" style="display: none; position: absolute; inset: 0; background: rgba(28, 25, 23, 0.85); color: white; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; z-index: 20; backdrop-filter: blur(4px);">
                                 <div style="width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.2); border-top: 4px solid #fef08a; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;"></div>
                                 <h4 id="stager-loader-title" style="margin: 0 0 8px 0; font-size: 1.05rem; color: #fef08a; font-weight: 700;">Conectando con Nano Banana Pro...</h4>
@@ -107,81 +198,73 @@
                             </div>
                         </div>
 
-                        <!-- Controls -->
                         <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 12px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #e7e5e4;">
                             
-                            <!-- Prompt Input -->
                             <div>
-                                <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #44403c; margin-bottom: 4px;">Instrucciones para la IA (Conversational Prompt)</label>
+                                <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #44403c; margin-bottom: 4px;">Instrucciones para la IA</label>
                                 <textarea id="ai-prompt" style="width: 100%; height: 60px; padding: 8px 12px; border-radius: 6px; border: 1px solid #d6d3d1; font-family: inherit; font-size: 0.8rem; resize: none; outline: none; box-sizing: border-box;" placeholder="Escribe cómo quieres colocar el mueble..."></textarea>
                             </div>
 
-                            <!-- Upload / Preset actions -->
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: center;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; align-items: center;">
                                 <button type="button" id="btn-stager-upload" style="padding: 10px; border-radius: 6px; border: 2px dashed #635bff; background: #f8fafc; font-weight: 700; font-size: 0.8rem; cursor: pointer; color: #635bff; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s;">
-                                    <ion-icon name="cloud-upload-outline" style="font-size: 1.1rem;"></ion-icon> Subir foto de mi casa
+                                    <ion-icon name="cloud-upload-outline" style="font-size: 1.1rem;"></ion-icon> Subir foto
                                 </button>
-                                <select id="stager-presets" style="padding: 10px; border-radius: 6px; border: 1px solid #d6d3d1; background: white; font-family: inherit; font-size: 0.8rem; cursor: pointer; outline: none;">
-                                    <option value="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80">Salón Moderno (Preset)</option>
+                                <select id="stager-presets" style="padding: 10px; border-radius: 6px; border: 1px solid #d6d3d1; background: white; font-family: inherit; font-size: 0.8rem; cursor: pointer; outline: none; width: 100%;">
+                                    <option value="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80">Salón Moderno</option>
                                     <option value="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80">Habitación Escandinava</option>
-                                    <option value="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=80">Espacio de Jardín / Terraza</option>
+                                    <option value="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=80">Jardín / Terraza</option>
                                     <option value="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80">Dormitorio Acogedor</option>
                                 </select>
                             </div>
                             <input type="file" id="stager-file-input" style="display: none;" accept="image/*">
 
-                            <!-- Action buttons -->
-                            <div style="display: flex; gap: 10px; margin-top: 5px;">
-                                <button type="button" id="btn-stager-generate" style="flex-grow: 2; padding: 12px; background: #635bff; color: white; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: none; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(99,91,255,0.25);">
-                                    <ion-icon name="color-wand-outline" style="font-size: 1.2rem;"></ion-icon> Generar Render Real con IA 🍌
+                            <div style="display: flex; gap: 10px; margin-top: 5px; flex-wrap: wrap;">
+                                <button type="button" id="btn-stager-generate" style="flex-grow: 1; padding: 12px; background: #635bff; color: white; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: none; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(99,91,255,0.25); min-width: 200px;">
+                                    <ion-icon name="color-wand-outline" style="font-size: 1.2rem;"></ion-icon> Generar Render IA 🍌
                                 </button>
-                                <button type="button" id="btn-stager-download" style="flex-grow: 1; padding: 12px; background: #e2e8f0; color: #475569; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: none; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;" disabled>
+                                <button type="button" id="btn-stager-download" style="flex-grow: 1; padding: 12px; background: #e2e8f0; color: #475569; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: none; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 120px;" disabled>
                                     <ion-icon name="download-outline" style="font-size: 1.2rem;"></ion-icon> Descargar
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- View Modes Selector -->
                     <div id="view-mode-selector" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.95); border: 1px solid #e2e8f0; border-radius: 99px; padding: 4px; display: none; gap: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); z-index: 10; font-family: 'Outfit', sans-serif;">
                         <button type="button" id="btn-mode-photo" class="mode-tab active" style="background: #635bff; color: white; border: none; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
                             <ion-icon name="image-outline"></ion-icon> Foto
                         </button>
 
                         <button type="button" id="btn-mode-ai" class="mode-tab" style="background: transparent; color: #6b7280; border: none; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
-                            <span>🍌</span> IA (Nano Banana)
+                            <span>🍌</span> IA
                         </button>
                     </div>
                 </div>
 
-                <!-- Info (Right) -->
                 <div class="info-col">
                     <div class="info-col__price" id="detail-price">0€</div>
-                    <h1 class="info-col__name" id="detail-title">Product Name</h1>
-                    <span class="info-col__tagline" id="detail-tagline">Premium Collection</span>
+                    <h1 class="info-col__name" id="detail-title" style="font-size: 2.2rem; margin-bottom: 5px;">Product Name</h1>
+                    <span class="info-col__tagline" id="detail-tagline" style="display: block; color: #78716c; margin-bottom: 15px;">Premium Collection</span>
                     
-                    <p class="info-col__desc" id="detail-desc">Loading description...</p>
+                    <p class="info-col__desc" id="detail-desc" style="line-height: 1.6; color: #44403c;">Loading description...</p>
 
-                    <!-- Shipping / Quick Delivery Status Badge -->
-                    <div class="delivery-status" style="color: #007715; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-top: 15px; margin-bottom: 20px; font-family: 'Signika', sans-serif;">
-                        <ion-icon name="checkmark-circle-outline" style="font-size: 1.25rem; color: #007715;"></ion-icon>
+                    <div class="delivery-status" style="color: #007715; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-top: 15px; margin-bottom: 20px; font-family: 'Outfit', sans-serif; background: #f0fdf4; padding: 10px 15px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                        <ion-icon name="checkmark-circle-outline" style="font-size: 1.25rem; color: #007715; flex-shrink: 0;"></ion-icon>
                         <span>Envío GRATIS • Entrega en 3-5 días laborables</span>
                     </div>
 
-                    <div class="color-options" id="detail-colors"></div>
+                    <div class="color-options" id="detail-colors" style="display: flex; gap: 10px; margin-bottom: 20px;"></div>
 
-                    <div class="product-actions" style="display: flex; gap: 0.8rem; width: 100%; flex-wrap: wrap; align-items: stretch;">
+                    <div class="product-actions">
                         <div class="qty-box" style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid #e2e8f0; border-radius: 99px; padding: 0.25rem 0.5rem; background: white;">
-                            <button class="qty-btn" id="btn-qty-minus"><ion-icon name="remove-outline"></ion-icon></button>
+                            <button class="qty-btn" id="btn-qty-minus" style="background:none; border:none; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; padding:5px;"><ion-icon name="remove-outline"></ion-icon></button>
                             <span id="qty-value" class="qty-value" style="min-width: 30px; text-align: center; font-weight: 600;">1</span>
-                            <button class="qty-btn" id="btn-qty-plus"><ion-icon name="add-outline"></ion-icon></button>
+                            <button class="qty-btn" id="btn-qty-plus" style="background:none; border:none; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; padding:5px;"><ion-icon name="add-outline"></ion-icon></button>
                         </div>
-                        <button class="btn-buy" id="btn-add-to-cart" style="flex: 1; min-width: 110px; background: transparent; border: 2px solid #006580; color: #006580; box-shadow: none;">Add to Cart</button>
-                        <button class="btn-buy" id="btn-buy-now" style="flex: 1; min-width: 110px; background: #006580; border: 2px solid #006580;">Buy Now</button>
+                        <button class="btn-buy" id="btn-add-to-cart" style="flex: 1; min-width: 110px; background: transparent; border: 2px solid #006580; color: #006580;">Add to Cart</button>
+                        <button class="btn-buy" id="btn-buy-now" style="flex: 1; min-width: 110px; background: #006580; color: white; border: 2px solid #006580;">Buy Now</button>
                     </div>
                 </div>
 
-                <!-- Label (Far Right) -->
                 <div class="category-label">
                     <span class="category-label__text" id="detail-category-v">CATEGORY</span>
                 </div>
@@ -189,20 +272,18 @@
         </div>
     </section>
 
-    <section class="similar-products container">
-        <h2 class="similar-products__title">You may also like</h2>
-        <div class="products-grid-normal" id="similar-grid">
-            <!-- Dynamic -->
-        </div>
+    <section class="similar-products container" style="margin-top: 60px; margin-bottom: 60px;">
+        <h2 class="similar-products__title" style="margin-bottom: 25px; font-size: 1.8rem;">You may also like</h2>
+        <div class="products-grid-normal" id="similar-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
+            </div>
     </section>
 
-        <footer class="site-footer">
+    <footer class="site-footer" style="background: #f8fafc; padding: 60px 0; border-top: 1px solid #e2e8f0;">
         <div class="container">
-            <div class="footer__grid" style="grid-template-columns: repeat(12, 1fr); gap: 30px;">
-                <!-- Col 1: Brand Info -->
-                <div class="footer-col" style="grid-column: span 6;">
-                    <h4 style="font-size: 1.2rem !important; color: var(--color-primary) !important;">Modsy</h4>
-                    <p style="color: #6e6e6e; font-size: 0.85rem; line-height: 1.5; margin-bottom: 15px; max-width: 320px;">
+            <div class="footer__grid-responsive">
+                <div class="footer-col footer-col-6">
+                    <h4 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 15px;">Modsy</h4>
+                    <p style="color: #6e6e6e; font-size: 0.85rem; line-height: 1.6; margin-bottom: 15px; max-width: 320px;">
                         Premium furniture and commercial equipment for modern spaces. Simple, ergonomic, and durable.
                     </p>
                     <div style="display: flex; gap: 15px; font-size: 1.25rem; color: var(--color-primary);">
@@ -211,25 +292,23 @@
                         <ion-icon name="logo-linkedin" style="cursor:pointer;"></ion-icon>
                     </div>
                 </div>
-                <!-- Col 2: Quick Links -->
-                <div class="footer-col" style="grid-column: span 3;">
-                    <h4>Explore</h4>
-                    <ul>
-                        <li><a href="products.html">All Products</a></li>
-                        <li><a href="contact.html">Contact & Help</a></li>
-                        <li><a href="intranet.html">Staff Intranet</a></li>
+                <div class="footer-col footer-col-3">
+                    <h4 style="margin-bottom: 15px;">Explore</h4>
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li><a href="products.html" style="color: #64748b; text-decoration: none;">All Products</a></li>
+                        <li><a href="contact.html" style="color: #64748b; text-decoration: none;">Contact & Help</a></li>
+                        <li><a href="intranet.html" style="color: #64748b; text-decoration: none;">Staff Intranet</a></li>
                     </ul>
                 </div>
-                <!-- Col 3: Legal -->
-                <div class="footer-col" style="grid-column: span 3;">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                <div class="footer-col footer-col-3">
+                    <h4 style="margin-bottom: 15px;">Legal</h4>
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li><a href="#" style="color: #64748b; text-decoration: none;">Privacy Policy</a></li>
+                        <li><a href="#" style="color: #64748b; text-decoration: none;">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer__brand-text">Modsy.</div>
+            <div class="footer__brand-text" style="text-align: center; margin-top: 40px; color: #cbd5e1; font-weight: 700; font-size: 2rem; opacity: 0.3;">Modsy.</div>
         </div>
     </footer>
 
@@ -237,7 +316,6 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="../assets/js/script.js"></script>
-    <!-- Add visual alerts -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../assets/js/navbar-updater.js"></script>
 
@@ -599,15 +677,19 @@
             const colorsContainer = document.getElementById('detail-colors');
             if (colorsContainer && currentProduct.colors && Array.isArray(currentProduct.colors) && currentProduct.colors.length > 0) {
                 colorsContainer.innerHTML = currentProduct.colors.map((c, idx) => `
-                    <div class="color-dot ${idx === 0 ? 'color-dot--active' : ''}" data-img="${c.img}" style="background:${c.code}" title="${c.name || ''}">
-                        <div class="color-dot-inner" style="background:${c.code};"></div>
+                    <div class="color-dot ${idx === 0 ? 'color-dot--active' : ''}" data-img="${c.img}" style="background:${c.code}; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2px solid ${idx === 0 ? '#006580' : 'transparent'}; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" title="${c.name || ''}">
                     </div>
                 `).join('');
 
                 colorsContainer.querySelectorAll('.color-dot').forEach(dot => {
                     dot.addEventListener('click', () => {
-                        colorsContainer.querySelectorAll('.color-dot').forEach(d => d.classList.remove('color-dot--active'));
+                        colorsContainer.querySelectorAll('.color-dot').forEach(d => {
+                            d.classList.remove('color-dot--active');
+                            d.style.border = '2px solid transparent';
+                        });
                         dot.classList.add('color-dot--active');
+                        dot.style.border = '2px solid #006580';
+                        
                         const newImg = dot.getAttribute('data-img');
                         if (newImg) {
                             const parsedImg = newImg.startsWith('/uploads') 
@@ -890,14 +972,14 @@
                         : (p.image || 'https://via.placeholder.com/300x300');
                     
                     return `
-                        <div class="product-card" style="cursor:pointer;" onclick="window.location.href='product-detail.html?id=${p.id || p._id}'">
+                        <div class="product-card" style="cursor:pointer; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'" onclick="window.location.href='product-detail.html?id=${p.id || p._id}'">
                             <div class="product-card__image">
-                                <img src="${sImg}" alt="${p.name}" class="product-card__img">
+                                <img src="${sImg}" alt="${p.name}" class="product-card__img" style="width:100%; height:200px; object-fit:cover;">
                             </div>
-                            <div class="product-card__info">
+                            <div class="product-card__info" style="padding: 15px;">
                                 <div class="product-card__header">
-                                    <h3 class="product-card__name">${p.name}</h3>
-                                    <span class="product-card__price">${String(p.price).includes('€') ? p.price : p.price + '€'}</span>
+                                    <h3 class="product-card__name" style="font-size: 1.1rem; margin-bottom: 5px; color: #1c1917;">${p.name}</h3>
+                                    <span class="product-card__price" style="font-weight: 700; color: #006580;">${String(p.price).includes('€') ? p.price : p.price + '€'}</span>
                                 </div>
                             </div>
                         </div>
@@ -909,3 +991,5 @@
     </script>
 </body>
 </html>
+
+```
