@@ -108,7 +108,7 @@ export class GoogleAuthUser {
       user = await this.userRepository.save({
         name: googlePayload.name,
         email: googlePayload.email,
-        password: undefined, // OAuth users have no local password
+        password: 'OAUTH_USER_NO_PASSWORD_REQUIRED', // OAuth users have no local password
         role: 'user',
       });
     }
