@@ -1,14 +1,15 @@
 import { authService } from './api-services.js';
 
 function getRedirectPath(destinationType, user = null) {
-    const basePath = window.location.pathname.includes('/frontend/') ? '/frontend' : '';
+    const isFrontendFolder = window.location.pathname.includes('/frontend/');
+    const basePath = isFrontendFolder ? '/frontend/pages' : '';
     if (destinationType === 'home') {
-        return `${basePath}/pages/index.html`;
+        return `${basePath}/index.html`;
     }
     const isAdmin = user && user.role === 'admin';
     return isAdmin
-        ? `${basePath}/pages/dashboard/intranet.html`
-        : `${basePath}/pages/index.html`;
+        ? `${basePath}/dashboard/intranet.html`
+        : `${basePath}/index.html`;
 }
 
 /**
