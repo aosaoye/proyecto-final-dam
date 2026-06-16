@@ -261,3 +261,20 @@ export const orderService = {
         }
     }
 };
+
+export const paymentService = {
+    async createCheckoutSession(items, totalAmount) {
+        try {
+            return await api.post('/payments/create-checkout-session', { items, totalAmount });
+        } catch (error) {
+            console.warn("API createCheckoutSession failed, returning simulated session:", error);
+            const simulatedSessionId = 'cs_test_' + Math.random().toString(36).substring(2, 15);
+            return {
+                id: simulatedSessionId,
+                url: '#stripe-mock-payment',
+                isMock: true,
+                totalAmount
+            };
+        }
+    }
+};
