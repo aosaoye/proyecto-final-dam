@@ -73,6 +73,12 @@ export const authService = {
         localStorage.setItem('user', JSON.stringify(data.user));
         return data;
     },
+    async googleAuth(idToken) {
+        const data = await api.post('/auth/google', { idToken });
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        return data;
+    },
     async register(userData) {
         return api.post('/auth/register', userData);
     },
