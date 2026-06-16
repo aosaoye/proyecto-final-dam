@@ -82,11 +82,94 @@
                             </button>
                         </model-viewer>
                     </div>
-                    <!-- View toggle button -->
-                    <button id="toggle-3d-btn" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.95); border: 1px solid #e2e8f0; color: #635bff; border-radius: 99px; padding: 8px 18px; font-weight: 700; cursor: pointer; display: none; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: all 0.2s ease; z-index: 10; font-family: 'Outfit', sans-serif;">
-                        <ion-icon name="cube-outline" style="font-size: 1.1rem;"></ion-icon>
-                        <span id="toggle-3d-text">Ver en 3D / AR</span>
-                    </button>
+
+                    <!-- Nano Banana AI Viewer Container -->
+                    <div id="ai-viewer-container" style="display: none; width: 100%; min-height: 500px; border-radius: 12px; padding: 24px; background: #fafaf9; border: 1px solid #e7e5e4; font-family: 'Outfit', sans-serif; box-sizing: border-box; text-align: left;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                            <div style="width: 36px; height: 36px; background: #fef08a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; border: 1px solid #fef08a;">🍌</div>
+                            <div>
+                                <h3 style="margin: 0; font-size: 1.1rem; color: #1c1917; font-weight: 700;">Diseño IA: Nano Banana</h3>
+                                <span style="font-size: 0.75rem; color: #78716c;">Visualización fotorrealista de tu espacio</span>
+                            </div>
+                        </div>
+
+                        <!-- Step 1: Configuration Form -->
+                        <div id="ai-form-step">
+                            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #44403c;">1. Elige el estilo de la habitación</label>
+                            <select id="ai-room-style" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #d6d3d1; background: white; font-family: inherit; font-size: 0.9rem; margin-bottom: 16px; outline: none; cursor: pointer;">
+                                <option value="moderno">Moderno / Minimalista</option>
+                                <option value="escandinavo" selected>Escandinavo (Scandi)</option>
+                                <option value="industrial">Industrial Loft</option>
+                                <option value="bohemio">Bohemio / Rústico</option>
+                                <option value="lujoso">Lujoso / Glamour</option>
+                            </select>
+
+                            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #44403c;">2. Imagen de fondo (Tu habitación)</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+                                <button type="button" class="ai-bg-preset-btn active" id="ai-preset-btn" style="padding: 10px; border-radius: 6px; border: 2px solid #635bff; background: white; font-weight: 600; font-size: 0.8rem; cursor: pointer; color: #635bff; transition: all 0.2s;">
+                                    Habitación Vacía (Por defecto)
+                                </button>
+                                <button type="button" id="ai-upload-btn" style="padding: 10px; border-radius: 6px; border: 2px dashed #d6d3d1; background: white; font-weight: 600; font-size: 0.8rem; cursor: pointer; color: #78716c; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                    <ion-icon name="cloud-upload-outline" style="font-size: 1.1rem;"></ion-icon> Subir mi foto
+                                </button>
+                            </div>
+                            <input type="file" id="ai-file-input" style="display: none;" accept="image/*">
+
+                            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #44403c;">3. Prompt de Diseño IA</label>
+                            <textarea id="ai-prompt" style="width: 100%; height: 80px; padding: 10px; border-radius: 6px; border: 1px solid #d6d3d1; background: white; font-family: inherit; font-size: 0.9rem; line-height: 1.4; resize: none; margin-bottom: 20px; outline: none;" placeholder="Ej: Una habitación luminosa con suelo de madera, grandes ventanas, plantas de interior..."></textarea>
+
+                            <button type="button" id="btn-generate-ai-render" style="width: 100%; padding: 14px; background: #635bff; color: white; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(99,91,255,0.25); transition: background 0.2s;">
+                                <ion-icon name="sparkles" style="font-size: 1.1rem;"></ion-icon>
+                                Generar Espacio con Nano Banana IA
+                            </button>
+                        </div>
+
+                        <!-- Step 2: Generation Loader (Hidden by default) -->
+                        <div id="ai-loading-step" style="display: none; text-align: center; padding: 40px 0;">
+                            <div style="position: relative; width: 80px; height: 80px; margin: 0 auto 24px;">
+                                <div style="width: 100%; height: 100%; border: 4px solid #f3f4f6; border-top: 4px solid #635bff; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                                <span style="position: absolute; top: 22px; left: 24px; font-size: 2rem;">🍌</span>
+                            </div>
+                            <h4 id="ai-status-title" style="margin: 0 0 8px 0; font-size: 1.1rem; color: #1c1917; font-weight: 700;">Subiendo foto de tu habitación...</h4>
+                            <p id="ai-status-desc" style="margin: 0; font-size: 0.85rem; color: #78716c;">El motor Nano Banana está procesando las dimensiones...</p>
+                        </div>
+
+                        <!-- Step 3: Result View (Hidden by default) -->
+                        <div id="ai-result-step" style="display: none;">
+                            <div style="position: relative; border-radius: 8px; overflow: hidden; border: 1px solid #e7e5e4; margin-bottom: 16px;">
+                                <img id="ai-result-img" src="" alt="Render de Nano Banana" style="width: 100%; height: auto; display: block; max-height: 350px; object-fit: cover;">
+                                <div style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                                    <span style="display:inline-block; width: 6px; height: 6px; background: #22c55e; border-radius: 50%;"></span>
+                                    Render Generado por Nano Banana AI
+                                </div>
+                            </div>
+                            <div style="background: #f5f5f4; border-radius: 6px; padding: 12px; margin-bottom: 20px;">
+                                <div style="font-size: 0.75rem; color: #78716c; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Prompt Utilizado</div>
+                                <div id="ai-prompt-used" style="font-size: 0.85rem; color: #44403c; font-style: italic; text-align: left;">...</div>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button type="button" id="btn-ai-reset" style="flex: 1; padding: 10px; border: 1px solid #d6d3d1; background: white; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; color: #44403c; transition: all 0.2s;">
+                                    Diseñar otra habitación
+                                </button>
+                                <button type="button" id="btn-ai-download" style="flex: 1; padding: 10px; background: #1c1917; color: white; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; border: none; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                    <ion-icon name="download-outline"></ion-icon> Guardar Render
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View Modes Selector -->
+                    <div id="view-mode-selector" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.95); border: 1px solid #e2e8f0; border-radius: 99px; padding: 4px; display: none; gap: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); z-index: 10; font-family: 'Outfit', sans-serif;">
+                        <button type="button" id="btn-mode-photo" class="mode-tab active" style="background: #635bff; color: white; border: none; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
+                            <ion-icon name="image-outline"></ion-icon> Foto
+                        </button>
+                        <button type="button" id="btn-mode-3d" class="mode-tab" style="background: transparent; color: #6b7280; border: none; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
+                            <ion-icon name="cube-outline"></ion-icon> 3D / AR
+                        </button>
+                        <button type="button" id="btn-mode-ai" class="mode-tab" style="background: transparent; color: #6b7280; border: none; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
+                            <span>🍌</span> IA (Nano Banana)
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Info (Right) -->
@@ -238,35 +321,192 @@
                 }
             }
 
-            const toggle3dBtn = document.getElementById('toggle-3d-btn');
+            const viewModeSelector = document.getElementById('view-mode-selector');
+            const btnModePhoto = document.getElementById('btn-mode-photo');
+            const btnMode3d = document.getElementById('btn-mode-3d');
+            const btnModeAi = document.getElementById('btn-mode-ai');
+            
             const arViewerContainer = document.getElementById('ar-viewer-container');
             const arViewer = document.getElementById('ar-viewer');
             const detailImg = document.getElementById('detail-img');
+            const aiViewerContainer = document.getElementById('ai-viewer-container');
 
             if (glbModelUrl) {
                 arViewer.setAttribute('src', glbModelUrl);
                 arViewer.setAttribute('poster', imgUrl);
-                toggle3dBtn.style.display = 'flex';
+            }
+            
+            // Show mode selector (we always show it since we have Photo, 3D, and AI)
+            viewModeSelector.style.display = 'flex';
+
+            function setActiveTab(activeBtn) {
+                [btnModePhoto, btnMode3d, btnModeAi].forEach(btn => {
+                    btn.style.background = 'transparent';
+                    btn.style.color = '#6b7280';
+                    btn.classList.remove('active');
+                });
+                activeBtn.style.background = '#635bff';
+                activeBtn.style.color = 'white';
+                activeBtn.classList.add('active');
+            }
+
+            btnModePhoto.addEventListener('click', () => {
+                setActiveTab(btnModePhoto);
+                detailImg.style.display = 'block';
+                arViewerContainer.style.display = 'none';
+                aiViewerContainer.style.display = 'none';
+            });
+
+            btnMode3d.addEventListener('click', () => {
+                setActiveTab(btnMode3d);
+                detailImg.style.display = 'none';
+                arViewerContainer.style.display = 'block';
+                aiViewerContainer.style.display = 'none';
+            });
+
+            btnModeAi.addEventListener('click', () => {
+                setActiveTab(btnModeAi);
+                detailImg.style.display = 'none';
+                arViewerContainer.style.display = 'none';
+                aiViewerContainer.style.display = 'block';
                 
-                let is3dMode = false;
-                toggle3dBtn.addEventListener('click', () => {
-                    is3dMode = !is3dMode;
-                    if (is3dMode) {
-                        detailImg.style.display = 'none';
-                        arViewerContainer.style.display = 'block';
-                        document.getElementById('toggle-3d-text').textContent = 'Ver Foto';
-                        toggle3dBtn.style.background = '#635bff';
-                        toggle3dBtn.style.color = 'white';
-                    } else {
-                        detailImg.style.display = 'block';
-                        arViewerContainer.style.display = 'none';
-                        document.getElementById('toggle-3d-text').textContent = 'Ver en 3D / AR';
-                        toggle3dBtn.style.background = 'rgba(255,255,255,0.95)';
-                        toggle3dBtn.style.color = '#635bff';
+                // Pre-populate AI Prompt
+                const promptBox = document.getElementById('ai-prompt');
+                if (promptBox && !promptBox.value) {
+                    const styleSel = document.getElementById('ai-room-style');
+                    const styleText = styleSel.options[styleSel.selectedIndex].text;
+                    promptBox.value = `Un espacio elegante estilo ${styleText} con el mueble ${currentProduct.name} colocado de forma natural, iluminación suave y renderizado fotorrealista.`;
+                }
+            });
+
+            const styleSel = document.getElementById('ai-room-style');
+            if (styleSel) {
+                styleSel.addEventListener('change', (e) => {
+                    const styleName = e.target.options[e.target.selectedIndex].text;
+                    document.getElementById('ai-prompt').value = `Un espacio elegante estilo ${styleName} con el mueble ${currentProduct.name} colocado de forma natural, iluminación suave y renderizado fotorrealista.`;
+                });
+            }
+
+            // Upload photo simulation
+            const aiUploadBtn = document.getElementById('ai-upload-btn');
+            const aiFileInput = document.getElementById('ai-file-input');
+            if (aiUploadBtn && aiFileInput) {
+                aiUploadBtn.addEventListener('click', () => aiFileInput.click());
+                aiFileInput.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        aiUploadBtn.innerHTML = `<ion-icon name="checkmark-circle-outline" style="font-size: 1.1rem;"></ion-icon> Foto subida`;
+                        aiUploadBtn.style.borderColor = '#22c55e';
+                        aiUploadBtn.style.color = '#22c55e';
+                        
+                        // Select preset button active styling state toggle
+                        const presetBtn = document.getElementById('ai-preset-btn');
+                        if (presetBtn) {
+                            presetBtn.classList.remove('active');
+                            presetBtn.style.borderColor = '#d6d3d1';
+                            presetBtn.style.color = '#78716c';
+                        }
                     }
                 });
-            } else {
-                toggle3dBtn.style.display = 'none';
+            }
+
+            // Preset button selector toggle
+            const presetBtn = document.getElementById('ai-preset-btn');
+            if (presetBtn) {
+                presetBtn.addEventListener('click', () => {
+                    presetBtn.classList.add('active');
+                    presetBtn.style.borderColor = '#635bff';
+                    presetBtn.style.color = '#635bff';
+                    
+                    if (aiUploadBtn) {
+                        aiUploadBtn.innerHTML = `<ion-icon name="cloud-upload-outline" style="font-size: 1.1rem;"></ion-icon> Subir mi foto`;
+                        aiUploadBtn.style.borderColor = '#d6d3d1';
+                        aiUploadBtn.style.color = '#78716c';
+                    }
+                    if (aiFileInput) aiFileInput.value = '';
+                });
+            }
+
+            // AI Generator trigger
+            const btnGenerate = document.getElementById('btn-generate-ai-render');
+            const formStep = document.getElementById('ai-form-step');
+            const loadingStep = document.getElementById('ai-loading-step');
+            const resultStep = document.getElementById('ai-result-step');
+            const statusTitle = document.getElementById('ai-status-title');
+            const statusDesc = document.getElementById('ai-status-desc');
+            const resultImg = document.getElementById('ai-result-img');
+            const promptUsed = document.getElementById('ai-prompt-used');
+
+            if (btnGenerate) {
+                btnGenerate.addEventListener('click', () => {
+                    const promptVal = document.getElementById('ai-prompt').value;
+                    formStep.style.display = 'none';
+                    loadingStep.style.display = 'block';
+                    
+                    // Simulation timeline
+                    setTimeout(() => {
+                        statusTitle.textContent = "Procesando plantilla de habitación...";
+                        statusDesc.textContent = "El motor Nano Banana AI está estimando las coordenadas y profundidad tridimensional...";
+                    }, 1200);
+
+                    setTimeout(() => {
+                        statusTitle.textContent = "Renderizando mobiliario en 3D...";
+                        statusDesc.textContent = `Colocando ${currentProduct.name} con texturas fotorrealistas y ajustando perspectiva...`;
+                    }, 2600);
+
+                    setTimeout(() => {
+                        statusTitle.textContent = "Aplicando iluminación y sombras...";
+                        statusDesc.textContent = "Optimizando sombras fotorrealistas, reflejos de luz y oclusión ambiental...";
+                    }, 4000);
+
+                    setTimeout(() => {
+                        // Match result render image based on current product properties
+                        let renderPath = '../assets/images/custom_modular_living.png';
+                        const category = currentProduct.category || '';
+                        const name = (currentProduct.name || '').toLowerCase();
+                        
+                        if (name.includes('table') || name.includes('oak') || category === 'Dining' || category === 'Kitchen') {
+                            renderPath = '../assets/images/custom_oak_table.png';
+                        } else if (name.includes('lounger') || name.includes('garden') || category === 'Garden') {
+                            renderPath = '../assets/images/custom_garden_lounge.png';
+                        }
+                        
+                        resultImg.src = renderPath;
+                        promptUsed.textContent = promptVal || `Diseño automático Nano Banana para ${currentProduct.name}.`;
+                        
+                        loadingStep.style.display = 'none';
+                        resultStep.style.display = 'block';
+                    }, 5500);
+                });
+            }
+
+            // Reset AI form
+            const btnReset = document.getElementById('btn-ai-reset');
+            if (btnReset) {
+                btnReset.addEventListener('click', () => {
+                    resultStep.style.display = 'none';
+                    formStep.style.display = 'block';
+                    
+                    // Restore preset state
+                    if (presetBtn) {
+                        presetBtn.classList.add('active');
+                        presetBtn.style.borderColor = '#635bff';
+                        presetBtn.style.color = '#635bff';
+                    }
+                    if (aiUploadBtn) {
+                        aiUploadBtn.innerHTML = `<ion-icon name="cloud-upload-outline" style="font-size: 1.1rem;"></ion-icon> Subir mi foto`;
+                        aiUploadBtn.style.borderColor = '#d6d3d1';
+                        aiUploadBtn.style.color = '#78716c';
+                    }
+                    if (aiFileInput) aiFileInput.value = '';
+                });
+            }
+
+            // Download mock
+            const btnDownload = document.getElementById('btn-ai-download');
+            if (btnDownload) {
+                btnDownload.addEventListener('click', () => {
+                    Swal.fire('Guardado', 'La visualización generada por Nano Banana se ha guardado en tu galería.', 'success');
+                });
             }
 
             // Populate color options dynamically and bind click triggers to swap visual

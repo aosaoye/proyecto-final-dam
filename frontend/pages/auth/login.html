@@ -12,6 +12,32 @@
         .auth-image-col {
             background: url('https://images.pexels.com/photos/1866141/pexels-photo-1866141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
         }
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            color: #a8a29e;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .auth-divider::before, .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e7e5e4;
+        }
+        #google-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        #google-btn > div {
+            width: 100% !important;
+        }
+        #google-btn iframe {
+            width: 100% !important;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +82,9 @@
                     <button type="submit" class="btn-modsy-primary">Continue</button>
                 </form>
 
+                <div class="auth-divider">or continue with</div>
+                <div id="google-btn"></div>
+
                 <div class="auth-footer">
                     New to Modsy? <a href="register.html">Create account</a>
                 </div>
@@ -64,10 +93,13 @@
     </div>
 
     <!-- External Framework Loader -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module">
-        import { initLoginView } from '../../assets/js/auth-ui.js';
+        import { initLoginView, initGoogleAuth } from '../../assets/js/auth-ui.js';
         initLoginView();
+        const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID';
+        window.addEventListener('load', () => initGoogleAuth(GOOGLE_CLIENT_ID, 'google-btn', 'login'));
     </script>
     
     <!-- Graphic Modules -->
