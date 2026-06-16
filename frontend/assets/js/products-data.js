@@ -355,3 +355,5 @@ const productsData = [
     description: "Dreamy cotton canvas tent for indoor adventures."
   }
 ];
+
+window.productsData = productsData;

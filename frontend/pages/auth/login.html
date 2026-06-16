@@ -99,7 +99,11 @@
         import { initLoginView, initGoogleAuth } from '../../assets/js/auth-ui.js';
         initLoginView();
         const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID';
-        window.addEventListener('load', () => initGoogleAuth(GOOGLE_CLIENT_ID, 'google-btn', 'login'));
+        if (document.readyState === 'complete') {
+            initGoogleAuth(GOOGLE_CLIENT_ID, 'google-btn', 'login');
+        } else {
+            window.addEventListener('load', () => initGoogleAuth(GOOGLE_CLIENT_ID, 'google-btn', 'login'));
+        }
     </script>
     
     <!-- Graphic Modules -->
