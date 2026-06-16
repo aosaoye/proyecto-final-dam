@@ -1,5 +1,16 @@
 import { authService } from './api-services.js';
 
+function getRedirectPath(destinationType, user = null) {
+    const basePath = window.location.pathname.includes('/frontend/') ? '/frontend' : '';
+    if (destinationType === 'home') {
+        return `${basePath}/pages/index.html`;
+    }
+    const isAdmin = user && user.role === 'admin';
+    return isAdmin
+        ? `${basePath}/pages/dashboard/intranet.html`
+        : `${basePath}/pages/index.html`;
+}
+
 /**
  * Initializes Google Sign-In using Google Identity Services (GSI).
  * @param {string} clientId  - Your Google OAuth Client ID
@@ -61,9 +72,7 @@ export function initGoogleAuth(clientId, containerId = 'google-btn', context = '
                         });
                         
                         setTimeout(() => {
-                            window.location.href = (result.user && result.user.role === 'admin')
-                                ? '../dashboard/intranet.html'
-                                : '../index.html';
+                            window.location.replace(getRedirectPath('auth', result.user));
                         }, 800);
                     } catch (err) {
                         Swal.fire({ icon: 'error', title: 'Error en Simulación', text: err.message });
@@ -94,9 +103,7 @@ export function initGoogleAuth(clientId, containerId = 'google-btn', context = '
                     showConfirmButton: false
                 });
                 setTimeout(() => {
-                    window.location.href = (result.user && result.user.role === 'admin')
-                        ? '../dashboard/intranet.html'
-                        : '../index.html';
+                    window.location.replace(getRedirectPath('auth', result.user));
                 }, 800);
             } catch (err) {
                 Swal.fire({ icon: 'error', title: 'Google Sign-In Failed', text: err.message });
@@ -122,7 +129,7 @@ export function initGoogleAuth(clientId, containerId = 'google-btn', context = '
 export function initLoginView(formId = 'login-form') {
     // 1. Pre-auth check redirect
     if (authService.isAuthenticated()) {
-        window.location.replace('../index.html');
+        window.location.replace(getRedirectPath('home'));
         return;
     }
 
@@ -151,9 +158,7 @@ export function initLoginView(formId = 'login-form') {
 
             // Smart navigation route based on clearance level
             setTimeout(() => {
-                window.location.href = (response.user && response.user.role === 'admin')
-                    ? '../dashboard/intranet.html'
-                    : '../index.html';
+                window.location.replace(getRedirectPath('auth', response.user));
             }, 800);
         } catch (error) {
             Swal.fire({
@@ -217,7 +222,7 @@ export function initLoginView(formId = 'login-form') {
  */
 export function initRegisterView(formId = 'register-form') {
     if (authService.isAuthenticated()) {
-        window.location.replace('../index.html');
+        window.location.replace(getRedirectPath('home'));
         return;
     }
 
